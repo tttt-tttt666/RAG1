@@ -1,8 +1,9 @@
 # Ankle Sprain RAG Index
 
-This directory contains the extracted English text from the four official
-ankle-sprain patient education PDFs. The source content has not been translated
-or paraphrased.
+This directory contains the extracted English text from 12 trusted
+ankle-sprain PDFs: official NHS patient resources and peer-reviewed research
+indexed in PubMed Central. The source content has not been translated or
+paraphrased.
 
 ## Files
 

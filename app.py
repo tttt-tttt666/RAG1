@@ -147,7 +147,7 @@ st.set_page_config(
 )
 
 st.title("脚踝康复资料助手")
-st.caption("基于 4 份 NHS 患者教育资料的本地语义检索 Demo")
+st.caption("基于 12 份 NHS 与 PubMed Central 可信资料的本地语义检索 Demo")
 
 st.info(
     "本工具仅提供健康教育资料检索，不能诊断伤情或替代医生。"
@@ -188,7 +188,7 @@ if submitted:
 
         st.subheader("相关资料")
         st.write(
-            "以下内容是从原始英文患者教育资料中检索出的段落，"
+            "以下内容是从原始英文患者资料和研究文献中检索出的段落，"
             "不是自动诊断或个性化治疗方案。"
         )
 

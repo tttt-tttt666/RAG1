@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract, chunk, and index the four ankle-sprain patient PDFs.
+"""Extract, chunk, and index the ankle-sprain education and evidence PDFs.
 
 The source text remains in English. Processing is limited to whitespace
 normalization and sentence-aware chunking; no translation or rewriting occurs.
@@ -51,6 +51,54 @@ SOURCES = {
         "source_url": "https://sfh-tr.nhs.uk/media/k5ghz1jb/ankle-sprains-and-strains.pdf",
         "document_date": "2026-03",
         "review_date": "2028-03",
+    },
+    "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review.pdf": {
+        "institution": "PLOS ONE (indexed in PubMed Central)",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8824326/",
+        "document_date": "2022-02-08",
+        "review_date": "not applicable",
+    },
+    "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review.pdf": {
+        "institution": "Frontiers in Medicine (indexed in PubMed Central)",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9301067/",
+        "document_date": "2022-07-07",
+        "review_date": "not applicable",
+    },
+    "07_PMC12481793_Physical_Therapy_Meta_Analysis.pdf": {
+        "institution": "BMC Musculoskeletal Disorders (indexed in PubMed Central)",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12481793/",
+        "document_date": "2025-09-29",
+        "review_date": "not applicable",
+    },
+    "08_Alder_Hey_NHS_Ankle_Foot_Sprain.pdf": {
+        "institution": "Alder Hey Children's NHS Foundation Trust",
+        "source_url": "https://www.alderhey.nhs.uk/wp-content/uploads/2024/03/PIAG-523-Ankle-Foot-Sprain.pdf",
+        "document_date": "not stated",
+        "review_date": "2027-02",
+    },
+    "09_Plymouth_NHS_Sprained_Ankle_Foot.pdf": {
+        "institution": "University Hospitals Plymouth NHS Trust",
+        "source_url": "https://www.plymouthhospitals.nhs.uk/download/sprained-ankle-foot-final-february-2025-v2pdf.pdf?doc=docm93jijm4n19511.pdf&ver=30493&ver=30533",
+        "document_date": "2025-02",
+        "review_date": "2027-02",
+    },
+    "10_ULH_NHS_Ankle_Sprain_Exercises.pdf": {
+        "institution": "United Lincolnshire Hospitals NHS Trust",
+        "source_url": "https://www.ulh.nhs.uk/wp-content/uploads/2025/07/Ankle-Sprain-Exercises.pdf",
+        "document_date": "2025-06",
+        "review_date": "2027-06",
+    },
+    "11_Oxford_NHS_Ankle_Sprain_Advice.pdf": {
+        "institution": "Oxford University Hospitals NHS Foundation Trust",
+        "source_url": "https://www.ouh.nhs.uk/media/i0ldiecy/116454sprain.pdf",
+        "document_date": "2025-10",
+        "review_date": "2028-10",
+    },
+    "12_Mersey_West_Lancs_NHS_Ankle_Sprain.pdf": {
+        "institution": "Mersey and West Lancashire Teaching Hospitals NHS Trust",
+        "source_url": "https://sthk.merseywestlancs.nhs.uk/media/.leaflets/6593fe207af493.62309476.pdf",
+        "document_date": "not stated",
+        "review_date": "2026-12-01",
     },
 }
 

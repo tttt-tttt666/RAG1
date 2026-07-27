@@ -22,7 +22,10 @@ with SQLite FTS5.
 python -m pip install -r requirements.txt
 python ingest.py
 python embed.py
+streamlit run app.py
 ```
+
+Open `http://localhost:8501` after starting Streamlit.
 
 See `index/ankle_sprain/README.md` for an example full-text query.
 

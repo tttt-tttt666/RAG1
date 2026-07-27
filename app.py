@@ -147,7 +147,7 @@ st.set_page_config(
 )
 
 st.title("脚踝康复资料助手")
-st.caption("基于 12 份 NHS 与 PubMed Central 可信资料的本地语义检索 Demo")
+st.caption("基于 32 份医院、政府卫生机构和专业医学组织可信资料的本地语义检索 Demo")
 
 st.info(
     "本工具仅提供健康教育资料检索，不能诊断伤情或替代医生。"

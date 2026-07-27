@@ -1,8 +1,9 @@
 # Ankle Sprain Patient Education RAG Dataset
 
-This project prepares 12 trusted ankle-sprain PDFs for retrieval-augmented
-generation (RAG): nine official NHS patient resources and three peer-reviewed
-systematic reviews/meta-analyses indexed in PubMed Central.
+This project prepares 32 trusted ankle-sprain PDFs for retrieval-augmented
+generation (RAG). The collection combines official patient education from
+hospitals, government health services, and professional medical organizations
+with three peer-reviewed evidence syntheses indexed in PubMed Central.
 
 The original English medical text is extracted without translation or
 paraphrasing, split into approximately 500-800 character chunks, and indexed
@@ -10,7 +11,7 @@ with SQLite FTS5.
 
 ## Contents
 
-- `output/pdf/ankle_sprain_patient_education/`: original source PDFs and source metadata
+- `output/pdf/ankle_sprain_patient_education/`: source PDFs, official-page PDF snapshots, and source metadata
 - `ingest.py`: reproducible extraction, chunking, and indexing script
 - `embed.py`: local semantic embedding generation script
 - `index/ankle_sprain/chunks.jsonl`: source chunks with page metadata

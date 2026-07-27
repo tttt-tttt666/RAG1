@@ -84,6 +84,62 @@ def contains_warning_term(query: str) -> bool:
     return any(term.casefold() in normalized for term in WARNING_TERMS)
 
 
+def generate_short_chinese_answer(query: str, warning: bool) -> str:
+    """Return a conservative Chinese summary from predefined medical templates."""
+    if warning:
+        return (
+            "你的描述包含需要专业评估的危险信号。请停止运动，并尽快联系医生、"
+            "急诊或当地紧急医疗服务。不要仅依赖本工具判断伤情。"
+        )
+
+    normalized = query.casefold()
+    intent_templates = (
+        (
+            ("48 hour", "first day", "early treatment", "刚受伤", "早期", "前48"),
+            "受伤早期应保护脚踝、适当休息、抬高患肢，并隔着毛巾短时间冷敷。"
+            "在疼痛允许的范围内逐渐进行轻柔活动。",
+        ),
+        (
+            ("exercise", "movement", "range of motion", "锻炼", "训练", "活动度"),
+            "可从轻柔的脚踝屈伸和画圈开始，再逐步加入小腿拉伸、提踵和单脚平衡训练。"
+            "如果练习明显加重疼痛或肿胀，应暂停并咨询专业人员。",
+        ),
+        (
+            ("balance", "stability", "prevent", "平衡", "稳定", "预防"),
+            "恢复期可逐步进行单脚站立、提踵及力量训练，以改善稳定性并降低再次扭伤风险。"
+            "训练难度应循序渐进。",
+        ),
+        (
+            ("walk", "weight bearing", "running", "sport", "return", "走路", "负重", "跑步", "运动"),
+            "疼痛允许时可逐渐恢复负重和正常步行。只有在走路舒适、疼痛和肿胀明显改善后，"
+            "再分阶段恢复慢跑及运动。",
+        ),
+        (
+            ("heal", "recovery", "how long", "恢复", "多久", "愈合"),
+            "轻度扭伤通常会在数周内改善，但完全恢复可能需要约六周；"
+            "较严重的扭伤可能需要更长时间。恢复速度应以疼痛、肿胀和功能变化为参考。",
+        ),
+        (
+            ("ice", "cold", "swelling", "冰敷", "冷敷", "肿胀"),
+            "冷敷时应使用毛巾隔开皮肤，并配合抬高患肢。不要把冰直接放在皮肤上；"
+            "如果肿胀持续、加重或伴随感觉异常，应寻求医疗评估。",
+        ),
+        (
+            ("medical help", "doctor", "hospital", "seek help", "医生", "医院", "就医"),
+            "如果不能正常负重、疼痛或肿胀没有改善、症状持续加重，"
+            "或脚部出现麻木、发冷、明显变色，应及时接受专业医疗评估。",
+        ),
+    )
+    for terms, answer in intent_templates:
+        if any(term in normalized for term in terms):
+            return answer
+
+    return (
+        "现有资料建议根据疼痛和肿胀情况循序渐进地恢复活动，并避免强行训练。"
+        "请结合下方英文原文核对；如果症状持续或加重，应咨询医生或物理治疗师。"
+    )
+
+
 st.set_page_config(
     page_title="脚踝康复资料助手",
     page_icon="🦶",
@@ -118,13 +174,18 @@ if submitted:
     if not question:
         st.warning("请先输入问题。")
     else:
-        if contains_warning_term(question):
+        warning_detected = contains_warning_term(question)
+        if warning_detected:
             st.error(
                 "你的描述可能包含需要专业医疗评估的情况。"
                 "请停止运动，并及时联系医生、急诊或当地紧急医疗服务。"
             )
 
         results = retrieve(question, chunks, embeddings, model)
+        st.subheader("简短中文回答")
+        st.success(generate_short_chinese_answer(question, warning_detected))
+        st.caption("该回答由受控模板生成，仅供健康教育；请用下方官方原文核对。")
+
         st.subheader("相关资料")
         st.write(
             "以下内容是从原始英文患者教育资料中检索出的段落，"

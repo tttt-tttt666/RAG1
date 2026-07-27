@@ -28,3 +28,4 @@ See `index/ankle_sprain/README.md` for an example full-text query.
 These materials are for patient education and RAG experimentation only. This
 project does not provide diagnosis, individualized rehabilitation plans, or a
 substitute for advice from a qualified healthcare professional.
+

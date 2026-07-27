@@ -1,0 +1,14 @@
+{
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_dimension": 384,
+  "embedding_count": 26,
+  "dtype": "float32",
+  "normalized": true,
+  "minimum_l2_norm": 0.9999999403953552,
+  "maximum_l2_norm": 1.0,
+  "source_chunks": "index/ankle_sprain/chunks.jsonl",
+  "source_chunks_sha256": "9fd03af2b3528e37cabbba9d3f97a8c74ec51fe651530d6ee72ebd575412df67",
+  "vectors_file": "embeddings.npz",
+  "vectors_sha256": "f0ef3d1e1bc2321b72cc6822d82862846b86e94baa30e841ccfc9292202c79a9",
+  "created_at_utc": "2026-07-27T09:14:56.588629+00:00"
+}

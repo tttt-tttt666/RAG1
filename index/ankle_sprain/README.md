@@ -9,6 +9,10 @@ or paraphrased.
 - `chunks.jsonl`: one JSON object per chunk, suitable for embedding or direct
   loading into a RAG pipeline.
 - `chunks.sqlite3`: the same chunks plus a local SQLite FTS5 full-text index.
+- `embeddings/embeddings.npz`: normalized dense vectors in the same order as
+  the stored `chunk_ids` array.
+- `embeddings/metadata.json`: model, dimensions, checksums, and generation
+  settings for the vectors.
 
 Each chunk contains its source filename, issuing institution, official URL,
 document and review dates, page range, character count, and original text.
@@ -45,3 +49,5 @@ LIMIT 5;
 
 The SQLite index is lexical rather than semantic. For vector retrieval, generate
 embeddings from the `text` field in `chunks.jsonl` while retaining all metadata.
+
+Run `python embed.py` from the project root to build the local semantic index.

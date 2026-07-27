@@ -11,14 +11,17 @@ with SQLite FTS5.
 
 - `output/pdf/ankle_sprain_patient_education/`: original source PDFs and source metadata
 - `ingest.py`: reproducible extraction, chunking, and indexing script
+- `embed.py`: local semantic embedding generation script
 - `index/ankle_sprain/chunks.jsonl`: 26 chunks with source and page metadata
 - `index/ankle_sprain/chunks.sqlite3`: local full-text search index
+- `index/ankle_sprain/embeddings/`: normalized dense vectors and metadata
 
 ## Setup
 
 ```bash
 python -m pip install -r requirements.txt
 python ingest.py
+python embed.py
 ```
 
 See `index/ankle_sprain/README.md` for an example full-text query.
@@ -28,4 +31,3 @@ See `index/ankle_sprain/README.md` for an example full-text query.
 These materials are for patient education and RAG experimentation only. This
 project does not provide diagnosis, individualized rehabilitation plans, or a
 substitute for advice from a qualified healthcare professional.
-

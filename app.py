@@ -1584,7 +1584,7 @@ if active_question:
                 st.write(chunk["text"])
             else:
                 try:
-                    with st.spinner("正在生成忠实中文翻译……"):
+                    with st.spinner("正在翻译成中文……"):
                         translation = cached_chinese_translation(
                             chunk["chunk_id"],
                             chunk["text"],

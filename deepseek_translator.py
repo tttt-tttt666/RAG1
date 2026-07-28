@@ -48,6 +48,9 @@ def assess_question_scope(question: str) -> dict:
                     "仅包含脚踝关键词但实际意图不属于上述患者教育资料的问题。"
                     "如果问题同时包含允许范围和无关问题，只有当核心意图能够由允许范围"
                     "直接回答时才允许。危险信号和就医问题必须允许。"
+                    "同时识别问题表达方式：yes_no（是否类）、how_to（怎么做类）、"
+                    "what_is（是什么或定义类）、when（何时或多久类）、"
+                    "comparison（比较区别类）、multi_part（确有多个独立问题）或 other。"
                     "只输出JSON对象，不要输出Markdown。"
                 ),
             },
@@ -56,7 +59,8 @@ def assess_question_scope(question: str) -> dict:
                 "content": (
                     "判断下面的问题是否应该由脚踝扭伤资料助手回答。"
                     '输出格式：{"should_answer":true或false,'
-                    '"category":"简短类别","reason":"简短中文原因"}。\n\n'
+                    '"category":"简短主题类别","question_type":"上述英文类型之一",'
+                    '"reason":"简短中文原因"}。\n\n'
                     f"问题：{question}"
                 ),
             },
@@ -71,9 +75,22 @@ def assess_question_scope(question: str) -> dict:
     result = json.loads(content)
     if not isinstance(result.get("should_answer"), bool):
         raise RuntimeError("DeepSeek 准入判断缺少布尔值 should_answer")
+    allowed_question_types = {
+        "yes_no",
+        "how_to",
+        "what_is",
+        "when",
+        "comparison",
+        "multi_part",
+        "other",
+    }
+    question_type = str(result.get("question_type", "other")).strip()
+    if question_type not in allowed_question_types:
+        question_type = "other"
     return {
         "should_answer": result["should_answer"],
         "category": str(result.get("category", "未分类")).strip(),
+        "question_type": question_type,
         "reason": str(result.get("reason", "未提供原因")).strip(),
         "source": "DeepSeek API",
     }

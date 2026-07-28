@@ -433,10 +433,29 @@ def local_question_scope_assessment(question: str) -> dict:
         "rehab",
         "rehabilitation",
     )
+    if any(term in normalized for term in ("区别", "比较", "difference", "compare")):
+        question_type = "comparison"
+    elif any(term in normalized for term in ("什么时候", "何时", "多久", "when", "how long")):
+        question_type = "when"
+    elif any(term in normalized for term in ("是什么", "什么意思", "what is", "define")):
+        question_type = "what_is"
+    elif any(
+        term in normalized
+        for term in ("是否", "能否", "可不可以", "应该吗", "should i", "can i", "is it")
+    ):
+        question_type = "yes_no"
+    elif any(
+        term in normalized
+        for term in ("怎么", "如何", "做什么", "怎么办", "how do", "what should i do")
+    ):
+        question_type = "how_to"
+    else:
+        question_type = "other"
     if any(term in normalized for term in out_of_scope_terms):
         return {
             "should_answer": False,
             "category": "超出资料范围",
+            "question_type": question_type,
             "reason": "问题主要询问饮食或营养，当前脚踝扭伤资料库不能提供可靠回答。",
             "source": "本地保守规则",
         }
@@ -444,6 +463,7 @@ def local_question_scope_assessment(question: str) -> dict:
     return {
         "should_answer": allowed,
         "category": "脚踝扭伤患者教育" if allowed else "超出资料范围",
+        "question_type": question_type,
         "reason": (
             "问题与脚踝扭伤或康复直接相关。"
             if allowed
@@ -453,7 +473,11 @@ def local_question_scope_assessment(question: str) -> dict:
     }
 
 
-def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
+def generate_detailed_chinese_answer(
+    query: str,
+    warning: bool,
+    question_type: str | None = None,
+) -> str:
     """Return a detailed, conservative Chinese answer from medical templates."""
     if warning:
         return (
@@ -468,6 +492,33 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
         )
 
     normalized = query.casefold()
+    next_day_action_markers = (
+        "训练后，第二天做什么",
+        "训练后第二天做什么",
+        "训练后的第二天做什么",
+        "次日做什么",
+        "第二天怎么办",
+        "what should i do the day after",
+        "what should i do the next day",
+    )
+    if any(marker in normalized for marker in next_day_action_markers):
+        return (
+            "**先检查脚踝对前一天训练的反应，再决定当天做什么；不要直接重复或加量。**\n\n"
+            "### 第一步：早晨先检查\n"
+            "比较训练前后是否出现新的或更明显的疼痛、肿胀、僵硬、跛行或不稳，"
+            "并试走几步，确认负重是否比前一天更困难。\n\n"
+            "### 第二步：根据反应安排当天活动\n"
+            "- **没有明显加重**：可以做轻柔的脚踝屈伸、画圈和舒适范围内的日常走路；"
+            "当天先维持原训练级别，不要立刻增加阻力、次数或单脚难度。\n"
+            "- **轻度加重但仍能正常走路**：减少次数、阻力或站立时间，改做较轻的活动度练习，"
+            "必要时安排恢复日。\n"
+            "- **疼痛或肿胀明显增加、出现跛行或不稳**：暂停力量和平衡训练，保护脚踝并减少负重；"
+            "待症状回到训练前水平后，再从较低一级恢复。\n\n"
+            "### 何时继续进阶\n"
+            "只有当前练习能够稳定完成，而且训练中和第二天都没有明显症状反弹时，"
+            "才逐步增加一个变量，例如次数、阻力或动作难度。\n\n"
+            "如果症状反复加重、无法正常负重或脚踝持续不稳，应咨询医生或物理治疗师。"
+        )
     high_ankle_comparison_markers = (
         "difference between a high ankle sprain",
         "high ankle sprain and a common lateral",
@@ -732,10 +783,14 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
     for title, terms, answer in intent_templates:
         if recurrence_intent and title == "何时恢复走路、跑步或运动":
             continue
+        if title == "如何恢复稳定性并预防再次扭伤" and not recurrence_intent:
+            continue
         if any(term in normalized for term in terms):
             matched_answers.append(f"## {title}\n\n{answer}")
 
     if matched_answers:
+        if question_type in {"yes_no", "how_to", "what_is", "when", "comparison"}:
+            matched_answers = matched_answers[:1]
         introduction = (
             f"我识别到你的问题包含 **{len(matched_answers)} 个方面**，下面逐项回答。"
             if len(matched_answers) > 1
@@ -867,6 +922,7 @@ if active_question:
 
     st.caption(
         f"问题准入：允许回答 · {scope_assessment['category']} "
+        f"· 问题类型：{scope_assessment.get('question_type', 'other')} "
         f"· 判断来源：{scope_assessment['source']}"
     )
     warning_detected = contains_warning_term(active_question)
@@ -930,7 +986,13 @@ if active_question:
             f"{active_source_threshold:.2f}；系统不会用低分段落强行补足三条。"
         )
     st.subheader("详细中文回答")
-    st.success(generate_detailed_chinese_answer(active_question, warning_detected))
+    st.success(
+        generate_detailed_chinese_answer(
+            active_question,
+            warning_detected,
+            scope_assessment.get("question_type"),
+        )
+    )
     st.caption(
         "该回答由详细的受控模板生成，仅供健康教育，不能替代诊断或个体化康复方案；"
         "请用下方官方原文核对。"

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 import streamlit as st
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import CrossEncoder, SentenceTransformer
 
 from deepseek_translator import api_is_configured, translate_to_chinese
 
@@ -19,6 +19,9 @@ INDEX_DIR = ROOT / "index" / "ankle_sprain"
 CHUNKS_PATH = INDEX_DIR / "chunks.jsonl"
 EMBEDDINGS_PATH = INDEX_DIR / "embeddings" / "embeddings.npz"
 EMBEDDING_METADATA_PATH = INDEX_DIR / "embeddings" / "metadata.json"
+CROSS_ENCODER_MODEL = "BAAI/bge-reranker-v2-m3"
+CROSS_ENCODER_CANDIDATES = 20
+CROSS_ENCODER_MIN_SCORE = 0.50
 
 WARNING_TERMS = (
     "畸形",
@@ -96,6 +99,17 @@ def load_model(model_name: str) -> SentenceTransformer:
     )
 
 
+@st.cache_resource
+def load_cross_encoder(model_name: str) -> CrossEncoder:
+    """Load the optional reranker only when the user selects that mode."""
+    return CrossEncoder(
+        model_name,
+        cache_folder=str(ROOT / ".cache" / "huggingface" / "hub"),
+        local_files_only=True,
+        max_length=512,
+    )
+
+
 def get_index_version() -> tuple[tuple[int, int], ...]:
     """Return stable file fingerprints used as the Streamlit cache key."""
     return tuple(
@@ -111,6 +125,9 @@ def retrieve(
     model: SentenceTransformer,
     query_prefix: str,
     top_k: int = 3,
+    reranker: CrossEncoder | None = None,
+    candidate_k: int = CROSS_ENCODER_CANDIDATES,
+    reranker_min_score: float = CROSS_ENCODER_MIN_SCORE,
 ) -> list[tuple[float, dict]]:
     retrieval_query = canonicalize_retrieval_query(query)
     prefixed_query = query_prefix + retrieval_query
@@ -139,11 +156,36 @@ def retrieve(
         ranked_indices = np.argsort(scores)[::-1]
         result_scores = scores
 
-    # Prefer useful body text from different documents. Research PDFs contain
-    # long bibliographies whose repeated terms can otherwise outrank actual
-    # patient guidance.
-    results: list[tuple[float, dict]] = []
-    seen_documents: set[str] = set()
+    # Preserve the original fast-search behaviour when reranking is disabled.
+    if reranker is None:
+        results: list[tuple[float, dict]] = []
+        seen_documents: set[str] = set()
+        for index in ranked_indices:
+            chunk = chunks[int(index)]
+            if is_low_information_chunk(chunk["text"]):
+                continue
+            if (
+                basketball_function_query
+                and not any(
+                    term in chunk["text"].casefold()
+                    for term in BASKETBALL_EVIDENCE_TERMS
+                )
+            ):
+                continue
+            document_id = chunk["document_id"]
+            if document_id in seen_documents:
+                continue
+            results.append((float(result_scores[index]), chunk))
+            seen_documents.add(document_id)
+            if len(results) == top_k:
+                break
+        return results
+
+    # First-stage Bi-Encoder recall for CrossEncoder reranking. Research PDFs
+    # contain long bibliographies whose repeated terms can otherwise outrank
+    # actual patient guidance.
+    candidate_limit = max(candidate_k, top_k)
+    candidates: list[tuple[float, dict]] = []
     for index in ranked_indices:
         chunk = chunks[int(index)]
         if is_low_information_chunk(chunk["text"]):
@@ -156,10 +198,41 @@ def retrieve(
             )
         ):
             continue
+        candidates.append((float(result_scores[index]), chunk))
+        if len(candidates) == candidate_limit:
+            break
+
+    # Second-stage CrossEncoder: read each query/passage pair jointly and
+    # reorder the Bi-Encoder candidates by direct relevance.
+    if candidates:
+        pairs = [(retrieval_query, chunk["text"]) for _, chunk in candidates]
+        rerank_scores = np.asarray(
+            reranker.predict(
+                pairs,
+                batch_size=4,
+                show_progress_bar=False,
+            ),
+            dtype=np.float32,
+        ).reshape(-1)
+        candidates = sorted(
+            [
+                (float(rerank_score), chunk)
+                for rerank_score, (_, chunk) in zip(rerank_scores, candidates)
+            ],
+            key=lambda item: item[0],
+            reverse=True,
+        )
+
+    # Return useful body text from different documents.
+    results = []
+    seen_documents = set()
+    for score, chunk in candidates:
+        if score < reranker_min_score:
+            continue
         document_id = chunk["document_id"]
         if document_id in seen_documents:
             continue
-        results.append((float(result_scores[index]), chunk))
+        results.append((score, chunk))
         seen_documents.add(document_id)
         if len(results) == top_k:
             break
@@ -649,6 +722,15 @@ except Exception as error:
     st.stop()
 
 with st.form("question_form"):
+    search_mode = st.radio(
+        "检索模式",
+        ("Bi-Encoder 快速检索", "Bi-Encoder + CrossEncoder 精排"),
+        horizontal=True,
+        help=(
+            "快速检索只使用现有 E5 向量；精排模式先召回 20 个候选段落，"
+            "再让 CrossEncoder 同时阅读问题和段落并重新排序。"
+        ),
+    )
     question = st.text_area(
         "请输入关于脚踝扭伤或康复的问题",
         placeholder="例如：脚踝扭伤后达到什么条件才能恢复打篮球？",
@@ -662,9 +744,14 @@ if submitted:
         st.warning("请先输入问题。")
     else:
         st.session_state["active_question"] = question
+        st.session_state["active_search_mode"] = search_mode
 
 active_question = st.session_state.get("active_question", "")
 if active_question:
+    active_search_mode = st.session_state.get(
+        "active_search_mode",
+        "Bi-Encoder 快速检索",
+    )
     warning_detected = contains_warning_term(active_question)
     if warning_detected:
         st.error(
@@ -672,13 +759,40 @@ if active_question:
             "请停止运动，并及时联系医生、急诊或当地紧急医疗服务。"
         )
 
+    active_reranker = None
+    if active_search_mode == "Bi-Encoder + CrossEncoder 精排":
+        try:
+            with st.spinner("正在加载 CrossEncoder 并对候选资料精排……"):
+                active_reranker = load_cross_encoder(CROSS_ENCODER_MODEL)
+        except Exception as error:
+            st.error(
+                "CrossEncoder 模型尚未下载或加载失败。"
+                "请先下载 BAAI/bge-reranker-v2-m3，或切换回 Bi-Encoder 快速检索。"
+            )
+            st.code(str(error), language=None)
+            st.stop()
+
     results = retrieve(
         active_question,
         chunks,
         embeddings,
         model,
         query_prefix=embedding_metadata.get("query_prefix", ""),
+        reranker=active_reranker,
     )
+    st.caption(
+        f"当前模式：{active_search_mode}"
+        + (
+            f" · 精排模型 {CROSS_ENCODER_MODEL}"
+            if active_reranker is not None
+            else f" · 召回模型 {embedding_metadata['model']}"
+        )
+    )
+    if active_reranker is not None and len(results) < 3:
+        st.info(
+            f"CrossEncoder 仅找到 {len(results)} 条达到相关性阈值 "
+            f"{CROSS_ENCODER_MIN_SCORE:.2f} 的资料；系统不会用低分段落强行补足三条。"
+        )
     st.subheader("详细中文回答")
     st.success(generate_detailed_chinese_answer(active_question, warning_detected))
     st.caption(
@@ -697,6 +811,7 @@ if active_question:
     )
 
     default_language = "中文" if contains_chinese(active_question) else "English"
+    score_label = "精排分" if active_reranker is not None else "匹配度"
     for rank, (score, chunk) in enumerate(results, start=1):
         page_label = (
             str(chunk["page_start"])
@@ -705,7 +820,7 @@ if active_question:
         )
         with st.expander(
             f"{rank}. {chunk['institution']} · 第 {page_label} 页 "
-            f"· 匹配度 {score:.3f}",
+            f"· {score_label} {score:.3f}",
             expanded=rank == 1,
         ):
             language = st.radio(

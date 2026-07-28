@@ -119,7 +119,41 @@ def retrieve(
 def canonicalize_retrieval_query(query: str) -> str:
     """Map bilingual domain intents to the same English retrieval query."""
     normalized = query.casefold()
+    recurrence_markers = (
+        "prevent",
+        "another ankle sprain",
+        "reduce the risk",
+        "risk of another",
+        "再次扭伤",
+        "降低脚踝",
+        "降低再次",
+        "预防复发",
+    )
+    if any(marker in normalized for marker in recurrence_markers):
+        return (
+            "prevent recurrent ankle sprain with balance training, "
+            "strengthening, bracing and neuromuscular exercise"
+        )
+
     intent_queries = (
+        (
+            (
+                "sprained my ankle yesterday",
+                "what should i do now",
+                "扭伤了脚踝",
+                "昨天扭伤",
+                "现在应该如何处理",
+            ),
+            "early care after an acute ankle sprain: protect, ice, compression, elevation and gradual weight bearing",
+        ),
+        (
+            ("how long", "recovery time", "time to heal", "多久恢复", "恢复时间", "多久能好"),
+            "ankle sprain recovery time: how many days or weeks pain and swelling take to improve and heal",
+        ),
+        (
+            ("ice and elevation", "use ice", "cold pack", "冷敷", "冰敷", "抬高"),
+            "ankle sprain swelling care: safe ice or cold pack use and elevation",
+        ),
         (
             ("return to sport", "returning to", "running", "basketball", "恢复运动", "恢复跑步", "打篮球"),
             "ankle sprain criteria for return to running and sport: pain free, no swelling, full range of motion, strength, balance, agility and sport-specific drills",
@@ -145,7 +179,16 @@ def canonicalize_retrieval_query(query: str) -> str:
             "ankle brace or taping after ankle sprain during rehabilitation and return to sport",
         ),
         (
-            ("prevent", "another ankle sprain", "再次扭伤", "预防复发"),
+            (
+                "prevent",
+                "another ankle sprain",
+                "reduce the risk",
+                "risk of another",
+                "再次扭伤",
+                "降低脚踝",
+                "降低再次",
+                "预防复发",
+            ),
             "prevent recurrent ankle sprain with balance training, strengthening, bracing and neuromuscular exercise",
         ),
     )
@@ -196,6 +239,17 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
         )
 
     normalized = query.casefold()
+    recurrence_markers = (
+        "prevent",
+        "another ankle sprain",
+        "reduce the risk",
+        "risk of another",
+        "再次扭伤",
+        "降低脚踝",
+        "降低再次",
+        "预防复发",
+    )
+    recurrence_intent = any(marker in normalized for marker in recurrence_markers)
     intent_templates = (
         (
             "受伤后现在如何处理",
@@ -203,6 +257,8 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
                 "48 hour",
                 "first day",
                 "early treatment",
+                "sprained my ankle yesterday",
+                "what should i do now",
                 "刚受伤",
                 "早期",
                 "前48",
@@ -236,7 +292,20 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
         ),
         (
             "如何恢复稳定性并预防再次扭伤",
-            ("balance", "stability", "prevent", "平衡", "稳定", "预防"),
+            (
+                "balance",
+                "stability",
+                "prevent",
+                "reduce the risk",
+                "risk of another",
+                "another ankle sprain",
+                "平衡",
+                "稳定",
+                "预防",
+                "再次扭伤",
+                "降低脚踝",
+                "降低再次",
+            ),
             "### 恢复重点\n"
             "反复扭伤通常不仅需要消肿，还要恢复脚踝力量、本体感觉和平衡控制。"
             "可从扶着固定物双脚站立开始，逐渐过渡到单脚站立、提踵和方向变化练习。\n\n"
@@ -347,7 +416,7 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
         ),
         (
             "如何处理肿胀及安全冷敷",
-            ("ice", "cold", "swelling", "冰敷", "冷敷", "肿胀"),
+            ("ice", "cold", "elevation", "冰敷", "冷敷", "抬高"),
             "### 冷敷与抬高\n"
             "冷敷时用毛巾隔开皮肤，短时间进行，并在休息时抬高患肢。"
             "不要让冰块直接接触皮肤，也不要在感觉减退的部位长时间冷敷。\n\n"
@@ -371,6 +440,8 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
     )
     matched_answers = []
     for title, terms, answer in intent_templates:
+        if recurrence_intent and title == "何时恢复走路、跑步或运动":
+            continue
         if any(term in normalized for term in terms):
             matched_answers.append(f"## {title}\n\n{answer}")
 

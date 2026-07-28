@@ -1,16 +1,16 @@
 {
-  "generated_at_utc": "2026-07-28T03:25:48.574728+00:00",
+  "generated_at_utc": "2026-07-28T03:30:28.344337+00:00",
   "question_pairs": 10,
   "query_count": 20,
   "embedding_model": "intfloat/multilingual-e5-base",
   "metrics": {
-    "answer_adaptation": 74.5,
-    "source_relevance_at_3": 76.7,
-    "bilingual_top3_consistency": 57.0,
-    "exact_order_pair_rate": 50.0,
-    "overall_score": 70.9
+    "answer_adaptation": 92.0,
+    "source_relevance_at_3": 90.0,
+    "bilingual_top3_consistency": 87.0,
+    "exact_order_pair_rate": 80.0,
+    "overall_score": 90.0
   },
-  "grade": "合格",
+  "grade": "优秀",
   "weights": {
     "answer_adaptation": 0.4,
     "source_relevance_at_3": 0.35,
@@ -20,81 +20,91 @@
     {
       "id": "early-care",
       "topic": "受伤后早期处理",
-      "answer_adaptation": 45.0,
-      "source_relevance_at_3": 50.0,
-      "bilingual_top3_consistency": 0.0,
-      "exact_order_match": false,
+      "answer_adaptation": 100.0,
+      "source_relevance_at_3": 100.0,
+      "bilingual_top3_consistency": 100.0,
+      "exact_order_match": true,
       "languages": {
         "zh": {
           "question": "我昨天扭伤了脚踝，现在肿胀、疼痛，但还能走路。我现在应该如何处理？",
-          "answer": "我识别到你的问题包含 **2 个方面**，下面逐项回答。\n\n---\n\n## 受伤后现在如何处理\n\n### 早期处理\n先停止引起疼痛的运动，保护脚踝并减少不必要的负重。休息时可把脚踝抬高；冷敷应隔着毛巾短时间进行，避免冰块直接接触皮肤。\n\n### 接下来怎么做\n不要长时间完全不动。在疼痛允许且没有明显危险信号时，可逐渐尝试轻柔屈伸脚踝，再根据疼痛、肿胀和步行能力逐步增加活动。\n\n### 需要就医的情况\n如果无法负重、疼痛或肿胀持续加重、脚踝明显变形，或脚部麻木、发冷、变色，应及时接受医疗评估。\n\n---\n\n## 如何处理肿胀及安全冷敷\n\n### 冷敷与抬高\n冷敷时用毛巾隔开皮肤，短时间进行，并在休息时抬高患肢。不要让冰块直接接触皮肤，也不要在感觉减退的部位长时间冷敷。\n\n### 活动安排\n肿胀明显时减少会加重症状的活动；在疼痛允许时保留轻柔活动，避免长期完全制动。\n\n### 何时就医\n如果肿胀快速增加、长时间不改善，或伴随无法负重、麻木、发冷、明显变色，应及时就医。",
-          "answer_score": 80.0,
+          "answer": "## 受伤后现在如何处理\n\n### 早期处理\n先停止引起疼痛的运动，保护脚踝并减少不必要的负重。休息时可把脚踝抬高；冷敷应隔着毛巾短时间进行，避免冰块直接接触皮肤。\n\n### 接下来怎么做\n不要长时间完全不动。在疼痛允许且没有明显危险信号时，可逐渐尝试轻柔屈伸脚踝，再根据疼痛、肿胀和步行能力逐步增加活动。\n\n### 需要就医的情况\n如果无法负重、疼痛或肿胀持续加重、脚踝明显变形，或脚部麻木、发冷、变色，应及时接受医疗评估。",
+          "answer_score": 100.0,
           "answer_checks": {
             "expected_intent_found": true,
-            "single_relevant_intent": false,
+            "single_relevant_intent": true,
             "answer_concept_coverage": 100.0,
             "detected_headings": [
-              "## 受伤后现在如何处理",
-              "## 如何处理肿胀及安全冷敷"
+              "## 受伤后现在如何处理"
             ]
           },
-          "source_score_at_3": 33.3,
+          "source_score_at_3": 100.0,
           "sources": [
             {
-              "chunk_id": "14_UHSussex_NHS_Ankle_Sprain_No_Followup__chunk_006",
-              "institution": "University Hospitals Sussex NHS Foundation Trust",
-              "similarity": 0.8308,
-              "matched_terms": []
-            },
-            {
-              "chunk_id": "07_PMC12481793_Physical_Therapy_Meta_Analysis__chunk_003",
-              "institution": "BMC Musculoskeletal Disorders (indexed in PubMed Central)",
-              "similarity": 0.8272,
-              "matched_terms": []
-            },
-            {
-              "chunk_id": "08_Alder_Hey_NHS_Ankle_Foot_Sprain__chunk_002",
-              "institution": "Alder Hey Children's NHS Foundation Trust",
-              "similarity": 0.8263,
+              "chunk_id": "28_Plymouth_NHS_Ankle_Sprain_Injury_Rehab__chunk_006",
+              "institution": "University Hospitals Plymouth NHS Trust",
+              "similarity": 0.8972,
               "matched_terms": [
                 "ice"
               ]
-            }
-          ]
-        },
-        "en": {
-          "question": "I sprained my ankle yesterday. It is swollen and painful, but I can still walk. What should I do now?",
-          "answer": "### 总体建议\n先保护受伤脚踝，并根据疼痛、肿胀和负重能力循序渐进地恢复活动。避免忍痛强行训练，也不建议在没有专业建议的情况下长期完全制动。\n\n### 恢复原则\n一般先恢复轻柔活动度和正常步行，再逐步加入力量、平衡以及运动专项训练。如果某一级活动导致疼痛或肿胀明显增加，应退回较轻的强度。\n\n### 安全提示\n请结合下方检索出的官方英文原文核对。症状持续、加重、无法负重或反复不稳时，应咨询医生或物理治疗师。",
-          "answer_score": 10.0,
-          "answer_checks": {
-            "expected_intent_found": false,
-            "single_relevant_intent": false,
-            "answer_concept_coverage": 33.3,
-            "detected_headings": []
-          },
-          "source_score_at_3": 66.7,
-          "sources": [
+            },
             {
-              "chunk_id": "20_Cambridge_NHS_Ankle_Sprain_Discharge_Advice__chunk_002",
-              "institution": "Cambridge University Hospitals NHS Foundation Trust",
-              "similarity": 0.8896,
+              "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_052",
+              "institution": "Frontiers in Medicine (indexed in PubMed Central)",
+              "similarity": 0.8918,
               "matched_terms": [
                 "ice",
                 "elevation"
               ]
             },
             {
-              "chunk_id": "27_Whittington_NHS_Ankle_Strain_Factsheet__chunk_003",
-              "institution": "Whittington Health NHS Trust",
-              "similarity": 0.8861,
-              "matched_terms": []
+              "chunk_id": "15_Plymouth_NHS_Easy_Read_Sprained_Ankle__chunk_003",
+              "institution": "University Hospitals Plymouth NHS Trust",
+              "similarity": 0.8837,
+              "matched_terms": [
+                "ice",
+                "protect"
+              ]
+            }
+          ]
+        },
+        "en": {
+          "question": "I sprained my ankle yesterday. It is swollen and painful, but I can still walk. What should I do now?",
+          "answer": "## 受伤后现在如何处理\n\n### 早期处理\n先停止引起疼痛的运动，保护脚踝并减少不必要的负重。休息时可把脚踝抬高；冷敷应隔着毛巾短时间进行，避免冰块直接接触皮肤。\n\n### 接下来怎么做\n不要长时间完全不动。在疼痛允许且没有明显危险信号时，可逐渐尝试轻柔屈伸脚踝，再根据疼痛、肿胀和步行能力逐步增加活动。\n\n### 需要就医的情况\n如果无法负重、疼痛或肿胀持续加重、脚踝明显变形，或脚部麻木、发冷、变色，应及时接受医疗评估。",
+          "answer_score": 100.0,
+          "answer_checks": {
+            "expected_intent_found": true,
+            "single_relevant_intent": true,
+            "answer_concept_coverage": 100.0,
+            "detected_headings": [
+              "## 受伤后现在如何处理"
+            ]
+          },
+          "source_score_at_3": 100.0,
+          "sources": [
+            {
+              "chunk_id": "28_Plymouth_NHS_Ankle_Sprain_Injury_Rehab__chunk_006",
+              "institution": "University Hospitals Plymouth NHS Trust",
+              "similarity": 0.8972,
+              "matched_terms": [
+                "ice"
+              ]
             },
             {
-              "chunk_id": "19_Worcestershire_NHS_Ankle_Sprain__chunk_002",
-              "institution": "Worcestershire Acute Hospitals NHS Trust",
-              "similarity": 0.8805,
+              "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_052",
+              "institution": "Frontiers in Medicine (indexed in PubMed Central)",
+              "similarity": 0.8918,
               "matched_terms": [
-                "weight bearing"
+                "ice",
+                "elevation"
+              ]
+            },
+            {
+              "chunk_id": "15_Plymouth_NHS_Easy_Read_Sprained_Ankle__chunk_003",
+              "institution": "University Hospitals Plymouth NHS Trust",
+              "similarity": 0.8837,
+              "matched_terms": [
+                "ice",
+                "protect"
               ]
             }
           ]
@@ -579,63 +589,21 @@
     {
       "id": "recovery-time",
       "topic": "恢复时间",
-      "answer_adaptation": 80.0,
-      "source_relevance_at_3": 83.3,
-      "bilingual_top3_consistency": 0.0,
-      "exact_order_match": false,
+      "answer_adaptation": 100.0,
+      "source_relevance_at_3": 100.0,
+      "bilingual_top3_consistency": 100.0,
+      "exact_order_match": true,
       "languages": {
         "zh": {
           "question": "脚踝扭伤后的疼痛和肿胀通常需要多久恢复？",
-          "answer": "我识别到你的问题包含 **2 个方面**，下面逐项回答。\n\n---\n\n## 通常需要多久恢复\n\n### 大致恢复时间\n轻度扭伤通常在数周内明显改善，完全恢复常需约六周；较严重损伤可能需要更久。时间只是参考，不能单独作为恢复运动的标准。\n\n### 更重要的判断依据\n应同时观察疼痛和肿胀是否下降、能否正常负重行走、活动度和力量是否恢复，以及单脚平衡和运动动作是否稳定。\n\n### 需要复查的情况\n症状没有逐步改善、持续无法负重、经常不稳，或恢复后反复扭伤时，应接受专业评估。\n\n---\n\n## 如何处理肿胀及安全冷敷\n\n### 冷敷与抬高\n冷敷时用毛巾隔开皮肤，短时间进行，并在休息时抬高患肢。不要让冰块直接接触皮肤，也不要在感觉减退的部位长时间冷敷。\n\n### 活动安排\n肿胀明显时减少会加重症状的活动；在疼痛允许时保留轻柔活动，避免长期完全制动。\n\n### 何时就医\n如果肿胀快速增加、长时间不改善，或伴随无法负重、麻木、发冷、明显变色，应及时就医。",
-          "answer_score": 80.0,
+          "answer": "## 通常需要多久恢复\n\n### 大致恢复时间\n轻度扭伤通常在数周内明显改善，完全恢复常需约六周；较严重损伤可能需要更久。时间只是参考，不能单独作为恢复运动的标准。\n\n### 更重要的判断依据\n应同时观察疼痛和肿胀是否下降、能否正常负重行走、活动度和力量是否恢复，以及单脚平衡和运动动作是否稳定。\n\n### 需要复查的情况\n症状没有逐步改善、持续无法负重、经常不稳，或恢复后反复扭伤时，应接受专业评估。",
+          "answer_score": 100.0,
           "answer_checks": {
             "expected_intent_found": true,
-            "single_relevant_intent": false,
+            "single_relevant_intent": true,
             "answer_concept_coverage": 100.0,
             "detected_headings": [
-              "## 通常需要多久恢复",
-              "## 如何处理肿胀及安全冷敷"
-            ]
-          },
-          "source_score_at_3": 66.7,
-          "sources": [
-            {
-              "chunk_id": "07_PMC12481793_Physical_Therapy_Meta_Analysis__chunk_003",
-              "institution": "BMC Musculoskeletal Disorders (indexed in PubMed Central)",
-              "similarity": 0.8418,
-              "matched_terms": []
-            },
-            {
-              "chunk_id": "29_AAPMR_Ankle_Sprain_Patient_Handout__chunk_002",
-              "institution": "American Academy of Physical Medicine and Rehabilitation",
-              "similarity": 0.8407,
-              "matched_terms": [
-                "weeks",
-                "heal"
-              ]
-            },
-            {
-              "chunk_id": "41_APTA_ChoosePT_Ankle_Sprain_Guide__chunk_005",
-              "institution": "American Physical Therapy Association (ChoosePT)",
-              "similarity": 0.8366,
-              "matched_terms": [
-                "weeks",
-                "heal"
-              ]
-            }
-          ]
-        },
-        "en": {
-          "question": "How long do pain and swelling usually take to recover after an ankle sprain?",
-          "answer": "我识别到你的问题包含 **2 个方面**，下面逐项回答。\n\n---\n\n## 通常需要多久恢复\n\n### 大致恢复时间\n轻度扭伤通常在数周内明显改善，完全恢复常需约六周；较严重损伤可能需要更久。时间只是参考，不能单独作为恢复运动的标准。\n\n### 更重要的判断依据\n应同时观察疼痛和肿胀是否下降、能否正常负重行走、活动度和力量是否恢复，以及单脚平衡和运动动作是否稳定。\n\n### 需要复查的情况\n症状没有逐步改善、持续无法负重、经常不稳，或恢复后反复扭伤时，应接受专业评估。\n\n---\n\n## 如何处理肿胀及安全冷敷\n\n### 冷敷与抬高\n冷敷时用毛巾隔开皮肤，短时间进行，并在休息时抬高患肢。不要让冰块直接接触皮肤，也不要在感觉减退的部位长时间冷敷。\n\n### 活动安排\n肿胀明显时减少会加重症状的活动；在疼痛允许时保留轻柔活动，避免长期完全制动。\n\n### 何时就医\n如果肿胀快速增加、长时间不改善，或伴随无法负重、麻木、发冷、明显变色，应及时就医。",
-          "answer_score": 80.0,
-          "answer_checks": {
-            "expected_intent_found": true,
-            "single_relevant_intent": false,
-            "answer_concept_coverage": 100.0,
-            "detected_headings": [
-              "## 通常需要多久恢复",
-              "## 如何处理肿胀及安全冷敷"
+              "## 通常需要多久恢复"
             ]
           },
           "source_score_at_3": 100.0,
@@ -643,26 +611,67 @@
             {
               "chunk_id": "36_Leeds_NHS_Soft_Tissue_Ankle_Injuries__chunk_004",
               "institution": "Leeds Teaching Hospitals NHS Trust",
-              "similarity": 0.9098,
+              "similarity": 0.9198,
               "matched_terms": [
                 "weeks"
               ]
             },
             {
-              "chunk_id": "44_UCSF_Health_Ankle_Sprain__chunk_005",
-              "institution": "UCSF Health",
-              "similarity": 0.9077,
+              "chunk_id": "01_PAH_NHS_Ankle_Sprain_Patient_Leaflet__chunk_001",
+              "institution": "The Princess Alexandra Hospital NHS Trust",
+              "similarity": 0.9196,
               "matched_terms": [
+                "weeks",
                 "heal"
+              ]
+            },
+            {
+              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
+              "institution": "MedlinePlus, U.S. National Library of Medicine",
+              "similarity": 0.9159,
+              "matched_terms": [
+                "weeks"
+              ]
+            }
+          ]
+        },
+        "en": {
+          "question": "How long do pain and swelling usually take to recover after an ankle sprain?",
+          "answer": "## 通常需要多久恢复\n\n### 大致恢复时间\n轻度扭伤通常在数周内明显改善，完全恢复常需约六周；较严重损伤可能需要更久。时间只是参考，不能单独作为恢复运动的标准。\n\n### 更重要的判断依据\n应同时观察疼痛和肿胀是否下降、能否正常负重行走、活动度和力量是否恢复，以及单脚平衡和运动动作是否稳定。\n\n### 需要复查的情况\n症状没有逐步改善、持续无法负重、经常不稳，或恢复后反复扭伤时，应接受专业评估。",
+          "answer_score": 100.0,
+          "answer_checks": {
+            "expected_intent_found": true,
+            "single_relevant_intent": true,
+            "answer_concept_coverage": 100.0,
+            "detected_headings": [
+              "## 通常需要多久恢复"
+            ]
+          },
+          "source_score_at_3": 100.0,
+          "sources": [
+            {
+              "chunk_id": "36_Leeds_NHS_Soft_Tissue_Ankle_Injuries__chunk_004",
+              "institution": "Leeds Teaching Hospitals NHS Trust",
+              "similarity": 0.9198,
+              "matched_terms": [
+                "weeks"
               ]
             },
             {
               "chunk_id": "01_PAH_NHS_Ankle_Sprain_Patient_Leaflet__chunk_001",
               "institution": "The Princess Alexandra Hospital NHS Trust",
-              "similarity": 0.9076,
+              "similarity": 0.9196,
               "matched_terms": [
                 "weeks",
                 "heal"
+              ]
+            },
+            {
+              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
+              "institution": "MedlinePlus, U.S. National Library of Medicine",
+              "similarity": 0.9159,
+              "matched_terms": [
+                "weeks"
               ]
             }
           ]
@@ -672,82 +681,94 @@
     {
       "id": "recurrence-prevention",
       "topic": "预防再次扭伤",
-      "answer_adaptation": 0.0,
-      "source_relevance_at_3": 33.3,
+      "answer_adaptation": 100.0,
+      "source_relevance_at_3": 100.0,
       "bilingual_top3_consistency": 100.0,
       "exact_order_match": true,
       "languages": {
         "zh": {
           "question": "恢复运动后，如何降低脚踝再次扭伤的风险？",
-          "answer": "## 何时恢复走路、跑步或运动\n\n### 恢复负重\n在疼痛允许的范围内逐渐增加负重，目标是先恢复不明显跛行的正常步行。如果走路后疼痛或肿胀明显反弹，应减少距离或强度。\n\n### 返回跑步和运动\n通常应先达到：日常走路和上下楼较舒适、活动度接近另一侧、单脚站立和提踵能够稳定完成。随后按快走、慢跑、直线跑、变向动作、专项训练的顺序逐级恢复。\n\n### 暂缓运动的情况\n仍明显跛行、脚踝不稳、活动后持续肿胀，或无法完成基本单脚动作时，不宜直接恢复比赛。",
-          "answer_score": 0.0,
+          "answer": "## 如何恢复稳定性并预防再次扭伤\n\n### 恢复重点\n反复扭伤通常不仅需要消肿，还要恢复脚踝力量、本体感觉和平衡控制。可从扶着固定物双脚站立开始，逐渐过渡到单脚站立、提踵和方向变化练习。\n\n### 进阶原则\n只有在当前练习能稳定完成、没有明显疼痛或次日肿胀增加时，再减少手扶、延长时间，或加入更复杂动作。恢复运动初期可依据专业建议使用护踝或贴扎。\n\n### 何时评估\n如果脚踝经常“打软腿”、持续不稳或多次扭伤，应咨询医生或物理治疗师。",
+          "answer_score": 100.0,
           "answer_checks": {
-            "expected_intent_found": false,
-            "single_relevant_intent": false,
-            "answer_concept_coverage": 0.0,
+            "expected_intent_found": true,
+            "single_relevant_intent": true,
+            "answer_concept_coverage": 100.0,
             "detected_headings": [
-              "## 何时恢复走路、跑步或运动"
+              "## 如何恢复稳定性并预防再次扭伤"
             ]
           },
-          "source_score_at_3": 33.3,
+          "source_score_at_3": 100.0,
           "sources": [
             {
-              "chunk_id": "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_009",
-              "institution": "Massachusetts General Brigham Sports Medicine",
-              "similarity": 0.8698,
+              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_093",
+              "institution": "PLOS ONE (indexed in PubMed Central)",
+              "similarity": 0.8889,
+              "matched_terms": [
+                "balance"
+              ]
+            },
+            {
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_029",
+              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
+              "similarity": 0.8865,
               "matched_terms": [
                 "balance",
                 "strength"
               ]
             },
             {
-              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_031",
-              "institution": "PLOS ONE (indexed in PubMed Central)",
-              "similarity": 0.8678,
-              "matched_terms": []
-            },
-            {
-              "chunk_id": "07_PMC12481793_Physical_Therapy_Meta_Analysis__chunk_064",
-              "institution": "BMC Musculoskeletal Disorders (indexed in PubMed Central)",
-              "similarity": 0.8636,
-              "matched_terms": []
+              "chunk_id": "41_APTA_ChoosePT_Ankle_Sprain_Guide__chunk_017",
+              "institution": "American Physical Therapy Association (ChoosePT)",
+              "similarity": 0.8863,
+              "matched_terms": [
+                "balance",
+                "strength",
+                "brace"
+              ]
             }
           ]
         },
         "en": {
           "question": "How can I reduce the risk of another ankle sprain after returning to sport?",
-          "answer": "## 何时恢复走路、跑步或运动\n\n### 恢复负重\n在疼痛允许的范围内逐渐增加负重，目标是先恢复不明显跛行的正常步行。如果走路后疼痛或肿胀明显反弹，应减少距离或强度。\n\n### 返回跑步和运动\n通常应先达到：日常走路和上下楼较舒适、活动度接近另一侧、单脚站立和提踵能够稳定完成。随后按快走、慢跑、直线跑、变向动作、专项训练的顺序逐级恢复。\n\n### 暂缓运动的情况\n仍明显跛行、脚踝不稳、活动后持续肿胀，或无法完成基本单脚动作时，不宜直接恢复比赛。",
-          "answer_score": 0.0,
+          "answer": "## 如何恢复稳定性并预防再次扭伤\n\n### 恢复重点\n反复扭伤通常不仅需要消肿，还要恢复脚踝力量、本体感觉和平衡控制。可从扶着固定物双脚站立开始，逐渐过渡到单脚站立、提踵和方向变化练习。\n\n### 进阶原则\n只有在当前练习能稳定完成、没有明显疼痛或次日肿胀增加时，再减少手扶、延长时间，或加入更复杂动作。恢复运动初期可依据专业建议使用护踝或贴扎。\n\n### 何时评估\n如果脚踝经常“打软腿”、持续不稳或多次扭伤，应咨询医生或物理治疗师。",
+          "answer_score": 100.0,
           "answer_checks": {
-            "expected_intent_found": false,
-            "single_relevant_intent": false,
-            "answer_concept_coverage": 0.0,
+            "expected_intent_found": true,
+            "single_relevant_intent": true,
+            "answer_concept_coverage": 100.0,
             "detected_headings": [
-              "## 何时恢复走路、跑步或运动"
+              "## 如何恢复稳定性并预防再次扭伤"
             ]
           },
-          "source_score_at_3": 33.3,
+          "source_score_at_3": 100.0,
           "sources": [
             {
-              "chunk_id": "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_009",
-              "institution": "Massachusetts General Brigham Sports Medicine",
-              "similarity": 0.8698,
+              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_093",
+              "institution": "PLOS ONE (indexed in PubMed Central)",
+              "similarity": 0.8889,
+              "matched_terms": [
+                "balance"
+              ]
+            },
+            {
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_029",
+              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
+              "similarity": 0.8865,
               "matched_terms": [
                 "balance",
                 "strength"
               ]
             },
             {
-              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_031",
-              "institution": "PLOS ONE (indexed in PubMed Central)",
-              "similarity": 0.8678,
-              "matched_terms": []
-            },
-            {
-              "chunk_id": "07_PMC12481793_Physical_Therapy_Meta_Analysis__chunk_064",
-              "institution": "BMC Musculoskeletal Disorders (indexed in PubMed Central)",
-              "similarity": 0.8636,
-              "matched_terms": []
+              "chunk_id": "41_APTA_ChoosePT_Ankle_Sprain_Guide__chunk_017",
+              "institution": "American Physical Therapy Association (ChoosePT)",
+              "similarity": 0.8863,
+              "matched_terms": [
+                "balance",
+                "strength",
+                "brace"
+              ]
             }
           ]
         }
@@ -841,8 +862,8 @@
       "topic": "肿胀与冷敷",
       "answer_adaptation": 100.0,
       "source_relevance_at_3": 100.0,
-      "bilingual_top3_consistency": 0.0,
-      "exact_order_match": false,
+      "bilingual_top3_consistency": 100.0,
+      "exact_order_match": true,
       "languages": {
         "zh": {
           "question": "脚踝扭伤后应该怎样冷敷和抬高来减轻肿胀？",
@@ -859,29 +880,30 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
-              "chunk_id": "21_NCBI_InformedHealth_Ankle_Sprain_Treatment_Options__chunk_004",
-              "institution": "Institute for Quality and Efficiency in Health Care (IQWiG) / NCBI Bookshelf",
-              "similarity": 0.8406,
+              "chunk_id": "28_Plymouth_NHS_Ankle_Sprain_Injury_Rehab__chunk_006",
+              "institution": "University Hospitals Plymouth NHS Trust",
+              "similarity": 0.9041,
               "matched_terms": [
                 "ice",
-                "cold"
-              ]
-            },
-            {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_019",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8339,
-              "matched_terms": [
-                "elevation",
                 "swelling"
               ]
             },
             {
-              "chunk_id": "46_Stanford_Health_Care_Ankle_Sprain_Treatment__chunk_003",
-              "institution": "Stanford Health Care",
-              "similarity": 0.8337,
+              "chunk_id": "14_UHSussex_NHS_Ankle_Sprain_No_Followup__chunk_003",
+              "institution": "University Hospitals Sussex NHS Foundation Trust",
+              "similarity": 0.8945,
               "matched_terms": [
-                "elevation",
+                "ice",
+                "swelling",
+                "cold"
+              ]
+            },
+            {
+              "chunk_id": "19_Worcestershire_NHS_Ankle_Sprain__chunk_003",
+              "institution": "Worcestershire Acute Hospitals NHS Trust",
+              "similarity": 0.8942,
+              "matched_terms": [
+                "ice",
                 "swelling"
               ]
             }
@@ -904,29 +926,28 @@
             {
               "chunk_id": "28_Plymouth_NHS_Ankle_Sprain_Injury_Rehab__chunk_006",
               "institution": "University Hospitals Plymouth NHS Trust",
-              "similarity": 0.9117,
+              "similarity": 0.9041,
               "matched_terms": [
                 "ice",
                 "swelling"
               ]
             },
             {
-              "chunk_id": "20_Cambridge_NHS_Ankle_Sprain_Discharge_Advice__chunk_002",
-              "institution": "Cambridge University Hospitals NHS Foundation Trust",
-              "similarity": 0.9082,
+              "chunk_id": "14_UHSussex_NHS_Ankle_Sprain_No_Followup__chunk_003",
+              "institution": "University Hospitals Sussex NHS Foundation Trust",
+              "similarity": 0.8945,
               "matched_terms": [
                 "ice",
-                "elevation",
-                "swelling"
+                "swelling",
+                "cold"
               ]
             },
             {
-              "chunk_id": "36_Leeds_NHS_Soft_Tissue_Ankle_Injuries__chunk_008",
-              "institution": "Leeds Teaching Hospitals NHS Trust",
-              "similarity": 0.9008,
+              "chunk_id": "19_Worcestershire_NHS_Ankle_Sprain__chunk_003",
+              "institution": "Worcestershire Acute Hospitals NHS Trust",
+              "similarity": 0.8942,
               "matched_terms": [
                 "ice",
-                "elevation",
                 "swelling"
               ]
             }

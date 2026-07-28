@@ -11,6 +11,8 @@ import numpy as np
 import streamlit as st
 from sentence_transformers import SentenceTransformer
 
+from deepseek_translator import api_is_configured, translate_to_chinese
+
 
 ROOT = Path(__file__).resolve().parent
 INDEX_DIR = ROOT / "index" / "ankle_sprain"
@@ -222,6 +224,18 @@ def is_low_information_chunk(text: str) -> bool:
 def contains_warning_term(query: str) -> bool:
     normalized = query.casefold()
     return any(term.casefold() in normalized for term in WARNING_TERMS)
+
+
+def contains_chinese(text: str) -> bool:
+    """Return whether text contains at least one CJK Unified Ideograph."""
+    return bool(re.search(r"[\u4e00-\u9fff]", text))
+
+
+@st.cache_data(show_spinner=False)
+def cached_chinese_translation(chunk_id: str, text: str) -> str:
+    """Cache translations by immutable chunk ID and source text."""
+    del chunk_id
+    return translate_to_chinese(text)
 
 
 def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
@@ -500,47 +514,83 @@ if submitted:
     if not question:
         st.warning("请先输入问题。")
     else:
-        warning_detected = contains_warning_term(question)
-        if warning_detected:
-            st.error(
-                "你的描述可能包含需要专业医疗评估的情况。"
-                "请停止运动，并及时联系医生、急诊或当地紧急医疗服务。"
+        st.session_state["active_question"] = question
+
+active_question = st.session_state.get("active_question", "")
+if active_question:
+    warning_detected = contains_warning_term(active_question)
+    if warning_detected:
+        st.error(
+            "你的描述可能包含需要专业医疗评估的情况。"
+            "请停止运动，并及时联系医生、急诊或当地紧急医疗服务。"
+        )
+
+    results = retrieve(
+        active_question,
+        chunks,
+        embeddings,
+        model,
+        query_prefix=embedding_metadata.get("query_prefix", ""),
+    )
+    st.subheader("详细中文回答")
+    st.success(generate_detailed_chinese_answer(active_question, warning_detected))
+    st.caption(
+        "该回答由详细的受控模板生成，仅供健康教育，不能替代诊断或个体化康复方案；"
+        "请用下方官方原文核对。"
+    )
+
+    st.subheader("相关资料")
+    st.write(
+        "以下内容是从原始英文患者资料和研究文献中检索出的段落，"
+        "不是自动诊断或个性化治疗方案。"
+    )
+    st.caption(
+        "中文译文由 DeepSeek 按需生成，会将当前英文段落发送至 DeepSeek API。"
+        "机器翻译仅供阅读，请以 English 原文为准；译文不会写入索引或 Embedding。"
+    )
+
+    default_language = "中文" if contains_chinese(active_question) else "English"
+    for rank, (score, chunk) in enumerate(results, start=1):
+        page_label = (
+            str(chunk["page_start"])
+            if chunk["page_start"] == chunk["page_end"]
+            else f'{chunk["page_start"]}-{chunk["page_end"]}'
+        )
+        with st.expander(
+            f"{rank}. {chunk['institution']} · 第 {page_label} 页 "
+            f"· 相似度 {score:.3f}",
+            expanded=rank == 1,
+        ):
+            language = st.radio(
+                "资料语言",
+                ("English", "中文"),
+                index=1 if default_language == "中文" else 0,
+                horizontal=True,
+                key=f"language_{chunk['chunk_id']}",
             )
-
-        results = retrieve(
-            question,
-            chunks,
-            embeddings,
-            model,
-            query_prefix=embedding_metadata.get("query_prefix", ""),
-        )
-        st.subheader("详细中文回答")
-        st.success(generate_detailed_chinese_answer(question, warning_detected))
-        st.caption(
-            "该回答由详细的受控模板生成，仅供健康教育，不能替代诊断或个体化康复方案；"
-            "请用下方官方原文核对。"
-        )
-
-        st.subheader("相关资料")
-        st.write(
-            "以下内容是从原始英文患者资料和研究文献中检索出的段落，"
-            "不是自动诊断或个性化治疗方案。"
-        )
-
-        for rank, (score, chunk) in enumerate(results, start=1):
-            page_label = (
-                str(chunk["page_start"])
-                if chunk["page_start"] == chunk["page_end"]
-                else f'{chunk["page_start"]}-{chunk["page_end"]}'
-            )
-            with st.expander(
-                f"{rank}. {chunk['institution']} · 第 {page_label} 页 "
-                f"· 相似度 {score:.3f}",
-                expanded=rank == 1,
-            ):
+            if language == "English":
                 st.write(chunk["text"])
-                st.markdown(f"[查看官方原始资料]({chunk['source_url']})")
-                st.code(chunk["chunk_id"], language=None)
+            elif not api_is_configured():
+                st.warning(
+                    "中文翻译尚未启用：请在项目根目录的 .env 中填写 "
+                    "DEEPSEEK_API_KEY，然后重新启动界面。"
+                )
+                st.write(chunk["text"])
+            else:
+                try:
+                    with st.spinner("正在生成忠实中文翻译……"):
+                        translation = cached_chinese_translation(
+                            chunk["chunk_id"],
+                            chunk["text"],
+                        )
+                    st.write(translation)
+                    st.caption("DeepSeek 机器翻译 · 请以 English 原文为准")
+                except Exception as error:
+                    st.error(f"翻译失败：{error}")
+                    st.write(chunk["text"])
+
+            st.markdown(f"[查看官方原始资料]({chunk['source_url']})")
+            st.code(chunk["chunk_id"], language=None)
 
 st.divider()
 st.caption(

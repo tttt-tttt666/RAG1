@@ -220,6 +220,66 @@ SOURCES = {
         "document_date": "not stated",
         "review_date": "not stated",
     },
+    "33_UHDB_NHS_Ankle_Sprain_Rehabilitation.pdf": {
+        "institution": "University Hospitals of Derby and Burton NHS Foundation Trust",
+        "source_url": "https://www.uhdb.nhs.uk/conditions-in-group-rehabilitation-ankle-sprain/",
+        "document_date": "not stated",
+        "review_date": "not stated",
+    },
+    "34_Norfolk_Waveney_NHS_Ankle_Sprains.pdf": {
+        "institution": "Norfolk and Waveney Community Health and Care NHS Trust",
+        "source_url": "https://norfolkandwaveneycommunityhealth.nhs.uk/media/sx5n25ad/ankle-sprain-leaflet.pdf",
+        "document_date": "2024-03-20",
+        "review_date": "not stated",
+    },
+    "35_Mass_General_Lateral_Ankle_Sprain_Protocol.pdf": {
+        "institution": "Massachusetts General Brigham Sports Medicine",
+        "source_url": "https://www.massgeneral.org/assets/MGH/pdf/orthopaedics/sports-medicine/physical-therapy/rehabilitation-protocol-for-ankle-sprain.pdf",
+        "document_date": "2021-09",
+        "review_date": "not stated",
+    },
+    "36_Leeds_NHS_Soft_Tissue_Ankle_Injuries.pdf": {
+        "institution": "Leeds Teaching Hospitals NHS Trust",
+        "source_url": "https://www.leedsth.nhs.uk/patients/resources/soft-tissue-injuries-of-the-ankle/",
+        "document_date": "2025-06-04",
+        "review_date": "2028-01-31",
+    },
+    "37_Mass_General_Ankle_Sprains_in_Children.pdf": {
+        "institution": "Massachusetts General Hospital",
+        "source_url": "https://www.massgeneral.org/orthopaedics/children/conditions-and-treatments/ankle-sprains-children",
+        "document_date": "not stated",
+        "review_date": "not stated",
+    },
+    "38_North_Bristol_NHS_Injured_Ankle.pdf": {
+        "institution": "North Bristol NHS Trust",
+        "source_url": "https://www.nbt.nhs.uk/our-services/a-z-services/emergency-department/ed-miu-patient-information/ankle-injuries",
+        "document_date": "2024-04",
+        "review_date": "2027-04",
+    },
+    "39_LuskinOIC_Ankle_Sprain_Return_to_Sport.pdf": {
+        "institution": "Luskin Orthopaedic Institute for Children",
+        "source_url": "https://www.luskinoic.org/health-information-library/ankle-sprain/",
+        "document_date": "not stated",
+        "review_date": "not stated",
+    },
+    "40_RCH_Ankle_Sprains_Emergency_Guideline.pdf": {
+        "institution": "The Royal Children's Hospital Melbourne",
+        "source_url": "https://www.rch.org.au/clinicalguide/guideline_index/fractures/Ankle_Sprains_-_Emergency_Department/",
+        "document_date": "not stated",
+        "review_date": "not stated",
+    },
+    "41_APTA_ChoosePT_Ankle_Sprain_Guide.pdf": {
+        "institution": "American Physical Therapy Association (ChoosePT)",
+        "source_url": "https://www.choosept.com/guide/physical-therapy-guide-ankle-sprain",
+        "document_date": "2023-02-13",
+        "review_date": "not applicable",
+    },
+    "42_Nationwide_Childrens_High_Ankle_Sprain.pdf": {
+        "institution": "Nationwide Children's Hospital",
+        "source_url": "https://www.nationwidechildrens.org/conditions/sports-medicine-high-ankle-sprain",
+        "document_date": "2022",
+        "review_date": "not stated",
+    },
 }
 
 

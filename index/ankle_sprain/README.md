@@ -1,6 +1,6 @@
 # Ankle Sprain RAG Index
 
-This directory contains the extracted English text from 32 trusted
+This directory contains the extracted English text from 42 trusted
 ankle-sprain PDFs: patient resources from hospitals, government health
 services, and professional medical organizations, plus peer-reviewed research
 indexed in PubMed Central. The source content has not been translated or

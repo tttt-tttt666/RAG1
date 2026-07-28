@@ -1,6 +1,6 @@
 # Ankle Sprain Patient Education RAG Dataset
 
-This project prepares 32 trusted ankle-sprain PDFs for retrieval-augmented
+This project prepares 42 trusted ankle-sprain PDFs for retrieval-augmented
 generation (RAG). The collection combines official patient education from
 hospitals, government health services, and professional medical organizations
 with three peer-reviewed evidence syntheses indexed in PubMed Central.

@@ -1,6 +1,6 @@
 # Ankle Sprain Patient Education PDFs
 
-Downloaded from official healthcare-provider websites on 2026-07-27.
+Collected from official healthcare-provider websites; last updated 2026-07-28.
 
 | File | Issuing institution | Document date | Next review | Official source |
 |---|---|---:|---:|---|
@@ -36,6 +36,16 @@ Downloaded from official healthcare-provider websites on 2026-07-27.
 | `30_WWL_NHS_Ankle_Sprain_Rehab.pdf` | Wrightington, Wigan and Leigh Teaching Hospitals NHS Foundation Trust | Reviewed February 2024 | February 2026 | https://www.wwl.nhs.uk/media/.leaflets/666844344b9e01.60265817.pdf |
 | `31_MedlinePlus_Ankle_Sprain_Aftercare.pdf` | MedlinePlus, U.S. National Library of Medicine | Reviewed 7 October 2024 | N/A | https://medlineplus.gov/ency/patientinstructions/000574.htm |
 | `32_AAOS_Sprained_Ankle.pdf` | American Academy of Orthopaedic Surgeons | Not stated | Not stated | https://orthoinfo.aaos.org/en/diseases--conditions/sprained-ankle |
+| `33_UHDB_NHS_Ankle_Sprain_Rehabilitation.pdf` | University Hospitals of Derby and Burton NHS Foundation Trust | Not stated | Not stated | https://www.uhdb.nhs.uk/conditions-in-group-rehabilitation-ankle-sprain/ |
+| `34_Norfolk_Waveney_NHS_Ankle_Sprains.pdf` | Norfolk and Waveney Community Health and Care NHS Trust | 20 March 2024 | Not stated | https://norfolkandwaveneycommunityhealth.nhs.uk/media/sx5n25ad/ankle-sprain-leaflet.pdf |
+| `35_Mass_General_Lateral_Ankle_Sprain_Protocol.pdf` | Massachusetts General Brigham Sports Medicine | Revised September 2021 | Not stated | https://www.massgeneral.org/assets/MGH/pdf/orthopaedics/sports-medicine/physical-therapy/rehabilitation-protocol-for-ankle-sprain.pdf |
+| `36_Leeds_NHS_Soft_Tissue_Ankle_Injuries.pdf` | Leeds Teaching Hospitals NHS Trust | Reviewed 4 June 2025 | 31 January 2028 | https://www.leedsth.nhs.uk/patients/resources/soft-tissue-injuries-of-the-ankle/ |
+| `37_Mass_General_Ankle_Sprains_in_Children.pdf` | Massachusetts General Hospital | Not stated | Not stated | https://www.massgeneral.org/orthopaedics/children/conditions-and-treatments/ankle-sprains-children |
+| `38_North_Bristol_NHS_Injured_Ankle.pdf` | North Bristol NHS Trust | April 2024 | April 2027 | https://www.nbt.nhs.uk/our-services/a-z-services/emergency-department/ed-miu-patient-information/ankle-injuries |
+| `39_LuskinOIC_Ankle_Sprain_Return_to_Sport.pdf` | Luskin Orthopaedic Institute for Children | Not stated | Not stated | https://www.luskinoic.org/health-information-library/ankle-sprain/ |
+| `40_RCH_Ankle_Sprains_Emergency_Guideline.pdf` | The Royal Children's Hospital Melbourne | Not stated | Not stated | https://www.rch.org.au/clinicalguide/guideline_index/fractures/Ankle_Sprains_-_Emergency_Department/ |
+| `41_APTA_ChoosePT_Ankle_Sprain_Guide.pdf` | American Physical Therapy Association (ChoosePT) | Expert review 22 October 2022; revised 13 February 2023 | N/A | https://www.choosept.com/guide/physical-therapy-guide-ankle-sprain |
+| `42_Nationwide_Childrens_High_Ankle_Sprain.pdf` | Nationwide Children's Hospital | 2022 | Not stated | https://www.nationwidechildrens.org/conditions/sports-medicine-high-ankle-sprain |
 
 ## Selection notes
 
@@ -57,3 +67,14 @@ Downloaded from official healthcare-provider websites on 2026-07-27.
   paraphrase, or add medical instructions.
 - The stated dates are preserved even when a document is older or its review
   date has passed, so users can judge currency rather than having it hidden.
+
+## Added sources 33-42
+
+- Files 34 and 35 are original PDFs from the issuing institutions. Files
+  33 and 36-42 are English-text PDF snapshots of official pages, each with a
+  provenance cover page.
+- These sources were selected to strengthen retrieval about injury grading,
+  staged rehabilitation, functional testing, return to running, and return to
+  court or field sports.
+- The snapshot process removed website navigation and normalized whitespace
+  only. It did not translate or rewrite the source medical content.

@@ -1,0 +1,4 @@
+[client]
+# Hide localhost developer controls such as Deploy, Rerun, and Clear cache.
+# Viewer mode leaves normal text selection and browser clipboard shortcuts free.
+toolbarMode = "viewer"

@@ -101,7 +101,18 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
     normalized = query.casefold()
     intent_templates = (
         (
-            ("48 hour", "first day", "early treatment", "刚受伤", "早期", "前48"),
+            "受伤后现在如何处理",
+            (
+                "48 hour",
+                "first day",
+                "early treatment",
+                "刚受伤",
+                "早期",
+                "前48",
+                "昨天",
+                "今天扭伤",
+                "如何处理",
+            ),
             "### 早期处理\n"
             "先停止引起疼痛的运动，保护脚踝并减少不必要的负重。休息时可把脚踝抬高；"
             "冷敷应隔着毛巾短时间进行，避免冰块直接接触皮肤。\n\n"
@@ -113,6 +124,7 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
             "应及时接受医疗评估。",
         ),
         (
+            "何时以及怎样开始康复训练",
             ("exercise", "movement", "range of motion", "锻炼", "训练", "活动度"),
             "### 建议的训练顺序\n"
             "1. **活动度**：先做轻柔的脚踝屈伸、画圈或用脚写字。\n"
@@ -126,6 +138,7 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
             "具体开始时间取决于损伤程度和负重能力；严重扭伤或反复不稳者应由医生或物理治疗师评估。",
         ),
         (
+            "如何恢复稳定性并预防再次扭伤",
             ("balance", "stability", "prevent", "平衡", "稳定", "预防"),
             "### 恢复重点\n"
             "反复扭伤通常不仅需要消肿，还要恢复脚踝力量、本体感觉和平衡控制。"
@@ -137,6 +150,7 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
             "如果脚踝经常“打软腿”、持续不稳或多次扭伤，应咨询医生或物理治疗师。",
         ),
         (
+            "何时恢复走路、跑步或运动",
             ("walk", "weight bearing", "running", "sport", "return", "走路", "负重", "跑步", "运动"),
             "### 恢复负重\n"
             "在疼痛允许的范围内逐渐增加负重，目标是先恢复不明显跛行的正常步行。"
@@ -148,6 +162,7 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
             "仍明显跛行、脚踝不稳、活动后持续肿胀，或无法完成基本单脚动作时，不宜直接恢复比赛。",
         ),
         (
+            "通常需要多久恢复",
             ("heal", "recovery", "how long", "恢复", "多久", "愈合"),
             "### 大致恢复时间\n"
             "轻度扭伤通常在数周内明显改善，完全恢复常需约六周；较严重损伤可能需要更久。"
@@ -159,6 +174,7 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
             "症状没有逐步改善、持续无法负重、经常不稳，或恢复后反复扭伤时，应接受专业评估。",
         ),
         (
+            "如何处理肿胀及安全冷敷",
             ("ice", "cold", "swelling", "冰敷", "冷敷", "肿胀"),
             "### 冷敷与抬高\n"
             "冷敷时用毛巾隔开皮肤，短时间进行，并在休息时抬高患肢。"
@@ -169,6 +185,7 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
             "如果肿胀快速增加、长时间不改善，或伴随无法负重、麻木、发冷、明显变色，应及时就医。",
         ),
         (
+            "哪些情况需要去医院",
             ("medical help", "doctor", "hospital", "seek help", "医生", "医院", "就医"),
             "### 建议尽快就医\n"
             "无法正常负重或走四步、疼痛或肿胀持续加重、按压骨头处明显疼痛，"
@@ -180,9 +197,18 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
             "仅凭文字无法可靠区分普通扭伤、骨折、脱位或严重韧带损伤；医生可能根据检查决定是否需要影像学检查。",
         ),
     )
-    for terms, answer in intent_templates:
+    matched_answers = []
+    for title, terms, answer in intent_templates:
         if any(term in normalized for term in terms):
-            return answer
+            matched_answers.append(f"## {title}\n\n{answer}")
+
+    if matched_answers:
+        introduction = (
+            f"我识别到你的问题包含 **{len(matched_answers)} 个方面**，下面逐项回答。"
+            if len(matched_answers) > 1
+            else ""
+        )
+        return "\n\n---\n\n".join(part for part in [introduction, *matched_answers] if part)
 
     return (
         "### 总体建议\n"

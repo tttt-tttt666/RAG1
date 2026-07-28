@@ -1,14 +1,14 @@
 {
-  "generated_at_utc": "2026-07-28T07:26:41.834963+00:00",
+  "generated_at_utc": "2026-07-28T08:20:15.759839+00:00",
   "question_pairs": 10,
   "query_count": 20,
   "embedding_model": "intfloat/multilingual-e5-base",
   "metrics": {
     "answer_adaptation": 92.0,
-    "source_relevance_at_3": 90.0,
-    "bilingual_top3_consistency": 87.0,
+    "source_relevance_at_3": 96.7,
+    "bilingual_top3_consistency": 95.0,
     "exact_order_pair_rate": 80.0,
-    "overall_score": 90.0
+    "overall_score": 94.4
   },
   "grade": "优秀",
   "weights": {
@@ -42,27 +42,26 @@
             {
               "chunk_id": "28_Plymouth_NHS_Ankle_Sprain_Injury_Rehab__chunk_006",
               "institution": "University Hospitals Plymouth NHS Trust",
-              "similarity": 0.8972,
+              "similarity": 0.9012,
               "matched_terms": [
                 "ice"
               ]
             },
             {
-              "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_052",
+              "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_054",
               "institution": "Frontiers in Medicine (indexed in PubMed Central)",
-              "similarity": 0.8918,
+              "similarity": 0.8908,
               "matched_terms": [
-                "ice",
-                "elevation"
+                "protect"
               ]
             },
             {
-              "chunk_id": "15_Plymouth_NHS_Easy_Read_Sprained_Ankle__chunk_003",
-              "institution": "University Hospitals Plymouth NHS Trust",
-              "similarity": 0.8837,
+              "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_011",
+              "institution": "The Royal Children's Hospital Melbourne",
+              "similarity": 0.89,
               "matched_terms": [
                 "ice",
-                "protect"
+                "elevation"
               ]
             }
           ]
@@ -84,27 +83,26 @@
             {
               "chunk_id": "28_Plymouth_NHS_Ankle_Sprain_Injury_Rehab__chunk_006",
               "institution": "University Hospitals Plymouth NHS Trust",
-              "similarity": 0.8972,
+              "similarity": 0.9012,
               "matched_terms": [
                 "ice"
               ]
             },
             {
-              "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_052",
+              "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_054",
               "institution": "Frontiers in Medicine (indexed in PubMed Central)",
-              "similarity": 0.8918,
+              "similarity": 0.8908,
               "matched_terms": [
-                "ice",
-                "elevation"
+                "protect"
               ]
             },
             {
-              "chunk_id": "15_Plymouth_NHS_Easy_Read_Sprained_Ankle__chunk_003",
-              "institution": "University Hospitals Plymouth NHS Trust",
-              "similarity": 0.8837,
+              "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_011",
+              "institution": "The Royal Children's Hospital Melbourne",
+              "similarity": 0.89,
               "matched_terms": [
                 "ice",
-                "protect"
+                "elevation"
               ]
             }
           ]
@@ -115,7 +113,7 @@
       "id": "medical-assessment",
       "topic": "就医或影像检查",
       "answer_adaptation": 100.0,
-      "source_relevance_at_3": 100.0,
+      "source_relevance_at_3": 66.7,
       "bilingual_top3_consistency": 100.0,
       "exact_order_match": true,
       "languages": {
@@ -131,7 +129,7 @@
               "## 哪些情况需要去医院"
             ]
           },
-          "source_score_at_3": 100.0,
+          "source_score_at_3": 66.7,
           "sources": [
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_011",
@@ -142,17 +140,15 @@
               ]
             },
             {
-              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_004",
-              "institution": "MedlinePlus, U.S. National Library of Medicine",
-              "similarity": 0.8884,
-              "matched_terms": [
-                "x-ray"
-              ]
+              "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_007",
+              "institution": "The Royal Children's Hospital Melbourne",
+              "similarity": 0.8966,
+              "matched_terms": []
             },
             {
               "chunk_id": "29_AAPMR_Ankle_Sprain_Patient_Handout__chunk_003",
               "institution": "American Academy of Physical Medicine and Rehabilitation",
-              "similarity": 0.8866,
+              "similarity": 0.8906,
               "matched_terms": [
                 "x-ray"
               ]
@@ -171,7 +167,7 @@
               "## 哪些情况需要去医院"
             ]
           },
-          "source_score_at_3": 100.0,
+          "source_score_at_3": 66.7,
           "sources": [
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_011",
@@ -182,17 +178,15 @@
               ]
             },
             {
-              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_004",
-              "institution": "MedlinePlus, U.S. National Library of Medicine",
-              "similarity": 0.8884,
-              "matched_terms": [
-                "x-ray"
-              ]
+              "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_007",
+              "institution": "The Royal Children's Hospital Melbourne",
+              "similarity": 0.8966,
+              "matched_terms": []
             },
             {
               "chunk_id": "29_AAPMR_Ankle_Sprain_Patient_Handout__chunk_003",
               "institution": "American Academy of Physical Medicine and Rehabilitation",
-              "similarity": 0.8866,
+              "similarity": 0.8906,
               "matched_terms": [
                 "x-ray"
               ]
@@ -206,8 +200,8 @@
       "topic": "康复训练顺序",
       "answer_adaptation": 100.0,
       "source_relevance_at_3": 100.0,
-      "bilingual_top3_consistency": 50.0,
-      "exact_order_match": false,
+      "bilingual_top3_consistency": 100.0,
+      "exact_order_match": true,
       "languages": {
         "zh": {
           "question": "脚踝扭伤后的康复训练应该按照什么顺序进行？",
@@ -224,30 +218,33 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
-              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_099",
-              "institution": "PLOS ONE (indexed in PubMed Central)",
-              "similarity": 0.885,
-              "matched_terms": [
-                "strength"
-              ]
-            },
-            {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
               "institution": "The Royal Children's Hospital Melbourne",
-              "similarity": 0.8848,
+              "similarity": 0.8889,
               "matched_terms": [
                 "balance",
                 "proprioception"
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_026",
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_017",
               "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8838,
+              "similarity": 0.8865,
+              "matched_terms": [
+                "strength",
+                "balance",
+                "proprioception"
+              ]
+            },
+            {
+              "chunk_id": "13_AAP_Ankle_Sprain_Treatment__chunk_002",
+              "institution": "American Academy of Pediatrics",
+              "similarity": 0.8836,
               "matched_terms": [
                 "range of motion",
                 "strength",
-                "balance"
+                "balance",
+                "proprioception"
               ]
             }
           ]
@@ -267,31 +264,33 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_026",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8778,
-              "matched_terms": [
-                "range of motion",
-                "strength",
-                "balance"
-              ]
-            },
-            {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
               "institution": "The Royal Children's Hospital Melbourne",
-              "similarity": 0.8763,
+              "similarity": 0.8889,
               "matched_terms": [
                 "balance",
                 "proprioception"
               ]
             },
             {
-              "chunk_id": "01_PAH_NHS_Ankle_Sprain_Patient_Leaflet__chunk_003",
-              "institution": "The Princess Alexandra Hospital NHS Trust",
-              "similarity": 0.8762,
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_017",
+              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
+              "similarity": 0.8865,
+              "matched_terms": [
+                "strength",
+                "balance",
+                "proprioception"
+              ]
+            },
+            {
+              "chunk_id": "13_AAP_Ankle_Sprain_Treatment__chunk_002",
+              "institution": "American Academy of Pediatrics",
+              "similarity": 0.8836,
               "matched_terms": [
                 "range of motion",
-                "strength"
+                "strength",
+                "balance",
+                "proprioception"
               ]
             }
           ]
@@ -302,7 +301,7 @@
       "id": "return-to-sport",
       "topic": "重返跑步或篮球",
       "answer_adaptation": 100.0,
-      "source_relevance_at_3": 66.7,
+      "source_relevance_at_3": 100.0,
       "bilingual_top3_consistency": 100.0,
       "exact_order_match": true,
       "languages": {
@@ -318,12 +317,12 @@
               "## 何时恢复走路、跑步或运动"
             ]
           },
-          "source_score_at_3": 66.7,
+          "source_score_at_3": 100.0,
           "sources": [
             {
               "chunk_id": "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_009",
               "institution": "Massachusetts General Brigham Sports Medicine",
-              "similarity": 0.8761,
+              "similarity": 0.8881,
               "matched_terms": [
                 "return to sport",
                 "strength",
@@ -334,16 +333,20 @@
             {
               "chunk_id": "39_LuskinOIC_Ankle_Sprain_Return_to_Sport__chunk_011",
               "institution": "Luskin Orthopaedic Institute for Children",
-              "similarity": 0.8678,
+              "similarity": 0.8758,
               "matched_terms": [
                 "strength"
               ]
             },
             {
-              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_031",
-              "institution": "PLOS ONE (indexed in PubMed Central)",
-              "similarity": 0.8662,
-              "matched_terms": []
+              "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_050",
+              "institution": "Frontiers in Medicine (indexed in PubMed Central)",
+              "similarity": 0.8685,
+              "matched_terms": [
+                "return to sport",
+                "strength",
+                "balance"
+              ]
             }
           ]
         },
@@ -359,12 +362,12 @@
               "## 何时恢复走路、跑步或运动"
             ]
           },
-          "source_score_at_3": 66.7,
+          "source_score_at_3": 100.0,
           "sources": [
             {
               "chunk_id": "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_009",
               "institution": "Massachusetts General Brigham Sports Medicine",
-              "similarity": 0.8761,
+              "similarity": 0.8881,
               "matched_terms": [
                 "return to sport",
                 "strength",
@@ -375,16 +378,20 @@
             {
               "chunk_id": "39_LuskinOIC_Ankle_Sprain_Return_to_Sport__chunk_011",
               "institution": "Luskin Orthopaedic Institute for Children",
-              "similarity": 0.8678,
+              "similarity": 0.8758,
               "matched_terms": [
                 "strength"
               ]
             },
             {
-              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_031",
-              "institution": "PLOS ONE (indexed in PubMed Central)",
-              "similarity": 0.8662,
-              "matched_terms": []
+              "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_050",
+              "institution": "Frontiers in Medicine (indexed in PubMed Central)",
+              "similarity": 0.8685,
+              "matched_terms": [
+                "return to sport",
+                "strength",
+                "balance"
+              ]
             }
           ]
         }
@@ -415,7 +422,7 @@
             {
               "chunk_id": "16_NCBI_InformedHealth_Ankle_Sprain_Overview__chunk_004",
               "institution": "Institute for Quality and Efficiency in Health Care (IQWiG) / NCBI Bookshelf",
-              "similarity": 0.9066,
+              "similarity": 0.9186,
               "matched_terms": [
                 "grade i",
                 "grade ii",
@@ -426,19 +433,19 @@
               ]
             },
             {
-              "chunk_id": "43_Cleveland_Clinic_Sprained_Ankle__chunk_003",
-              "institution": "Cleveland Clinic",
-              "similarity": 0.8945,
+              "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_003",
+              "institution": "The Royal Children's Hospital Melbourne",
+              "similarity": 0.8962,
               "matched_terms": [
-                "mild",
-                "moderate",
-                "severe"
+                "grade i",
+                "grade ii",
+                "grade iii"
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8888,
+              "chunk_id": "43_Cleveland_Clinic_Sprained_Ankle__chunk_003",
+              "institution": "Cleveland Clinic",
+              "similarity": 0.8945,
               "matched_terms": [
                 "mild",
                 "moderate",
@@ -464,7 +471,7 @@
             {
               "chunk_id": "16_NCBI_InformedHealth_Ankle_Sprain_Overview__chunk_004",
               "institution": "Institute for Quality and Efficiency in Health Care (IQWiG) / NCBI Bookshelf",
-              "similarity": 0.9066,
+              "similarity": 0.9186,
               "matched_terms": [
                 "grade i",
                 "grade ii",
@@ -475,19 +482,19 @@
               ]
             },
             {
-              "chunk_id": "43_Cleveland_Clinic_Sprained_Ankle__chunk_003",
-              "institution": "Cleveland Clinic",
-              "similarity": 0.8945,
+              "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_003",
+              "institution": "The Royal Children's Hospital Melbourne",
+              "similarity": 0.8962,
               "matched_terms": [
-                "mild",
-                "moderate",
-                "severe"
+                "grade i",
+                "grade ii",
+                "grade iii"
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8888,
+              "chunk_id": "43_Cleveland_Clinic_Sprained_Ankle__chunk_003",
+              "institution": "Cleveland Clinic",
+              "similarity": 0.8945,
               "matched_terms": [
                 "mild",
                 "moderate",
@@ -519,6 +526,14 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
+              "chunk_id": "08_Alder_Hey_NHS_Ankle_Foot_Sprain__chunk_003",
+              "institution": "Alder Hey Children's NHS Foundation Trust",
+              "similarity": 0.8897,
+              "matched_terms": [
+                "walking"
+              ]
+            },
+            {
               "chunk_id": "44_UCSF_Health_Ankle_Sprain__chunk_005",
               "institution": "UCSF Health",
               "similarity": 0.8866,
@@ -528,19 +543,12 @@
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8844,
+              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
+              "institution": "MedlinePlus, U.S. National Library of Medicine",
+              "similarity": 0.886,
               "matched_terms": [
+                "walking",
                 "pain"
-              ]
-            },
-            {
-              "chunk_id": "08_Alder_Hey_NHS_Ankle_Foot_Sprain__chunk_003",
-              "institution": "Alder Hey Children's NHS Foundation Trust",
-              "similarity": 0.8817,
-              "matched_terms": [
-                "walking"
               ]
             }
           ]
@@ -558,6 +566,14 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
+              "chunk_id": "08_Alder_Hey_NHS_Ankle_Foot_Sprain__chunk_003",
+              "institution": "Alder Hey Children's NHS Foundation Trust",
+              "similarity": 0.8897,
+              "matched_terms": [
+                "walking"
+              ]
+            },
+            {
               "chunk_id": "44_UCSF_Health_Ankle_Sprain__chunk_005",
               "institution": "UCSF Health",
               "similarity": 0.8866,
@@ -567,19 +583,12 @@
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8844,
+              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
+              "institution": "MedlinePlus, U.S. National Library of Medicine",
+              "similarity": 0.886,
               "matched_terms": [
+                "walking",
                 "pain"
-              ]
-            },
-            {
-              "chunk_id": "08_Alder_Hey_NHS_Ankle_Foot_Sprain__chunk_003",
-              "institution": "Alder Hey Children's NHS Foundation Trust",
-              "similarity": 0.8817,
-              "matched_terms": [
-                "walking"
               ]
             }
           ]
@@ -609,6 +618,14 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
+              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
+              "institution": "MedlinePlus, U.S. National Library of Medicine",
+              "similarity": 0.9239,
+              "matched_terms": [
+                "weeks"
+              ]
+            },
+            {
               "chunk_id": "36_Leeds_NHS_Soft_Tissue_Ankle_Injuries__chunk_004",
               "institution": "Leeds Teaching Hospitals NHS Trust",
               "similarity": 0.9198,
@@ -623,14 +640,6 @@
               "matched_terms": [
                 "weeks",
                 "heal"
-              ]
-            },
-            {
-              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
-              "institution": "MedlinePlus, U.S. National Library of Medicine",
-              "similarity": 0.9159,
-              "matched_terms": [
-                "weeks"
               ]
             }
           ]
@@ -650,6 +659,14 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
+              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
+              "institution": "MedlinePlus, U.S. National Library of Medicine",
+              "similarity": 0.9239,
+              "matched_terms": [
+                "weeks"
+              ]
+            },
+            {
               "chunk_id": "36_Leeds_NHS_Soft_Tissue_Ankle_Injuries__chunk_004",
               "institution": "Leeds Teaching Hospitals NHS Trust",
               "similarity": 0.9198,
@@ -665,14 +682,6 @@
                 "weeks",
                 "heal"
               ]
-            },
-            {
-              "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
-              "institution": "MedlinePlus, U.S. National Library of Medicine",
-              "similarity": 0.9159,
-              "matched_terms": [
-                "weeks"
-              ]
             }
           ]
         }
@@ -683,8 +692,8 @@
       "topic": "预防再次扭伤",
       "answer_adaptation": 100.0,
       "source_relevance_at_3": 100.0,
-      "bilingual_top3_consistency": 100.0,
-      "exact_order_match": true,
+      "bilingual_top3_consistency": 50.0,
+      "exact_order_match": false,
       "languages": {
         "zh": {
           "question": "恢复运动后，如何降低脚踝再次扭伤的风险？",
@@ -701,30 +710,30 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
-              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_093",
-              "institution": "PLOS ONE (indexed in PubMed Central)",
-              "similarity": 0.8889,
+              "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
+              "institution": "The Royal Children's Hospital Melbourne",
+              "similarity": 0.8921,
               "matched_terms": [
+                "recurrent",
                 "balance"
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_029",
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_021",
               "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8865,
+              "similarity": 0.8889,
               "matched_terms": [
                 "balance",
                 "strength"
               ]
             },
             {
-              "chunk_id": "41_APTA_ChoosePT_Ankle_Sprain_Guide__chunk_017",
+              "chunk_id": "41_APTA_ChoosePT_Ankle_Sprain_Guide__chunk_016",
               "institution": "American Physical Therapy Association (ChoosePT)",
-              "similarity": 0.8863,
+              "similarity": 0.8884,
               "matched_terms": [
                 "balance",
-                "strength",
-                "brace"
+                "strength"
               ]
             }
           ]
@@ -744,30 +753,30 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
-              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_093",
-              "institution": "PLOS ONE (indexed in PubMed Central)",
-              "similarity": 0.8889,
+              "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
+              "institution": "The Royal Children's Hospital Melbourne",
+              "similarity": 0.8921,
               "matched_terms": [
+                "recurrent",
                 "balance"
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_029",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8865,
+              "chunk_id": "41_APTA_ChoosePT_Ankle_Sprain_Guide__chunk_016",
+              "institution": "American Physical Therapy Association (ChoosePT)",
+              "similarity": 0.8884,
               "matched_terms": [
                 "balance",
                 "strength"
               ]
             },
             {
-              "chunk_id": "41_APTA_ChoosePT_Ankle_Sprain_Guide__chunk_017",
-              "institution": "American Physical Therapy Association (ChoosePT)",
-              "similarity": 0.8863,
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_017",
+              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
+              "similarity": 0.8879,
               "matched_terms": [
                 "balance",
-                "strength",
-                "brace"
+                "strength"
               ]
             }
           ]
@@ -778,13 +787,13 @@
       "id": "brace-taping",
       "topic": "护具与贴扎",
       "answer_adaptation": 100.0,
-      "source_relevance_at_3": 33.3,
-      "bilingual_top3_consistency": 20.0,
+      "source_relevance_at_3": 100.0,
+      "bilingual_top3_consistency": 100.0,
       "exact_order_match": false,
       "languages": {
         "zh": {
           "question": "恢复篮球运动时，是否应该使用脚踝护具或运动贴扎？",
-          "answer": "## 恢复运动时是否使用护具或贴扎\n\n### 是否可以使用\n恢复篮球等需要跳跃和变向的运动时，护踝或专业贴扎可以作为短期辅助，尤其适用于既往反复扭伤、刚开始恢复专项训练，或专业人员建议使用的人。\n\n### 不能替代康复训练\n护具和贴扎不能替代活动度、力量、平衡及变向控制训练，也不能证明脚踝已经适合比赛。恢复前仍应确认正常走路、单脚站立、提踵、跳跃和变向动作能够稳定完成，且运动后疼痛与肿胀没有明显增加。\n\n### 使用注意\n护具应尺寸合适，不应造成麻木、发冷、变色或明显压痛；贴扎最好由受过训练的人员指导。如果脚踝持续不稳、疼痛或反复肿胀，应咨询医生或物理治疗师，而不是只依赖护具。",
+          "answer": "## 恢复运动时是否使用护具或贴扎\n\n### 是否可以使用\n**可以考虑使用，但它只能作为辅助，不能代替康复训练或重返运动评估。**\n\n恢复篮球等需要跳跃和变向的运动时，护踝或专业贴扎可以作为短期辅助，尤其适用于既往反复扭伤、刚开始恢复专项训练，或专业人员建议使用的人。\n\n### 不能替代康复训练\n护具和贴扎不能替代活动度、力量、平衡及变向控制训练，也不能证明脚踝已经适合比赛。恢复前仍应确认正常走路、单脚站立、提踵、跳跃和变向动作能够稳定完成，且运动后疼痛与肿胀没有明显增加。\n\n### 使用注意\n护具应尺寸合适，不应造成麻木、发冷、变色或明显压痛；贴扎最好由受过训练的人员指导。如果脚踝持续不稳、疼痛或反复肿胀，应咨询医生或物理治疗师，而不是只依赖护具。",
           "answer_score": 100.0,
           "answer_checks": {
             "expected_intent_found": true,
@@ -794,34 +803,40 @@
               "## 恢复运动时是否使用护具或贴扎"
             ]
           },
-          "source_score_at_3": 33.3,
+          "source_score_at_3": 100.0,
           "sources": [
-            {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_026",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8916,
-              "matched_terms": []
-            },
             {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_016",
               "institution": "The Royal Children's Hospital Melbourne",
-              "similarity": 0.8885,
+              "similarity": 0.8925,
               "matched_terms": [
                 "brace",
                 "return to sport"
               ]
             },
             {
-              "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_006",
-              "institution": "Frontiers in Medicine (indexed in PubMed Central)",
-              "similarity": 0.8832,
-              "matched_terms": []
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_017",
+              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
+              "similarity": 0.8872,
+              "matched_terms": [
+                "bracing",
+                "taping",
+                "return to sport"
+              ]
+            },
+            {
+              "chunk_id": "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_003",
+              "institution": "Massachusetts General Brigham Sports Medicine",
+              "similarity": 0.8869,
+              "matched_terms": [
+                "brace"
+              ]
             }
           ]
         },
         "en": {
           "question": "Should I use an ankle brace or taping when returning to basketball?",
-          "answer": "## 恢复运动时是否使用护具或贴扎\n\n### 是否可以使用\n恢复篮球等需要跳跃和变向的运动时，护踝或专业贴扎可以作为短期辅助，尤其适用于既往反复扭伤、刚开始恢复专项训练，或专业人员建议使用的人。\n\n### 不能替代康复训练\n护具和贴扎不能替代活动度、力量、平衡及变向控制训练，也不能证明脚踝已经适合比赛。恢复前仍应确认正常走路、单脚站立、提踵、跳跃和变向动作能够稳定完成，且运动后疼痛与肿胀没有明显增加。\n\n### 使用注意\n护具应尺寸合适，不应造成麻木、发冷、变色或明显压痛；贴扎最好由受过训练的人员指导。如果脚踝持续不稳、疼痛或反复肿胀，应咨询医生或物理治疗师，而不是只依赖护具。",
+          "answer": "## 恢复运动时是否使用护具或贴扎\n\n### 是否可以使用\n**可以考虑使用，但它只能作为辅助，不能代替康复训练或重返运动评估。**\n\n恢复篮球等需要跳跃和变向的运动时，护踝或专业贴扎可以作为短期辅助，尤其适用于既往反复扭伤、刚开始恢复专项训练，或专业人员建议使用的人。\n\n### 不能替代康复训练\n护具和贴扎不能替代活动度、力量、平衡及变向控制训练，也不能证明脚踝已经适合比赛。恢复前仍应确认正常走路、单脚站立、提踵、跳跃和变向动作能够稳定完成，且运动后疼痛与肿胀没有明显增加。\n\n### 使用注意\n护具应尺寸合适，不应造成麻木、发冷、变色或明显压痛；贴扎最好由受过训练的人员指导。如果脚踝持续不稳、疼痛或反复肿胀，应咨询医生或物理治疗师，而不是只依赖护具。",
           "answer_score": 100.0,
           "answer_checks": {
             "expected_intent_found": true,
@@ -831,27 +846,34 @@
               "## 恢复运动时是否使用护具或贴扎"
             ]
           },
-          "source_score_at_3": 33.3,
+          "source_score_at_3": 100.0,
           "sources": [
             {
-              "chunk_id": "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_009",
-              "institution": "Massachusetts General Brigham Sports Medicine",
-              "similarity": 0.8731,
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_017",
+              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
+              "similarity": 0.8586,
               "matched_terms": [
+                "bracing",
+                "taping",
                 "return to sport"
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_026",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8697,
-              "matched_terms": []
+              "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_016",
+              "institution": "The Royal Children's Hospital Melbourne",
+              "similarity": 0.857,
+              "matched_terms": [
+                "brace",
+                "return to sport"
+              ]
             },
             {
-              "chunk_id": "05_PMC8824326_Exercise_Rehabilitation_Systematic_Review__chunk_068",
-              "institution": "PLOS ONE (indexed in PubMed Central)",
-              "similarity": 0.8687,
-              "matched_terms": []
+              "chunk_id": "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_003",
+              "institution": "Massachusetts General Brigham Sports Medicine",
+              "similarity": 0.8565,
+              "matched_terms": [
+                "brace"
+              ]
             }
           ]
         }
@@ -882,7 +904,16 @@
             {
               "chunk_id": "28_Plymouth_NHS_Ankle_Sprain_Injury_Rehab__chunk_006",
               "institution": "University Hospitals Plymouth NHS Trust",
-              "similarity": 0.9041,
+              "similarity": 0.9081,
+              "matched_terms": [
+                "ice",
+                "swelling"
+              ]
+            },
+            {
+              "chunk_id": "11_Oxford_NHS_Ankle_Sprain_Advice__chunk_003",
+              "institution": "Oxford University Hospitals NHS Foundation Trust",
+              "similarity": 0.8975,
               "matched_terms": [
                 "ice",
                 "swelling"
@@ -896,15 +927,6 @@
                 "ice",
                 "swelling",
                 "cold"
-              ]
-            },
-            {
-              "chunk_id": "19_Worcestershire_NHS_Ankle_Sprain__chunk_003",
-              "institution": "Worcestershire Acute Hospitals NHS Trust",
-              "similarity": 0.8942,
-              "matched_terms": [
-                "ice",
-                "swelling"
               ]
             }
           ]
@@ -926,7 +948,16 @@
             {
               "chunk_id": "28_Plymouth_NHS_Ankle_Sprain_Injury_Rehab__chunk_006",
               "institution": "University Hospitals Plymouth NHS Trust",
-              "similarity": 0.9041,
+              "similarity": 0.9081,
+              "matched_terms": [
+                "ice",
+                "swelling"
+              ]
+            },
+            {
+              "chunk_id": "11_Oxford_NHS_Ankle_Sprain_Advice__chunk_003",
+              "institution": "Oxford University Hospitals NHS Foundation Trust",
+              "similarity": 0.8975,
               "matched_terms": [
                 "ice",
                 "swelling"
@@ -940,15 +971,6 @@
                 "ice",
                 "swelling",
                 "cold"
-              ]
-            },
-            {
-              "chunk_id": "19_Worcestershire_NHS_Ankle_Sprain__chunk_003",
-              "institution": "Worcestershire Acute Hospitals NHS Trust",
-              "similarity": 0.8942,
-              "matched_terms": [
-                "ice",
-                "swelling"
               ]
             }
           ]

@@ -71,6 +71,88 @@ BASKETBALL_EVIDENCE_TERMS = (
     "full strength",
 )
 
+DANGER_EVIDENCE_TERMS = (
+    "deformity",
+    "unable to put weight",
+    "unable to bear weight",
+    "cannot bear weight",
+    "cannot walk",
+    "numb",
+    "tingling",
+    "coldness",
+    "feels cold",
+    "blue foot",
+    "blue toes",
+    "discolored",
+    "changes in sensation",
+    "symptoms get worse",
+    "pain or swelling hasn’t improved",
+    "severe pain",
+)
+
+
+def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
+    """Return strict evidence terms for topics prone to keyword-only matches."""
+    normalized = query.casefold()
+    if any(
+        term in normalized
+        for term in (
+            "x-ray",
+            "x ray",
+            "radiograph",
+            "拍片",
+            "x光",
+        )
+    ):
+        return (
+            "x-ray",
+            "x ray",
+            "radiograph",
+            "ottawa ankle",
+        )
+    if contains_warning_term(query):
+        return DANGER_EVIDENCE_TERMS
+    if any(term in normalized for term in ("护踝", "贴扎", "brace", "bracing", "taping")):
+        return ("brace", "bracing", "taping", "strapping")
+    if any(
+        term in normalized
+        for term in (
+            "一级",
+            "二级",
+            "三级",
+            "grade 1",
+            "grade 2",
+            "grade 3",
+            "轻度",
+            "中度",
+            "重度",
+            "损伤程度",
+        )
+    ):
+        return ("grade i", "grade ii", "grade iii", "grade 1", "grade 2", "grade 3")
+    if any(
+        term in normalized
+        for term in (
+            "恢复跑步",
+            "打篮球",
+            "重返运动",
+            "return to sport",
+            "returning to running",
+            "returning to sport",
+        )
+    ):
+        return (
+            "return to sport",
+            "return to running",
+            "running",
+            "hop",
+            "agility",
+            "sport-specific",
+            "pain-free",
+            "full strength",
+        )
+    return ()
+
 
 @st.cache_data
 def load_index(
@@ -141,6 +223,27 @@ def retrieve(
         normalize_embeddings=True,
     )[0]
     scores = embeddings @ query_vector
+    quality_adjustments = np.asarray(
+        [chunk_quality_adjustment(chunk["text"]) for chunk in chunks],
+        dtype=np.float32,
+    )
+    scores = np.minimum(scores + quality_adjustments, 1.0)
+    danger_query = contains_warning_term(query)
+    priority_evidence_terms = prioritized_evidence_terms(query)
+    if priority_evidence_terms:
+        priority_scores = scores.copy()
+        for index, chunk in enumerate(chunks):
+            text = chunk["text"].casefold()
+            evidence_hits = sum(term in text for term in priority_evidence_terms)
+            if evidence_hits:
+                priority_scores[index] += min(evidence_hits * 0.035, 0.14)
+            else:
+                priority_scores[index] -= 0.12
+        ranked_indices = np.argsort(priority_scores)[::-1]
+        result_scores = np.minimum(priority_scores, 1.0)
+    else:
+        ranked_indices = np.argsort(scores)[::-1]
+        result_scores = scores
     basketball_function_query = any(
         marker in query.casefold() for marker in BASKETBALL_FUNCTION_MARKERS
     )
@@ -156,7 +259,7 @@ def retrieve(
                 rerank_scores[index] -= 0.10
         ranked_indices = np.argsort(rerank_scores)[::-1]
         result_scores = rerank_scores
-    else:
+    elif not danger_query:
         ranked_indices = np.argsort(scores)[::-1]
         result_scores = scores
 
@@ -167,6 +270,10 @@ def retrieve(
         for index in ranked_indices:
             chunk = chunks[int(index)]
             if is_low_information_chunk(chunk["text"]):
+                continue
+            if priority_evidence_terms and not any(
+                term in chunk["text"].casefold() for term in priority_evidence_terms
+            ):
                 continue
             if (
                 basketball_function_query
@@ -193,6 +300,10 @@ def retrieve(
     for index in ranked_indices:
         chunk = chunks[int(index)]
         if is_low_information_chunk(chunk["text"]):
+            continue
+        if priority_evidence_terms and not any(
+            term in chunk["text"].casefold() for term in priority_evidence_terms
+        ):
             continue
         if (
             basketball_function_query
@@ -246,6 +357,25 @@ def retrieve(
 def canonicalize_retrieval_query(query: str) -> str:
     """Map bilingual domain intents to the same English retrieval query."""
     normalized = query.casefold()
+    if contains_warning_term(query):
+        return (
+            "ankle injury emergency red flags: deformity, inability to bear weight, "
+            "numbness, cold or blue foot, severe or worsening pain, and when to seek "
+            "urgent medical assessment"
+        )
+    if any(
+        marker in normalized
+        for marker in (
+            "康复训练应该按照什么顺序",
+            "康复训练顺序",
+            "rehabilitation exercises be performed",
+            "order should rehabilitation",
+        )
+    ):
+        return (
+            "ankle sprain rehabilitation progression in order: range of motion, "
+            "strengthening, balance, proprioception and functional exercises"
+        )
     high_ankle_comparison_markers = (
         "difference between a high ankle sprain",
         "high ankle sprain and a common lateral",
@@ -366,27 +496,186 @@ def canonicalize_retrieval_query(query: str) -> str:
 def is_low_information_chunk(text: str) -> bool:
     """Detect bibliography and publication-administration chunks."""
     normalized = " ".join(text.casefold().split())
+    compact = re.sub(r"\s+", "", normalized)
     doi_count = normalized.count("doi:")
-    spaced_doi_count = normalized.count("h t t p s : / / d o i")
+    doi_link_count = compact.count("doi.org")
     citation_years = len(re.findall(r"\((?:19|20)\d{2}\)", normalized))
+    reference_signals = (
+        doi_count
+        + doi_link_count
+        + normalized.count("pmid:")
+        + normalized.count(" et al.")
+    )
     administrative_markers = (
         "all authors read and approved",
         "author contributions",
         "competing interests",
         "publisher's note",
         "references 1.",
+        "correspondence:",
+        "*correspondence",
+        "author affiliations",
+    )
+    footer_markers = (
+        "privacy",
+        "cookies",
+        "accessibility",
+        "copyright",
+        "terms and conditions",
+        "contact us",
+        "switchboard",
+        "follow us",
+        "staff intranet",
+    )
+    footer_count = sum(marker in normalized for marker in footer_markers)
+    title_page_admin = (
+        "abstract" in normalized
+        and ("correspondence" in normalized or "@" in normalized)
+        and ("department of" in normalized or "university" in normalized)
     )
     return (
         doi_count >= 2
-        or spaced_doi_count >= 1
+        or doi_link_count >= 2
         or citation_years >= 4
+        or reference_signals >= 4
+        or (citation_years >= 3 and reference_signals >= 2)
+        or footer_count >= 3
+        or title_page_admin
         or any(marker in normalized for marker in administrative_markers)
     )
+
+
+def chunk_quality_adjustment(text: str) -> float:
+    """Give actionable clinical passages a small boost and demote publication noise."""
+    normalized = " ".join(text.casefold().split())
+    compact = re.sub(r"\s+", "", normalized)
+    if is_low_information_chunk(text):
+        return -0.30
+
+    actionable_markers = (
+        "when to seek medical",
+        "contact your",
+        "you should",
+        "do not",
+        "start with",
+        "progress to",
+        "criteria to progress",
+        "return to sport",
+        "unable to bear weight",
+        "symptoms get worse",
+        "range of motion",
+        "strengthening",
+        "balance exercise",
+        "grade i",
+        "grade ii",
+        "grade iii",
+        "pain-free",
+        "without pain",
+    )
+    actionable_hits = sum(marker in normalized for marker in actionable_markers)
+    adjustment = min(actionable_hits * 0.004, 0.016)
+
+    soft_noise_markers = (
+        "doi:",
+        "pmid:",
+        "references",
+        "journal of",
+        "volume ",
+        "issue ",
+        "table 1",
+        "fig. ",
+        "copyright",
+        "publication date",
+    )
+    soft_noise_hits = sum(marker in normalized for marker in soft_noise_markers)
+    if compact.count("doi.org"):
+        soft_noise_hits += 1
+    adjustment -= min(soft_noise_hits * 0.008, 0.032)
+    return adjustment
 
 
 def contains_warning_term(query: str) -> bool:
     normalized = query.casefold()
     return any(term.casefold() in normalized for term in WARNING_TERMS)
+
+
+def evidence_support_for_question(
+    query: str,
+    rows: list[tuple[float, dict]],
+    warning: bool = False,
+) -> dict:
+    """Check that at least one retrieved passage directly supports the question topic."""
+    normalized = query.casefold()
+    profiles = (
+        (warning, DANGER_EVIDENCE_TERMS, "危险症状与紧急就医"),
+        (
+            any(term in normalized for term in ("护踝", "贴扎", "brace", "bracing", "taping")),
+            ("brace", "bracing", "taping", "strapping"),
+            "护踝或贴扎",
+        ),
+        (
+            any(
+                term in normalized
+                for term in (
+                    "一级",
+                    "二级",
+                    "三级",
+                    "grade 1",
+                    "grade 2",
+                    "grade 3",
+                    "轻度",
+                    "中度",
+                    "重度",
+                    "损伤程度",
+                )
+            ),
+            ("grade i", "grade ii", "grade iii", "grade 1", "grade 2", "grade 3"),
+            "脚踝扭伤分级",
+        ),
+        (
+            any(term in normalized for term in ("冷敷", "冰敷", "抬高", "ice", "cold pack", "elevation")),
+            ("ice", "cold pack", "elevation", "elevate"),
+            "冷敷与抬高",
+        ),
+        (
+            any(term in normalized for term in ("再次扭伤", "预防复发", "prevent", "recurrent")),
+            ("recurrent", "re-injury", "prevention", "balance", "brace"),
+            "复发预防",
+        ),
+        (
+            any(term in normalized for term in ("跑步", "篮球", "重返运动", "return to sport", "running")),
+            ("return to sport", "running", "strength", "balance", "hop", "agility"),
+            "重返运动",
+        ),
+        (
+            any(term in normalized for term in ("训练", "活动度", "力量", "平衡", "exercise", "rehabilitation")),
+            ("exercise", "rehabilitation", "range of motion", "strength", "balance"),
+            "康复训练",
+        ),
+    )
+    selected = next(
+        ((terms, topic) for matched, terms, topic in profiles if matched),
+        ((), "脚踝扭伤患者教育"),
+    )
+    terms, topic = selected
+    if not rows:
+        return {"supported": False, "topic": topic, "matched_chunk_ids": []}
+    if not terms:
+        return {
+            "supported": True,
+            "topic": topic,
+            "matched_chunk_ids": [rows[0][1]["chunk_id"]],
+        }
+    matched_chunk_ids = [
+        chunk["chunk_id"]
+        for _, chunk in rows
+        if any(term in chunk["text"].casefold() for term in terms)
+    ]
+    return {
+        "supported": bool(matched_chunk_ids),
+        "topic": topic,
+        "matched_chunk_ids": matched_chunk_ids,
+    }
 
 
 def contains_chinese(text: str) -> bool:
@@ -422,6 +711,15 @@ def local_question_scope_assessment(question: str) -> dict:
         "nutrition",
         "meal",
         "recipe",
+        "阿莫西林",
+        "抗生素",
+        "多少毫克",
+        "针灸",
+        "穴位",
+        "留针",
+        "amoxicillin",
+        "antibiotic dose",
+        "acupuncture point",
     )
     in_scope_terms = (
         "脚踝",
@@ -432,6 +730,10 @@ def local_question_scope_assessment(question: str) -> dict:
         "sprain",
         "rehab",
         "rehabilitation",
+        "护踝",
+        "贴扎",
+        "brace",
+        "taping",
     )
     if any(term in normalized for term in ("区别", "比较", "difference", "compare")):
         question_type = "comparison"
@@ -456,7 +758,7 @@ def local_question_scope_assessment(question: str) -> dict:
             "should_answer": False,
             "category": "超出资料范围",
             "question_type": question_type,
-            "reason": "问题主要询问饮食或营养，当前脚踝扭伤资料库不能提供可靠回答。",
+            "reason": "问题要求的具体内容不在当前脚踝扭伤资料库支持范围内。",
             "source": "本地保守规则",
         }
     allowed = any(term in normalized for term in in_scope_terms)
@@ -477,6 +779,7 @@ def generate_detailed_chinese_answer(
     query: str,
     warning: bool,
     question_type: str | None = None,
+    question_category: str | None = None,
 ) -> str:
     """Return a detailed, conservative Chinese answer from medical templates."""
     if warning:
@@ -662,6 +965,9 @@ def generate_detailed_chinese_answer(
                 "grade 1",
                 "grade 2",
                 "grade 3",
+                "一级",
+                "二级",
+                "三级",
                 "mild",
                 "moderate",
                 "severe",
@@ -745,6 +1051,7 @@ def generate_detailed_chinese_answer(
                 "运动贴",
             ),
             "### 是否可以使用\n"
+            "**可以考虑使用，但它只能作为辅助，不能代替康复训练或重返运动评估。**\n\n"
             "恢复篮球等需要跳跃和变向的运动时，护踝或专业贴扎可以作为短期辅助，"
             "尤其适用于既往反复扭伤、刚开始恢复专项训练，或专业人员建议使用的人。\n\n"
             "### 不能替代康复训练\n"
@@ -785,10 +1092,53 @@ def generate_detailed_chinese_answer(
             continue
         if title == "如何恢复稳定性并预防再次扭伤" and not recurrence_intent:
             continue
-        if any(term in normalized for term in terms):
-            matched_answers.append(f"## {title}\n\n{answer}")
+        matched_terms = [term for term in terms if term in normalized]
+        if matched_terms:
+            matched_answers.append(
+                {
+                    "title": title,
+                    "answer": f"## {title}\n\n{answer}",
+                    "matched_terms": matched_terms,
+                }
+            )
 
     if matched_answers:
+        category = (question_category or "").casefold()
+        preferred_title = None
+        topic_routes = (
+            (
+                ("护踝", "贴扎", "brace", "bracing", "taping"),
+                "恢复运动时是否使用护具或贴扎",
+            ),
+            (
+                ("一级", "二级", "三级", "损伤程度", "分级", "grade"),
+                "脚踝扭伤的严重程度",
+            ),
+            (("冷敷", "冰敷", "抬高", "ice", "cold"), "如何处理肿胀及安全冷敷"),
+            (("多久", "恢复时间", "how long"), "通常需要多久恢复"),
+            (
+                ("再次扭伤", "预防复发", "prevent", "recurrent"),
+                "如何恢复稳定性并预防再次扭伤",
+            ),
+            (
+                ("跑步", "篮球", "重返运动", "return to sport", "running"),
+                "何时恢复走路、跑步或运动",
+            ),
+            (("医院", "就医", "doctor", "hospital"), "哪些情况需要去医院"),
+        )
+        combined_topic_text = f"{normalized} {category}"
+        for markers, title in topic_routes:
+            if any(marker in combined_topic_text for marker in markers):
+                preferred_title = title
+                break
+        matched_answers.sort(
+            key=lambda item: (
+                item["title"] == preferred_title,
+                len(item["matched_terms"]),
+                max(len(term) for term in item["matched_terms"]),
+            ),
+            reverse=True,
+        )
         if question_type in {"yes_no", "how_to", "what_is", "when", "comparison"}:
             matched_answers = matched_answers[:1]
         introduction = (
@@ -796,7 +1146,8 @@ def generate_detailed_chinese_answer(
             if len(matched_answers) > 1
             else ""
         )
-        return "\n\n---\n\n".join(part for part in [introduction, *matched_answers] if part)
+        answers = [item["answer"] for item in matched_answers]
+        return "\n\n---\n\n".join(part for part in [introduction, *answers] if part)
 
     return (
         "### 总体建议\n"
@@ -913,7 +1264,7 @@ if active_question:
 
     if not scope_assessment["should_answer"]:
         st.warning(
-            "这个问题不适合由当前脚踝扭伤资料助手回答，因此没有执行检索或生成回答。\n\n"
+            "当前资料不足，无法可靠回答这个问题，因此没有执行检索或生成回答。\n\n"
             f"判断类别：{scope_assessment['category']}\n\n"
             f"原因：{scope_assessment['reason']}"
         )
@@ -975,6 +1326,19 @@ if active_question:
         )
         st.stop()
 
+    evidence_support = evidence_support_for_question(
+        active_question,
+        raw_results,
+        warning_detected,
+    )
+    if not evidence_support["supported"]:
+        st.warning(
+            "当前资料不足，无法回答这个问题。虽然检索到了文字相近的段落，"
+            f"但没有找到能够直接支持“{evidence_support['topic']}”结论的原文，"
+            "因此系统不会根据相似关键词强行生成回答。"
+        )
+        st.stop()
+
     results = [
         (score, chunk)
         for score, chunk in raw_results
@@ -991,6 +1355,7 @@ if active_question:
             active_question,
             warning_detected,
             scope_assessment.get("question_type"),
+            scope_assessment.get("category"),
         )
     )
     st.caption(

@@ -51,6 +51,14 @@ Collected from official healthcare-provider websites; last updated 2026-07-28.
 | `45_UPMC_Ankle_Sprain.pdf` | UPMC | Reviewed 11 June 2024 | N/A | https://www.upmc.com/conditions/a/ankle-sprain |
 | `46_Stanford_Health_Care_Ankle_Sprain_Treatment.pdf` | Stanford Health Care | Not stated | Not stated | https://stanfordhealthcare.org/medical-conditions/bones-joints-and-muscles/ankle-sprain/treatments.html |
 | `47_Alder_Hey_NHS_Ankle_Sprains_Grading.pdf` | Alder Hey Children's NHS Foundation Trust | Review date April 2022 | Not stated | https://www.alderhey.nhs.uk/wp-content/uploads/2023/06/Ankle_Sprains_Leaflet_PIAG_257.pdf |
+| `48_RUH_NHS_Advice_After_Ankle_Sprain.pdf` | Royal United Hospitals Bath NHS Foundation Trust | November 2017 | Not stated | https://www.ruh.nhs.uk/patients/patient_information/ORT045_Advice_after_spraining_your_ankle.pdf |
+| `49_QVH_NHS_Ankle_Sprain.pdf` | Queen Victoria Hospital NHS Foundation Trust | August 2020 | August 2023 | https://www.qvh.nhs.uk/wp-content/uploads/2015/09/Ankle-Sprain-0414.pdf |
+| `50_ACR_Acute_Trauma_to_Ankle.pdf` | American College of Radiology | 2020 | Not stated | https://acsearch.acr.org/list/TopicNarrativePdf?topicId=94 |
+| `51_UHB_NHS_Paediatric_Ankle_Sprain.pdf` | University Hospitals Birmingham NHS Foundation Trust | July 2023 | July 2026 | https://www.uhb.nhs.uk/media/nk5cqqdr/pi-paediatrics-ankle-sprain-information.pdf |
+| `52_St_Georges_NHS_Ankle_Sprains.pdf` | St George's University Hospitals NHS Foundation Trust | June 2025 | June 2027 | https://www.stgeorges.nhs.uk/wp-content/uploads/2025/06/PHY_ASA.pdf |
+| `53_RadiologyInfo_Chronic_Ankle_Pain_Imaging.pdf` | RadiologyInfo.org (ACR / RSNA) | Reviewed 15 December 2021 | N/A | https://www.radiologyinfo.org/en/info/acs-chronic-ankle-pain |
+| `54_East_Kent_NHS_Ankle_Foot_Sprain_Aftercare.pdf` | East Kent Hospitals University NHS Foundation Trust | Reviewed June 2023 | October 2026 | https://leaflets.ekhuft.nhs.uk/s3/leaflets/ankle-and-foot-sprain-injury-aftercare-advice/7ff85e40-9353-4d68-9f6c-8315ac480041.p1692359596.pdf |
+| `55_Chelsea_Westminster_NHS_Care_of_Ankle_Injury.pdf` | Chelsea and Westminster Hospital NHS Foundation Trust | Not stated | Not stated | https://www.chelwest.nhs.uk/your-visit/patient-leaflets/medicine-services/care-of-your-ankle-injury/ |
 
 ## Selection notes
 
@@ -100,3 +108,15 @@ Collected from official healthcare-provider websites; last updated 2026-07-28.
   diagnosis, treatment by severity, rehabilitation, and expected outcomes.
 - Navigation was removed from snapshots without translating, paraphrasing, or
   adding medical instructions.
+
+## Added sources 48-55
+
+- Files 48-52 and 54 are original PDFs from official NHS and professional
+  medical-organization websites. Files 53 and 55 are English-text PDF snapshots
+  of official pages, each with a provenance cover page.
+- These sources were selected specifically to strengthen retrieval about
+  pain-guided return to weight bearing, progression toward full weight bearing,
+  inability to bear weight, when to seek medical review, Ottawa Ankle Rule
+  imaging indications, and imaging for persistent ankle pain.
+- The original English medical text was preserved. No source was machine
+  translated before chunking, indexing, or embedding.

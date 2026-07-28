@@ -310,6 +310,54 @@ SOURCES = {
         "document_date": "2022-04",
         "review_date": "not stated",
     },
+    "48_RUH_NHS_Advice_After_Ankle_Sprain.pdf": {
+        "institution": "Royal United Hospitals Bath NHS Foundation Trust",
+        "source_url": "https://www.ruh.nhs.uk/patients/patient_information/ORT045_Advice_after_spraining_your_ankle.pdf",
+        "document_date": "2017-11",
+        "review_date": "not stated",
+    },
+    "49_QVH_NHS_Ankle_Sprain.pdf": {
+        "institution": "Queen Victoria Hospital NHS Foundation Trust",
+        "source_url": "https://www.qvh.nhs.uk/wp-content/uploads/2015/09/Ankle-Sprain-0414.pdf",
+        "document_date": "2020-08",
+        "review_date": "2023-08",
+    },
+    "50_ACR_Acute_Trauma_to_Ankle.pdf": {
+        "institution": "American College of Radiology (ACR)",
+        "source_url": "https://acsearch.acr.org/list/TopicNarrativePdf?topicId=94",
+        "document_date": "2020",
+        "review_date": "not stated",
+    },
+    "51_UHB_NHS_Paediatric_Ankle_Sprain.pdf": {
+        "institution": "University Hospitals Birmingham NHS Foundation Trust",
+        "source_url": "https://www.uhb.nhs.uk/media/nk5cqqdr/pi-paediatrics-ankle-sprain-information.pdf",
+        "document_date": "2023-07",
+        "review_date": "2026-07",
+    },
+    "52_St_Georges_NHS_Ankle_Sprains.pdf": {
+        "institution": "St George's University Hospitals NHS Foundation Trust",
+        "source_url": "https://www.stgeorges.nhs.uk/wp-content/uploads/2025/06/PHY_ASA.pdf",
+        "document_date": "2025-06",
+        "review_date": "2027-06",
+    },
+    "53_RadiologyInfo_Chronic_Ankle_Pain_Imaging.pdf": {
+        "institution": "RadiologyInfo.org (ACR / RSNA)",
+        "source_url": "https://www.radiologyinfo.org/en/info/acs-chronic-ankle-pain",
+        "document_date": "2021-12-15",
+        "review_date": "not applicable",
+    },
+    "54_East_Kent_NHS_Ankle_Foot_Sprain_Aftercare.pdf": {
+        "institution": "East Kent Hospitals University NHS Foundation Trust",
+        "source_url": "https://leaflets.ekhuft.nhs.uk/s3/leaflets/ankle-and-foot-sprain-injury-aftercare-advice/7ff85e40-9353-4d68-9f6c-8315ac480041.p1692359596.pdf",
+        "document_date": "2023-06",
+        "review_date": "2026-10",
+    },
+    "55_Chelsea_Westminster_NHS_Care_of_Ankle_Injury.pdf": {
+        "institution": "Chelsea and Westminster Hospital NHS Foundation Trust",
+        "source_url": "https://www.chelwest.nhs.uk/your-visit/patient-leaflets/medicine-services/care-of-your-ankle-injury/",
+        "document_date": "not stated",
+        "review_date": "not stated",
+    },
 }
 
 

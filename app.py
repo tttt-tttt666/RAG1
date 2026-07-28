@@ -94,6 +94,11 @@ DANGER_EVIDENCE_TERMS = (
 def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
     """Return strict evidence terms for topics prone to keyword-only matches."""
     normalized = query.casefold()
+    if (
+        any(term in normalized for term in ("六周", "6周", "6 weeks", "persistent", "持续"))
+        and any(term in normalized for term in ("x-ray", "x ray", "mri", "影像", "拍片", "x光"))
+    ):
+        return ("chronic ankle pain", "6 weeks", "x-ray", "mri", "ultrasound", "ct")
     if any(
         term in normalized
         for term in (
@@ -130,6 +135,18 @@ def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
         )
     ):
         return ("grade i", "grade ii", "grade iii", "grade 1", "grade 2", "grade 3")
+    if any(
+        term in normalized
+        for term in (
+            "再次扭伤",
+            "预防复发",
+            "prevent",
+            "another ankle sprain",
+            "reduce the risk",
+            "recurrent",
+        )
+    ):
+        return ()
     if any(
         term in normalized
         for term in (
@@ -259,7 +276,7 @@ def retrieve(
                 rerank_scores[index] -= 0.10
         ranked_indices = np.argsort(rerank_scores)[::-1]
         result_scores = rerank_scores
-    elif not danger_query:
+    elif not danger_query and not priority_evidence_terms:
         ranked_indices = np.argsort(scores)[::-1]
         result_scores = scores
 
@@ -357,6 +374,14 @@ def retrieve(
 def canonicalize_retrieval_query(query: str) -> str:
     """Map bilingual domain intents to the same English retrieval query."""
     normalized = query.casefold()
+    if (
+        any(term in normalized for term in ("六周", "6周", "6 weeks", "persistent", "持续"))
+        and any(term in normalized for term in ("x-ray", "x ray", "mri", "影像", "拍片", "x光"))
+    ):
+        return (
+            "chronic ankle pain persisting for 6 weeks or more: x-ray as first "
+            "imaging test and when MRI, CT or ultrasound may be appropriate"
+        )
     if contains_warning_term(query):
         return (
             "ankle injury emergency red flags: deformity, inability to bear weight, "
@@ -410,6 +435,15 @@ def canonicalize_retrieval_query(query: str) -> str:
         return (
             "ankle sprain return to basketball functional criteria: pain-free "
             "single-leg heel raises, balance, hopping, cutting and sport-specific drills"
+        )
+
+    if any(
+        marker in normalized
+        for marker in ("ankle brace", "bracing", "taping", "护具", "护踝", "贴扎")
+    ):
+        return (
+            "ankle brace or taping after ankle sprain during rehabilitation "
+            "and return to sport"
         )
 
     recurrence_markers = (
@@ -1002,6 +1036,10 @@ def generate_detailed_chinese_answer(
                 "returning to running",
                 "when can i run",
                 "恢复走路",
+                "weight bearing",
+                "walking normally",
+                "负重",
+                "正常走路",
                 "何时负重",
                 "什么时候负重",
                 "恢复跑步",
@@ -1125,6 +1163,10 @@ def generate_detailed_chinese_answer(
                 "何时恢复走路、跑步或运动",
             ),
             (("医院", "就医", "doctor", "hospital"), "哪些情况需要去医院"),
+            (
+                ("负重", "正常走路", "weight bearing", "walking normally"),
+                "何时恢复走路、跑步或运动",
+            ),
         )
         combined_topic_text = f"{normalized} {category}"
         for markers, title in topic_routes:
@@ -1169,7 +1211,7 @@ st.set_page_config(
 )
 
 st.title("脚踝康复资料助手")
-st.caption("基于 47 份医院、政府卫生机构和专业医学组织可信资料的本地语义检索 Demo")
+st.caption("基于 55 份医院、政府卫生机构和专业医学组织可信资料的本地语义检索 Demo")
 
 st.info(
     "本工具仅提供健康教育资料检索，不能诊断伤情或替代医生。"

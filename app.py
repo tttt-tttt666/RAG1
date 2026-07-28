@@ -731,6 +731,25 @@ with st.form("question_form"):
             "再让 CrossEncoder 同时阅读问题和段落并重新排序。"
         ),
     )
+    source_threshold = st.slider(
+        "资料显示相关性阈值",
+        min_value=0.0,
+        max_value=1.0,
+        value=0.50,
+        step=0.05,
+        help="低于这个分数的资料段落不会显示。数值越高，筛选越严格。",
+    )
+    answer_threshold = st.slider(
+        "回答生成相关性阈值",
+        min_value=0.0,
+        max_value=1.0,
+        value=0.60,
+        step=0.05,
+        help=(
+            "如果最佳资料仍低于这个分数，系统不会生成回答或展示资料，"
+            "而是直接提示当前资料不足。"
+        ),
+    )
     question = st.text_area(
         "请输入关于脚踝扭伤或康复的问题",
         placeholder="例如：脚踝扭伤后达到什么条件才能恢复打篮球？",
@@ -745,12 +764,22 @@ if submitted:
     else:
         st.session_state["active_question"] = question
         st.session_state["active_search_mode"] = search_mode
+        st.session_state["active_source_threshold"] = source_threshold
+        st.session_state["active_answer_threshold"] = answer_threshold
 
 active_question = st.session_state.get("active_question", "")
 if active_question:
     active_search_mode = st.session_state.get(
         "active_search_mode",
         "Bi-Encoder 快速检索",
+    )
+    active_source_threshold = st.session_state.get(
+        "active_source_threshold",
+        0.50,
+    )
+    active_answer_threshold = st.session_state.get(
+        "active_answer_threshold",
+        0.60,
     )
     warning_detected = contains_warning_term(active_question)
     if warning_detected:
@@ -772,13 +801,14 @@ if active_question:
             st.code(str(error), language=None)
             st.stop()
 
-    results = retrieve(
+    raw_results = retrieve(
         active_question,
         chunks,
         embeddings,
         model,
         query_prefix=embedding_metadata.get("query_prefix", ""),
         reranker=active_reranker,
+        reranker_min_score=0.0,
     )
     st.caption(
         f"当前模式：{active_search_mode}"
@@ -787,11 +817,29 @@ if active_question:
             if active_reranker is not None
             else f" · 召回模型 {embedding_metadata['model']}"
         )
+        + f" · 资料阈值 {active_source_threshold:.2f}"
+        + f" · 回答阈值 {active_answer_threshold:.2f}"
     )
-    if active_reranker is not None and len(results) < 3:
+
+    best_score = raw_results[0][0] if raw_results else 0.0
+    if not raw_results or best_score < active_answer_threshold:
+        st.warning(
+            "当前资料与问题的相关性不足，系统没有生成回答。"
+            f"最佳匹配分为 {best_score:.3f}，低于回答生成阈值 "
+            f"{active_answer_threshold:.2f}。请降低阈值、换一种检索模式，"
+            "或把问题描述得更具体。"
+        )
+        st.stop()
+
+    results = [
+        (score, chunk)
+        for score, chunk in raw_results
+        if score >= active_source_threshold
+    ]
+    if len(results) < len(raw_results):
         st.info(
-            f"CrossEncoder 仅找到 {len(results)} 条达到相关性阈值 "
-            f"{CROSS_ENCODER_MIN_SCORE:.2f} 的资料；系统不会用低分段落强行补足三条。"
+            f"当前仅有 {len(results)} 条资料达到显示阈值 "
+            f"{active_source_threshold:.2f}；系统不会用低分段落强行补足三条。"
         )
     st.subheader("详细中文回答")
     st.success(generate_detailed_chinese_answer(active_question, warning_detected))

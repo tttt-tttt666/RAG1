@@ -121,6 +121,35 @@ def retrieve(
 def canonicalize_retrieval_query(query: str) -> str:
     """Map bilingual domain intents to the same English retrieval query."""
     normalized = query.casefold()
+    load_response_markers = (
+        "pain and swelling increase the day after",
+        "continue training or reduce",
+        "worse the next day",
+        "第二天疼痛和肿胀增加",
+        "继续训练还是降低",
+        "训练后疼痛或肿胀",
+        "次日肿胀增加",
+    )
+    if any(marker in normalized for marker in load_response_markers):
+        return (
+            "ankle rehabilitation exercise dosage: reduce intensity or pause "
+            "when pain and swelling increase after exercise or the next day"
+        )
+
+    basketball_function_markers = (
+        "single-leg heel raises, hopping, and cutting",
+        "single leg heel raises, hopping, and cutting",
+        "heel raises, hopping",
+        "无痛完成单脚提踵、跳跃和变向",
+        "单脚提踵、跳跃和变向",
+        "提踵、跳跃和变向",
+    )
+    if any(marker in normalized for marker in basketball_function_markers):
+        return (
+            "ankle sprain return to basketball functional criteria: pain-free "
+            "single-leg heel raises, balance, hopping, cutting and sport-specific drills"
+        )
+
     recurrence_markers = (
         "prevent",
         "another ankle sprain",
@@ -253,6 +282,46 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
         )
 
     normalized = query.casefold()
+    load_response_markers = (
+        "pain and swelling increase the day after",
+        "continue training or reduce",
+        "worse the next day",
+        "第二天疼痛和肿胀增加",
+        "继续训练还是降低",
+        "训练后疼痛或肿胀",
+        "次日肿胀增加",
+    )
+    if any(marker in normalized for marker in load_response_markers):
+        return (
+            "**应该降低强度；如果症状增加明显，应暂停当前练习，而不是按原强度继续。**\n\n"
+            "训练后或第二天疼痛、肿胀比训练前明显增加，通常说明这次训练负荷超过了脚踝目前"
+            "能够承受的程度。可以先减少阻力、次数、站立时间或动作难度；待症状回到训练前水平后，"
+            "再从较低一级重新尝试。\n\n"
+            "重新训练时，应选择能够稳定完成且不会导致疼痛、肿胀持续增加的强度。"
+            "如果即使降低强度仍反复加重，或者出现明显跛行、无法正常负重、脚踝持续不稳，"
+            "应停止自行进阶并咨询医生或物理治疗师。"
+        )
+
+    basketball_function_markers = (
+        "single-leg heel raises, hopping, and cutting",
+        "single leg heel raises, hopping, and cutting",
+        "heel raises, hopping",
+        "无痛完成单脚提踵、跳跃和变向",
+        "单脚提踵、跳跃和变向",
+        "提踵、跳跃和变向",
+    )
+    if any(marker in normalized for marker in basketball_function_markers):
+        return (
+            "**是的。无痛、稳定地完成单脚提踵、跳跃和变向，是重返篮球前应检查的重要功能标准，"
+            "但不能只看这三项。**\n\n"
+            "重返完整训练或比赛前，还应确认：日常走路和上下楼没有明显疼痛或跛行；"
+            "脚踝活动度和力量接近未受伤侧；单脚站立稳定；能够逐级完成双脚跳、单脚跳、"
+            "直线跑、急停和变向；训练过程中及第二天没有明显疼痛或肿胀增加。\n\n"
+            "如果完成动作时需要代偿、落地不稳、害怕发力，或者运动后症状反弹，"
+            "应继续较低级别训练，而不是直接参加比赛。反复扭伤或持续不稳者应由医生或"
+            "物理治疗师进行功能评估。"
+        )
+
     recurrence_markers = (
         "prevent",
         "another ankle sprain",

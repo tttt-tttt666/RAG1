@@ -40,7 +40,11 @@ WARNING_TERMS = (
 
 
 @st.cache_data
-def load_index() -> tuple[list[dict], np.ndarray, np.ndarray, dict]:
+def load_index(
+    index_version: tuple[tuple[int, int], ...],
+) -> tuple[list[dict], np.ndarray, np.ndarray, dict]:
+    """Load index data, invalidating the cache whenever an index file changes."""
+    del index_version
     chunks = [
         json.loads(line)
         for line in CHUNKS_PATH.read_text(encoding="utf-8").splitlines()
@@ -60,6 +64,14 @@ def load_index() -> tuple[list[dict], np.ndarray, np.ndarray, dict]:
 @st.cache_resource
 def load_model(model_name: str) -> SentenceTransformer:
     return SentenceTransformer(model_name)
+
+
+def get_index_version() -> tuple[tuple[int, int], ...]:
+    """Return stable file fingerprints used as the Streamlit cache key."""
+    return tuple(
+        (path.stat().st_mtime_ns, path.stat().st_size)
+        for path in (CHUNKS_PATH, EMBEDDINGS_PATH, EMBEDDING_METADATA_PATH)
+    )
 
 
 def retrieve(
@@ -238,7 +250,7 @@ st.info(
 )
 
 try:
-    chunks, embeddings, _, embedding_metadata = load_index()
+    chunks, embeddings, _, embedding_metadata = load_index(get_index_version())
     model = load_model(embedding_metadata["model"])
 except Exception as error:
     st.error(f"索引加载失败：{error}")

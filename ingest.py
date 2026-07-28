@@ -280,6 +280,36 @@ SOURCES = {
         "document_date": "2022",
         "review_date": "not stated",
     },
+    "43_Cleveland_Clinic_Sprained_Ankle.pdf": {
+        "institution": "Cleveland Clinic",
+        "source_url": "https://my.clevelandclinic.org/health/diseases/22048-sprained-ankle",
+        "document_date": "2026-04-13",
+        "review_date": "not applicable",
+    },
+    "44_UCSF_Health_Ankle_Sprain.pdf": {
+        "institution": "UCSF Health",
+        "source_url": "https://www.ucsfhealth.org/care/conditions/ankle-sprain",
+        "document_date": "not stated",
+        "review_date": "not stated",
+    },
+    "45_UPMC_Ankle_Sprain.pdf": {
+        "institution": "UPMC",
+        "source_url": "https://www.upmc.com/conditions/a/ankle-sprain",
+        "document_date": "2024-06-11",
+        "review_date": "not applicable",
+    },
+    "46_Stanford_Health_Care_Ankle_Sprain_Treatment.pdf": {
+        "institution": "Stanford Health Care",
+        "source_url": "https://stanfordhealthcare.org/medical-conditions/bones-joints-and-muscles/ankle-sprain/treatments.html",
+        "document_date": "not stated",
+        "review_date": "not stated",
+    },
+    "47_Alder_Hey_NHS_Ankle_Sprains_Grading.pdf": {
+        "institution": "Alder Hey Children's NHS Foundation Trust",
+        "source_url": "https://www.alderhey.nhs.uk/wp-content/uploads/2023/06/Ankle_Sprains_Leaflet_PIAG_257.pdf",
+        "document_date": "2022-04",
+        "review_date": "not stated",
+    },
 }
 
 

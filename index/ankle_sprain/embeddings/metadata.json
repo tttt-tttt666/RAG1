@@ -1,16 +1,16 @@
 {
   "model": "intfloat/multilingual-e5-base",
   "embedding_dimension": 768,
-  "embedding_count": 718,
+  "embedding_count": 756,
   "dtype": "float32",
   "normalized": true,
   "query_prefix": "query: ",
   "passage_prefix": "passage: ",
-  "minimum_l2_norm": 0.9999999403953552,
-  "maximum_l2_norm": 1.0000001192092896,
+  "minimum_l2_norm": 0.9999998211860657,
+  "maximum_l2_norm": 1.000000238418579,
   "source_chunks": "index/ankle_sprain/chunks.jsonl",
-  "source_chunks_sha256": "4a5aff1b8a9bf5333076aeb59da84ca8cafc9a6d428c3a44aea93d144a784a28",
+  "source_chunks_sha256": "960bdf675e62b3a86859425cb6dc122b346bfdae34e9a8602b45e12e56b6f82f",
   "vectors_file": "embeddings.npz",
-  "vectors_sha256": "dc6923dcdd0e2ac6b297e6ad81f38b6e00f2c143d75d796a086ca800646bbb82",
-  "created_at_utc": "2026-07-28T02:19:36.159352+00:00"
+  "vectors_sha256": "40e82e129cd8b4be48b9f6c3d52ac73160695fc520bae57854eca9a4444a9c01",
+  "created_at_utc": "2026-07-28T03:15:47.057994+00:00"
 }

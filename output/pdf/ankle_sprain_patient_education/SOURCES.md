@@ -46,6 +46,11 @@ Collected from official healthcare-provider websites; last updated 2026-07-28.
 | `40_RCH_Ankle_Sprains_Emergency_Guideline.pdf` | The Royal Children's Hospital Melbourne | Not stated | Not stated | https://www.rch.org.au/clinicalguide/guideline_index/fractures/Ankle_Sprains_-_Emergency_Department/ |
 | `41_APTA_ChoosePT_Ankle_Sprain_Guide.pdf` | American Physical Therapy Association (ChoosePT) | Expert review 22 October 2022; revised 13 February 2023 | N/A | https://www.choosept.com/guide/physical-therapy-guide-ankle-sprain |
 | `42_Nationwide_Childrens_High_Ankle_Sprain.pdf` | Nationwide Children's Hospital | 2022 | Not stated | https://www.nationwidechildrens.org/conditions/sports-medicine-high-ankle-sprain |
+| `43_Cleveland_Clinic_Sprained_Ankle.pdf` | Cleveland Clinic | Reviewed 13 April 2026 | N/A | https://my.clevelandclinic.org/health/diseases/22048-sprained-ankle |
+| `44_UCSF_Health_Ankle_Sprain.pdf` | UCSF Health | Not stated | Not stated | https://www.ucsfhealth.org/care/conditions/ankle-sprain |
+| `45_UPMC_Ankle_Sprain.pdf` | UPMC | Reviewed 11 June 2024 | N/A | https://www.upmc.com/conditions/a/ankle-sprain |
+| `46_Stanford_Health_Care_Ankle_Sprain_Treatment.pdf` | Stanford Health Care | Not stated | Not stated | https://stanfordhealthcare.org/medical-conditions/bones-joints-and-muscles/ankle-sprain/treatments.html |
+| `47_Alder_Hey_NHS_Ankle_Sprains_Grading.pdf` | Alder Hey Children's NHS Foundation Trust | Review date April 2022 | Not stated | https://www.alderhey.nhs.uk/wp-content/uploads/2023/06/Ankle_Sprains_Leaflet_PIAG_257.pdf |
 
 ## Selection notes
 
@@ -78,3 +83,20 @@ Collected from official healthcare-provider websites; last updated 2026-07-28.
   court or field sports.
 - The snapshot process removed website navigation and normalized whitespace
   only. It did not translate or rewrite the source medical content.
+
+## Added sources 43-47
+
+| Title | Issuing institution | Publication/update date | Original official URL |
+|---|---|---:|---|
+| Sprained Ankle: Symptoms, Treatment & Recovery Time | Cleveland Clinic | 13 April 2026 | https://my.clevelandclinic.org/health/diseases/22048-sprained-ankle |
+| Ankle Sprain | UCSF Health | Not stated | https://www.ucsfhealth.org/care/conditions/ankle-sprain |
+| Ankle Sprain Causes, Symptoms, and Treatment | UPMC | 11 June 2024 | https://www.upmc.com/conditions/a/ankle-sprain |
+| Treatment of Ankle Sprain | Stanford Health Care | Not stated | https://stanfordhealthcare.org/medical-conditions/bones-joints-and-muscles/ankle-sprain/treatments.html |
+| Ankle Sprains: Information for patients, parents and carers | Alder Hey Children's NHS Foundation Trust | Review date April 2022 | https://www.alderhey.nhs.uk/wp-content/uploads/2023/06/Ankle_Sprains_Leaflet_PIAG_257.pdf |
+
+- Files 43-46 are English-text PDF snapshots of official hospital pages, each
+  with a provenance cover page. File 47 is the original official NHS PDF.
+- These sources were selected to strengthen sprain grading, symptom severity,
+  diagnosis, treatment by severity, rehabilitation, and expected outcomes.
+- Navigation was removed from snapshots without translating, paraphrasing, or
+  adding medical instructions.

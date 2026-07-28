@@ -1,0 +1,92 @@
+[
+  {
+    "id": "early-care",
+    "topic": "受伤后早期处理",
+    "zh": "我昨天扭伤了脚踝，现在肿胀、疼痛，但还能走路。我现在应该如何处理？",
+    "en": "I sprained my ankle yesterday. It is swollen and painful, but I can still walk. What should I do now?",
+    "expected_heading": "受伤后现在如何处理",
+    "answer_terms": ["冷敷", "抬高", "负重"],
+    "evidence_terms": ["ice", "elevation", "weight bearing", "protect"]
+  },
+  {
+    "id": "medical-assessment",
+    "topic": "就医或影像检查",
+    "zh": "脚踝扭伤后出现哪些症状时，我应该去医院或接受X光检查？",
+    "en": "What symptoms after an ankle sprain mean that I should go to hospital or have an X-ray?",
+    "expected_heading": "哪些情况需要去医院",
+    "answer_terms": ["无法正常负重", "变形", "麻木"],
+    "evidence_terms": ["x-ray", "unable to bear weight", "four steps", "deformity", "bone tenderness"]
+  },
+  {
+    "id": "rehab-sequence",
+    "topic": "康复训练顺序",
+    "zh": "脚踝扭伤后的康复训练应该按照什么顺序进行？",
+    "en": "In what order should rehabilitation exercises be performed after an ankle sprain?",
+    "expected_heading": "何时以及怎样开始康复训练",
+    "answer_terms": ["活动度", "力量", "平衡"],
+    "evidence_terms": ["range of motion", "strength", "balance", "proprioception"]
+  },
+  {
+    "id": "return-to-sport",
+    "topic": "重返跑步或篮球",
+    "zh": "恢复跑步或打篮球之前，我需要达到哪些标准？",
+    "en": "What criteria should I meet before returning to running or basketball?",
+    "expected_heading": "何时恢复走路、跑步或运动",
+    "answer_terms": ["单脚站立", "提踵", "变向"],
+    "evidence_terms": ["return to sport", "strength", "balance", "agility", "hop"]
+  },
+  {
+    "id": "severity",
+    "topic": "损伤程度判定",
+    "zh": "轻度、中度和重度脚踝扭伤通常有什么区别？",
+    "en": "What are the usual differences between mild, moderate, and severe ankle sprains?",
+    "expected_heading": "脚踝扭伤的严重程度",
+    "answer_terms": ["轻度", "中度", "重度"],
+    "evidence_terms": ["grade i", "grade ii", "grade iii", "mild", "moderate", "severe"]
+  },
+  {
+    "id": "weight-bearing",
+    "topic": "恢复负重",
+    "zh": "脚踝扭伤后什么时候可以开始负重和正常走路？",
+    "en": "When can I start bearing weight and walking normally after an ankle sprain?",
+    "expected_heading": "何时恢复走路、跑步或运动",
+    "answer_terms": ["逐渐增加负重", "正常步行", "肿胀"],
+    "evidence_terms": ["weight bearing", "walking", "gait", "pain"]
+  },
+  {
+    "id": "recovery-time",
+    "topic": "恢复时间",
+    "zh": "脚踝扭伤后的疼痛和肿胀通常需要多久恢复？",
+    "en": "How long do pain and swelling usually take to recover after an ankle sprain?",
+    "expected_heading": "通常需要多久恢复",
+    "answer_terms": ["数周", "六周", "较严重"],
+    "evidence_terms": ["weeks", "six weeks", "recovery", "heal"]
+  },
+  {
+    "id": "recurrence-prevention",
+    "topic": "预防再次扭伤",
+    "zh": "恢复运动后，如何降低脚踝再次扭伤的风险？",
+    "en": "How can I reduce the risk of another ankle sprain after returning to sport?",
+    "expected_heading": "如何恢复稳定性并预防再次扭伤",
+    "answer_terms": ["力量", "平衡", "护踝"],
+    "evidence_terms": ["recurrent", "balance", "strength", "brace", "neuromuscular"]
+  },
+  {
+    "id": "brace-taping",
+    "topic": "护具与贴扎",
+    "zh": "恢复篮球运动时，是否应该使用脚踝护具或运动贴扎？",
+    "en": "Should I use an ankle brace or taping when returning to basketball?",
+    "expected_heading": "恢复运动时是否使用护具或贴扎",
+    "answer_terms": ["短期辅助", "不能替代", "尺寸合适"],
+    "evidence_terms": ["brace", "bracing", "taping", "return to sport"]
+  },
+  {
+    "id": "swelling-ice",
+    "topic": "肿胀与冷敷",
+    "zh": "脚踝扭伤后应该怎样冷敷和抬高来减轻肿胀？",
+    "en": "How should I use ice and elevation to reduce swelling after an ankle sprain?",
+    "expected_heading": "如何处理肿胀及安全冷敷",
+    "answer_terms": ["毛巾", "抬高", "冰块直接接触"],
+    "evidence_terms": ["ice", "elevation", "swelling", "cold"]
+  }
+]

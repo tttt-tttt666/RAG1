@@ -1,0 +1,6 @@
+interface:
+  display_name: "RAG 双语评测"
+  short_description: "自动评估中英文回答、检索资料相关性与前三条一致性"
+  default_prompt: "Use $rag-bilingual-evaluator to run the bilingual RAG regression suite and summarize its scores."
+policy:
+  allow_implicit_invocation: true

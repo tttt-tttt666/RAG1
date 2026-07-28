@@ -1,0 +1,49 @@
+name: RAG bilingual evaluation
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Cache multilingual E5
+        uses: actions/cache@v4
+        with:
+          path: .cache/huggingface
+          key: multilingual-e5-base-v1
+
+      - name: Download embedding model when absent
+        run: |
+          python - <<'PY'
+          from huggingface_hub import snapshot_download
+          snapshot_download(
+              "intfloat/multilingual-e5-base",
+              cache_dir=".cache/huggingface/hub",
+          )
+          PY
+
+      - name: Run bilingual RAG evaluation
+        run: |
+          python skills/rag-bilingual-evaluator/scripts/evaluate_rag.py \
+            --project "$GITHUB_WORKSPACE" \
+            --output "$GITHUB_WORKSPACE/evaluation"
+          cat evaluation/latest_report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload evaluation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: rag-bilingual-evaluation
+          path: evaluation/

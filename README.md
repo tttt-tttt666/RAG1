@@ -17,7 +17,7 @@ with SQLite FTS5.
 - `index/ankle_sprain/chunks.jsonl`: source chunks with page metadata
 - `index/ankle_sprain/chunks.sqlite3`: local full-text search index
 - `index/ankle_sprain/embeddings/`: normalized dense vectors and metadata
-- `app.py`: local Streamlit interface with short Chinese template answers,
+- `app.py`: local Streamlit interface with detailed Chinese template answers,
   source passages, and safety warnings
 
 ## Setup

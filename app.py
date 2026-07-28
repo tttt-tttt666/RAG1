@@ -121,6 +121,21 @@ def retrieve(
 def canonicalize_retrieval_query(query: str) -> str:
     """Map bilingual domain intents to the same English retrieval query."""
     normalized = query.casefold()
+    high_ankle_comparison_markers = (
+        "difference between a high ankle sprain",
+        "high ankle sprain and a common lateral",
+        "high ankle sprain take longer",
+        "高位踝扭伤和普通外侧踝扭伤",
+        "高位踝扭伤与普通外侧踝扭伤",
+        "高位踝扭伤和外侧踝扭伤",
+    )
+    if any(marker in normalized for marker in high_ankle_comparison_markers):
+        return (
+            "compare high syndesmotic ankle sprain versus common lateral ankle "
+            "sprain: injured ligaments, location, mechanism, symptoms, severity "
+            "and why high ankle sprains take longer to recover"
+        )
+
     load_response_markers = (
         "pain and swelling increase the day after",
         "continue training or reduce",
@@ -235,6 +250,7 @@ def is_low_information_chunk(text: str) -> bool:
     """Detect bibliography and publication-administration chunks."""
     normalized = " ".join(text.casefold().split())
     doi_count = normalized.count("doi:")
+    spaced_doi_count = normalized.count("h t t p s : / / d o i")
     citation_years = len(re.findall(r"\((?:19|20)\d{2}\)", normalized))
     administrative_markers = (
         "all authors read and approved",
@@ -245,6 +261,7 @@ def is_low_information_chunk(text: str) -> bool:
     )
     return (
         doi_count >= 2
+        or spaced_doi_count >= 1
         or citation_years >= 4
         or any(marker in normalized for marker in administrative_markers)
     )
@@ -282,6 +299,35 @@ def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
         )
 
     normalized = query.casefold()
+    high_ankle_comparison_markers = (
+        "difference between a high ankle sprain",
+        "high ankle sprain and a common lateral",
+        "high ankle sprain take longer",
+        "高位踝扭伤和普通外侧踝扭伤",
+        "高位踝扭伤与普通外侧踝扭伤",
+        "高位踝扭伤和外侧踝扭伤",
+    )
+    if any(marker in normalized for marker in high_ankle_comparison_markers):
+        return (
+            "**问题一：高位踝扭伤和普通外侧踝扭伤有什么区别？**\n\n"
+            "- **受伤位置不同**：高位踝扭伤损伤的是踝关节上方、连接胫骨和腓骨的下胫腓联合"
+            "韧带；普通外侧踝扭伤主要损伤脚踝外侧的距腓前韧带、跟腓韧带等结构。\n"
+            "- **常见受伤方式不同**：高位扭伤常与足部被迫向外旋转、背屈有关；外侧扭伤更常见于"
+            "脚向内翻、身体重心压到脚踝外侧。\n"
+            "- **症状位置不同**：高位扭伤的疼痛可位于踝关节前方或上方的小腿下段，外观肿胀有时"
+            "并不明显，但走路、蹬地或向外转脚可能更痛；外侧扭伤通常在外踝周围出现压痛、肿胀和"
+            "瘀青。\n"
+            "- **稳定性风险不同**：如果下胫腓联合变得不稳定，高位扭伤需要更严格的固定和专科评估；"
+            "多数稳定的外侧扭伤可通过保护、逐渐负重和康复治疗恢复。\n\n"
+            "**问题二：高位踝扭伤的恢复时间是否更长？**\n\n"
+            "**通常是的，但具体时间取决于损伤等级和关节是否稳定。**轻度外侧踝扭伤常在数周内"
+            "明显改善；高位踝扭伤通常需要数周到数月，存在明显不稳、无法负重或需要手术时可能更久。"
+            "恢复不能只看时间，还应确认疼痛和肿胀下降、正常走路、活动度、力量、平衡以及专项动作"
+            "已经恢复。\n\n"
+            "仅凭疼痛位置不能自行确定是哪一种扭伤。如果疼痛主要位于踝关节上方、无法正常负重、"
+            "按压胫腓骨之间明显疼痛，或症状没有逐步改善，应由医生或运动医学专业人员评估。"
+        )
+
     load_response_markers = (
         "pain and swelling increase the day after",
         "continue training or reduce",

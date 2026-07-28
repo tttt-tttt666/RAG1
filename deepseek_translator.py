@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 
 from dotenv import load_dotenv
@@ -19,17 +20,68 @@ def api_is_configured() -> bool:
     return bool(os.getenv("DEEPSEEK_API_KEY", "").strip())
 
 
-def translate_to_chinese(text: str) -> str:
-    """Translate an English medical passage without adding medical advice."""
+def _client() -> OpenAI:
+    """Create a DeepSeek client without exposing the API key."""
     api_key = os.getenv("DEEPSEEK_API_KEY", "").strip()
     if not api_key:
         raise RuntimeError("尚未配置 DEEPSEEK_API_KEY，请先填写项目根目录中的 .env")
-
-    client = OpenAI(
+    return OpenAI(
         api_key=api_key,
         base_url=os.getenv("DEEPSEEK_BASE_URL", DEFAULT_BASE_URL),
     )
-    response = client.chat.completions.create(
+
+
+def assess_question_scope(question: str) -> dict:
+    """Decide whether the ankle-sprain RAG assistant should answer a question."""
+    response = _client().chat.completions.create(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "你是脚踝扭伤患者教育RAG系统的问题准入分类器。"
+                    "你只负责判断问题是否应进入检索与回答流程，不回答医学问题。"
+                    "允许范围：脚踝扭伤的受伤机制、症状、严重程度、就医或影像检查、"
+                    "早期处理、治疗、康复训练、训练负荷、恢复时间、护具贴扎、"
+                    "重返走路跑步运动、疗效、复发预防和危险信号。"
+                    "拒绝范围：饮食或吃什么、一般营养、与脚踝扭伤无关的问题、"
+                    "仅包含脚踝关键词但实际意图不属于上述患者教育资料的问题。"
+                    "如果问题同时包含允许范围和无关问题，只有当核心意图能够由允许范围"
+                    "直接回答时才允许。危险信号和就医问题必须允许。"
+                    "只输出JSON对象，不要输出Markdown。"
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    "判断下面的问题是否应该由脚踝扭伤资料助手回答。"
+                    '输出格式：{"should_answer":true或false,'
+                    '"category":"简短类别","reason":"简短中文原因"}。\n\n'
+                    f"问题：{question}"
+                ),
+            },
+        ],
+        response_format={"type": "json_object"},
+        stream=False,
+        extra_body={"thinking": {"type": "disabled"}},
+    )
+    content = response.choices[0].message.content
+    if not content or not content.strip():
+        raise RuntimeError("DeepSeek 返回了空的准入判断")
+    result = json.loads(content)
+    if not isinstance(result.get("should_answer"), bool):
+        raise RuntimeError("DeepSeek 准入判断缺少布尔值 should_answer")
+    return {
+        "should_answer": result["should_answer"],
+        "category": str(result.get("category", "未分类")).strip(),
+        "reason": str(result.get("reason", "未提供原因")).strip(),
+        "source": "DeepSeek API",
+    }
+
+
+def translate_to_chinese(text: str) -> str:
+    """Translate an English medical passage without adding medical advice."""
+    response = _client().chat.completions.create(
         model=MODEL,
         messages=[
             {

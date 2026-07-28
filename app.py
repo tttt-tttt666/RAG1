@@ -11,7 +11,11 @@ import numpy as np
 import streamlit as st
 from sentence_transformers import CrossEncoder, SentenceTransformer
 
-from deepseek_translator import api_is_configured, translate_to_chinese
+from deepseek_translator import (
+    api_is_configured,
+    assess_question_scope,
+    translate_to_chinese,
+)
 
 
 ROOT = Path(__file__).resolve().parent
@@ -397,6 +401,58 @@ def cached_chinese_translation(chunk_id: str, text: str) -> str:
     return translate_to_chinese(text)
 
 
+@st.cache_data(show_spinner=False, ttl=3600)
+def cached_question_scope_assessment(question: str) -> dict:
+    """Cache the API admission decision for identical questions."""
+    return assess_question_scope(question)
+
+
+def local_question_scope_assessment(question: str) -> dict:
+    """Conservative offline fallback when the admission API is unavailable."""
+    normalized = question.casefold()
+    out_of_scope_terms = (
+        "吃什么",
+        "饮食",
+        "食谱",
+        "营养",
+        "减肥",
+        "what to eat",
+        "what should i eat",
+        "diet",
+        "nutrition",
+        "meal",
+        "recipe",
+    )
+    in_scope_terms = (
+        "脚踝",
+        "踝关节",
+        "扭伤",
+        "康复",
+        "ankle",
+        "sprain",
+        "rehab",
+        "rehabilitation",
+    )
+    if any(term in normalized for term in out_of_scope_terms):
+        return {
+            "should_answer": False,
+            "category": "超出资料范围",
+            "reason": "问题主要询问饮食或营养，当前脚踝扭伤资料库不能提供可靠回答。",
+            "source": "本地保守规则",
+        }
+    allowed = any(term in normalized for term in in_scope_terms)
+    return {
+        "should_answer": allowed,
+        "category": "脚踝扭伤患者教育" if allowed else "超出资料范围",
+        "reason": (
+            "问题与脚踝扭伤或康复直接相关。"
+            if allowed
+            else "问题与当前脚踝扭伤患者教育资料范围没有明确关系。"
+        ),
+        "source": "本地保守规则",
+    }
+
+
 def generate_detailed_chinese_answer(query: str, warning: bool) -> str:
     """Return a detailed, conservative Chinese answer from medical templates."""
     if warning:
@@ -713,6 +769,10 @@ st.info(
     "本工具仅提供健康教育资料检索，不能诊断伤情或替代医生。"
     "当前多语言模型支持中文问题检索英文医学资料，也支持直接使用英文提问。"
 )
+st.caption(
+    "提交问题后，问题文本会先发送至 DeepSeek API 进行范围判断；"
+    "只有通过准入判断的问题才会进入本地检索与回答流程。"
+)
 
 try:
     chunks, embeddings, _, embedding_metadata = load_index(get_index_version())
@@ -780,6 +840,34 @@ if active_question:
     active_answer_threshold = st.session_state.get(
         "active_answer_threshold",
         0.60,
+    )
+
+    if api_is_configured():
+        try:
+            with st.spinner("正在判断该问题是否适合由脚踝资料助手回答……"):
+                scope_assessment = cached_question_scope_assessment(active_question)
+        except Exception as error:
+            scope_assessment = local_question_scope_assessment(active_question)
+            st.warning(
+                "API 问题准入判断暂时不可用，已启用本地保守规则。"
+                f"错误信息：{error}"
+            )
+    else:
+        scope_assessment = local_question_scope_assessment(active_question)
+        st.warning("DeepSeek API 未配置，问题准入判断暂时使用本地保守规则。")
+
+    if not scope_assessment["should_answer"]:
+        st.warning(
+            "这个问题不适合由当前脚踝扭伤资料助手回答，因此没有执行检索或生成回答。\n\n"
+            f"判断类别：{scope_assessment['category']}\n\n"
+            f"原因：{scope_assessment['reason']}"
+        )
+        st.caption(f"问题准入判断来源：{scope_assessment['source']}")
+        st.stop()
+
+    st.caption(
+        f"问题准入：允许回答 · {scope_assessment['category']} "
+        f"· 判断来源：{scope_assessment['source']}"
     )
     warning_detected = contains_warning_term(active_question)
     if warning_detected:

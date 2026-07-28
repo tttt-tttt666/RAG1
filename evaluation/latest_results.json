@@ -1,16 +1,16 @@
 {
-  "generated_at_utc": "2026-07-28T02:58:49.624763+00:00",
+  "generated_at_utc": "2026-07-28T03:25:48.574728+00:00",
   "question_pairs": 10,
   "query_count": 20,
   "embedding_model": "intfloat/multilingual-e5-base",
   "metrics": {
-    "answer_adaptation": 64.5,
-    "source_relevance_at_3": 75.0,
+    "answer_adaptation": 74.5,
+    "source_relevance_at_3": 76.7,
     "bilingual_top3_consistency": 57.0,
     "exact_order_pair_rate": 50.0,
-    "overall_score": 66.3
+    "overall_score": 70.9
   },
-  "grade": "需改进",
+  "grade": "合格",
   "weights": {
     "answer_adaptation": 0.4,
     "source_relevance_at_3": 0.35,
@@ -383,20 +383,22 @@
     {
       "id": "severity",
       "topic": "损伤程度判定",
-      "answer_adaptation": 0.0,
+      "answer_adaptation": 100.0,
       "source_relevance_at_3": 100.0,
       "bilingual_top3_consistency": 100.0,
       "exact_order_match": true,
       "languages": {
         "zh": {
           "question": "轻度、中度和重度脚踝扭伤通常有什么区别？",
-          "answer": "### 总体建议\n先保护受伤脚踝，并根据疼痛、肿胀和负重能力循序渐进地恢复活动。避免忍痛强行训练，也不建议在没有专业建议的情况下长期完全制动。\n\n### 恢复原则\n一般先恢复轻柔活动度和正常步行，再逐步加入力量、平衡以及运动专项训练。如果某一级活动导致疼痛或肿胀明显增加，应退回较轻的强度。\n\n### 安全提示\n请结合下方检索出的官方英文原文核对。症状持续、加重、无法负重或反复不稳时，应咨询医生或物理治疗师。",
-          "answer_score": 0.0,
+          "answer": "## 脚踝扭伤的严重程度\n\n### 常见的三级划分\n- **轻度（1级）**：韧带受到牵拉或有微小纤维损伤，通常只有轻度压痛和肿胀，一般仍能负重，检查时通常没有明显不稳。\n- **中度（2级）**：韧带部分撕裂，疼痛、肿胀和瘀青更明显，走路可能疼痛或跛行，也可能出现轻度松弛或不稳。\n- **重度（3级）**：韧带完全撕裂，常有明显肿胀、瘀青和关节不稳，可能无法正常负重或行走。\n\n### 治疗通常如何变化\n轻度损伤多采用保护、逐渐负重和循序康复；中度损伤可能需要护具、行走靴或短期限制活动；重度损伤应由医生评估，可能需要更长时间固定和专业康复。即使是完全撕裂，很多单纯外侧踝扭伤仍可通过适当固定和康复治疗，手术通常只用于持续不稳、合并损伤或保守治疗失败等情况。\n\n### 不要自行确定等级\n疼痛和肿胀程度不能可靠排除骨折或其他损伤。无法走四步、骨性压痛明显、脚踝变形、麻木发冷，或症状持续加重时，应接受医疗评估；医生可能根据检查决定是否需要X光、超声或MRI。",
+          "answer_score": 100.0,
           "answer_checks": {
-            "expected_intent_found": false,
-            "single_relevant_intent": false,
-            "answer_concept_coverage": 0.0,
-            "detected_headings": []
+            "expected_intent_found": true,
+            "single_relevant_intent": true,
+            "answer_concept_coverage": 100.0,
+            "detected_headings": [
+              "## 脚踝扭伤的严重程度"
+            ]
           },
           "source_score_at_3": 100.0,
           "sources": [
@@ -414,9 +416,9 @@
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8888,
+              "chunk_id": "43_Cleveland_Clinic_Sprained_Ankle__chunk_003",
+              "institution": "Cleveland Clinic",
+              "similarity": 0.8945,
               "matched_terms": [
                 "mild",
                 "moderate",
@@ -424,24 +426,28 @@
               ]
             },
             {
-              "chunk_id": "07_PMC12481793_Physical_Therapy_Meta_Analysis__chunk_004",
-              "institution": "BMC Musculoskeletal Disorders (indexed in PubMed Central)",
-              "similarity": 0.8852,
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
+              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
+              "similarity": 0.8888,
               "matched_terms": [
-                "grade i"
+                "mild",
+                "moderate",
+                "severe"
               ]
             }
           ]
         },
         "en": {
           "question": "What are the usual differences between mild, moderate, and severe ankle sprains?",
-          "answer": "### 总体建议\n先保护受伤脚踝，并根据疼痛、肿胀和负重能力循序渐进地恢复活动。避免忍痛强行训练，也不建议在没有专业建议的情况下长期完全制动。\n\n### 恢复原则\n一般先恢复轻柔活动度和正常步行，再逐步加入力量、平衡以及运动专项训练。如果某一级活动导致疼痛或肿胀明显增加，应退回较轻的强度。\n\n### 安全提示\n请结合下方检索出的官方英文原文核对。症状持续、加重、无法负重或反复不稳时，应咨询医生或物理治疗师。",
-          "answer_score": 0.0,
+          "answer": "## 脚踝扭伤的严重程度\n\n### 常见的三级划分\n- **轻度（1级）**：韧带受到牵拉或有微小纤维损伤，通常只有轻度压痛和肿胀，一般仍能负重，检查时通常没有明显不稳。\n- **中度（2级）**：韧带部分撕裂，疼痛、肿胀和瘀青更明显，走路可能疼痛或跛行，也可能出现轻度松弛或不稳。\n- **重度（3级）**：韧带完全撕裂，常有明显肿胀、瘀青和关节不稳，可能无法正常负重或行走。\n\n### 治疗通常如何变化\n轻度损伤多采用保护、逐渐负重和循序康复；中度损伤可能需要护具、行走靴或短期限制活动；重度损伤应由医生评估，可能需要更长时间固定和专业康复。即使是完全撕裂，很多单纯外侧踝扭伤仍可通过适当固定和康复治疗，手术通常只用于持续不稳、合并损伤或保守治疗失败等情况。\n\n### 不要自行确定等级\n疼痛和肿胀程度不能可靠排除骨折或其他损伤。无法走四步、骨性压痛明显、脚踝变形、麻木发冷，或症状持续加重时，应接受医疗评估；医生可能根据检查决定是否需要X光、超声或MRI。",
+          "answer_score": 100.0,
           "answer_checks": {
-            "expected_intent_found": false,
-            "single_relevant_intent": false,
-            "answer_concept_coverage": 0.0,
-            "detected_headings": []
+            "expected_intent_found": true,
+            "single_relevant_intent": true,
+            "answer_concept_coverage": 100.0,
+            "detected_headings": [
+              "## 脚踝扭伤的严重程度"
+            ]
           },
           "source_score_at_3": 100.0,
           "sources": [
@@ -459,9 +465,9 @@
               ]
             },
             {
-              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
-              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
-              "similarity": 0.8888,
+              "chunk_id": "43_Cleveland_Clinic_Sprained_Ankle__chunk_003",
+              "institution": "Cleveland Clinic",
+              "similarity": 0.8945,
               "matched_terms": [
                 "mild",
                 "moderate",
@@ -469,11 +475,13 @@
               ]
             },
             {
-              "chunk_id": "07_PMC12481793_Physical_Therapy_Meta_Analysis__chunk_004",
-              "institution": "BMC Musculoskeletal Disorders (indexed in PubMed Central)",
-              "similarity": 0.8852,
+              "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
+              "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
+              "similarity": 0.8888,
               "matched_terms": [
-                "grade i"
+                "mild",
+                "moderate",
+                "severe"
               ]
             }
           ]
@@ -501,6 +509,15 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
+              "chunk_id": "44_UCSF_Health_Ankle_Sprain__chunk_005",
+              "institution": "UCSF Health",
+              "similarity": 0.8866,
+              "matched_terms": [
+                "walking",
+                "pain"
+              ]
+            },
+            {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
               "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
               "similarity": 0.8844,
@@ -512,14 +529,6 @@
               "chunk_id": "08_Alder_Hey_NHS_Ankle_Foot_Sprain__chunk_003",
               "institution": "Alder Hey Children's NHS Foundation Trust",
               "similarity": 0.8817,
-              "matched_terms": [
-                "walking"
-              ]
-            },
-            {
-              "chunk_id": "30_WWL_NHS_Ankle_Sprain_Rehab__chunk_002",
-              "institution": "Wrightington, Wigan and Leigh Teaching Hospitals NHS Foundation Trust",
-              "similarity": 0.8816,
               "matched_terms": [
                 "walking"
               ]
@@ -539,6 +548,15 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
+              "chunk_id": "44_UCSF_Health_Ankle_Sprain__chunk_005",
+              "institution": "UCSF Health",
+              "similarity": 0.8866,
+              "matched_terms": [
+                "walking",
+                "pain"
+              ]
+            },
+            {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_014",
               "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
               "similarity": 0.8844,
@@ -553,14 +571,6 @@
               "matched_terms": [
                 "walking"
               ]
-            },
-            {
-              "chunk_id": "30_WWL_NHS_Ankle_Sprain_Rehab__chunk_002",
-              "institution": "Wrightington, Wigan and Leigh Teaching Hospitals NHS Foundation Trust",
-              "similarity": 0.8816,
-              "matched_terms": [
-                "walking"
-              ]
             }
           ]
         }
@@ -570,7 +580,7 @@
       "id": "recovery-time",
       "topic": "恢复时间",
       "answer_adaptation": 80.0,
-      "source_relevance_at_3": 66.7,
+      "source_relevance_at_3": 83.3,
       "bilingual_top3_consistency": 0.0,
       "exact_order_match": false,
       "languages": {
@@ -628,7 +638,7 @@
               "## 如何处理肿胀及安全冷敷"
             ]
           },
-          "source_score_at_3": 66.7,
+          "source_score_at_3": 100.0,
           "sources": [
             {
               "chunk_id": "36_Leeds_NHS_Soft_Tissue_Ankle_Injuries__chunk_004",
@@ -639,6 +649,14 @@
               ]
             },
             {
+              "chunk_id": "44_UCSF_Health_Ankle_Sprain__chunk_005",
+              "institution": "UCSF Health",
+              "similarity": 0.9077,
+              "matched_terms": [
+                "heal"
+              ]
+            },
+            {
               "chunk_id": "01_PAH_NHS_Ankle_Sprain_Patient_Leaflet__chunk_001",
               "institution": "The Princess Alexandra Hospital NHS Trust",
               "similarity": 0.9076,
@@ -646,12 +664,6 @@
                 "weeks",
                 "heal"
               ]
-            },
-            {
-              "chunk_id": "14_UHSussex_NHS_Ankle_Sprain_No_Followup__chunk_003",
-              "institution": "University Hospitals Sussex NHS Foundation Trust",
-              "similarity": 0.906,
-              "matched_terms": []
             }
           ]
         }
@@ -781,7 +793,7 @@
             {
               "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_006",
               "institution": "Frontiers in Medicine (indexed in PubMed Central)",
-              "similarity": 0.8829,
+              "similarity": 0.8832,
               "matched_terms": []
             }
           ]
@@ -865,11 +877,10 @@
               ]
             },
             {
-              "chunk_id": "30_WWL_NHS_Ankle_Sprain_Rehab__chunk_003",
-              "institution": "Wrightington, Wigan and Leigh Teaching Hospitals NHS Foundation Trust",
-              "similarity": 0.8327,
+              "chunk_id": "46_Stanford_Health_Care_Ankle_Sprain_Treatment__chunk_003",
+              "institution": "Stanford Health Care",
+              "similarity": 0.8337,
               "matched_terms": [
-                "ice",
                 "elevation",
                 "swelling"
               ]

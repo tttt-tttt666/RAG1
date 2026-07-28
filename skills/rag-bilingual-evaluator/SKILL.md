@@ -43,9 +43,16 @@ Run a deterministic 10-pair/20-query regression suite and report one composite s
 Keep scoring deterministic and offline after the embedding model is cached.
 Do not translate source documents.
 
-## GitHub Automation
+## Pre-publish review gate
 
-Use `.github/workflows/rag-evaluation.yml` in the target repository to run the
-suite after every push. Upload JSON and Markdown reports as workflow artifacts
-and write the summary to the GitHub Actions job summary. Do not auto-commit
-reports from the workflow because that can create a push loop.
+After every local change to RAG code, prompts, chunks, embeddings, ranking, or
+answer logic:
+
+1. Run the evaluation locally before saving the update to GitHub.
+2. Present the scores, regressions, and failed cases to the user.
+3. Ask whether the user wants to keep this update and upload it.
+4. Do not commit or upload the update unless the user explicitly confirms.
+
+Keep `.github/workflows/rag-evaluation.yml` available only as a manually
+triggered verification workflow. Do not run it automatically on every push,
+and do not auto-commit reports from the workflow.

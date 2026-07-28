@@ -96,6 +96,54 @@ def assess_question_scope(question: str) -> dict:
     }
 
 
+def assess_ankle_risk(question: str) -> dict:
+    """Classify a possible ankle-injury warning signal without diagnosing it."""
+    response = _client().chat.completions.create(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "你是脚踝损伤患者教育系统的风险分级器，不进行诊断。"
+                    "只有在文本已经命中潜在危险症状同义词后才会调用你。"
+                    "将风险分为：emergency（明显变形、开放伤口、足部发冷发紫、"
+                    "感觉丧失等可能威胁肢体或需要立即急诊的表现）；"
+                    "urgent_review（不能负重或走四步、严重或持续加重的疼痛肿胀等，"
+                    "可先保护、停止运动和减少负重，但应尽快或当日医疗评估）；"
+                    "self_care（语境并未描述当前危险症状，可提供一般处理及观察建议）。"
+                    "必须结合完整语义，区分否定、假设、询问定义和患者正在出现症状。"
+                    "不得因为单个关键词自动判为 emergency，也不得把明确的 emergency "
+                    "表现降级。只输出JSON对象，不要输出Markdown。"
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    '输出格式：{"risk_level":"emergency、urgent_review或self_care",'
+                    '"reason":"简短中文原因","immediate_action":"一条安全的立即措施"}。\n\n'
+                    f"问题：{question}"
+                ),
+            },
+        ],
+        response_format={"type": "json_object"},
+        stream=False,
+        extra_body={"thinking": {"type": "disabled"}},
+    )
+    content = response.choices[0].message.content
+    if not content or not content.strip():
+        raise RuntimeError("DeepSeek 返回了空的风险判断")
+    result = json.loads(content)
+    risk_level = str(result.get("risk_level", "")).strip()
+    if risk_level not in {"emergency", "urgent_review", "self_care"}:
+        raise RuntimeError("DeepSeek 风险判断包含无效的 risk_level")
+    return {
+        "risk_level": risk_level,
+        "reason": str(result.get("reason", "未提供原因")).strip(),
+        "immediate_action": str(result.get("immediate_action", "")).strip(),
+        "source": "DeepSeek API",
+    }
+
+
 def translate_to_chinese(text: str) -> str:
     """Translate an English medical passage without adding medical advice."""
     response = _client().chat.completions.create(

@@ -13,6 +13,7 @@ from sentence_transformers import CrossEncoder, SentenceTransformer
 
 from deepseek_translator import (
     api_is_configured,
+    assess_ankle_risk,
     assess_question_scope,
     translate_to_chinese,
 )
@@ -29,23 +30,80 @@ CROSS_ENCODER_MIN_SCORE = 0.50
 
 WARNING_TERMS = (
     "畸形",
+    "变形",
     "无法负重",
+    "不能负重",
+    "不能承重",
+    "无法承重",
+    "走不了四步",
     "不能走",
+    "无法行走",
     "麻木",
     "失去知觉",
+    "没有感觉",
     "发紫",
+    "变紫",
     "发冷",
+    "冰冷",
     "剧烈疼痛",
+    "疼痛加重",
+    "肿胀加重",
+    "开放性伤口",
+    "伤口开放",
     "呼吸困难",
     "高烧",
     "deformity",
     "cannot walk",
     "unable to bear weight",
+    "cannot bear weight",
+    "cannot take four steps",
     "numb",
+    "loss of sensation",
     "cold foot",
     "blue foot",
     "severe pain",
+    "worsening pain",
+    "worsening swelling",
+    "open wound",
     "difficulty breathing",
+)
+
+EMERGENCY_TERMS = (
+    "畸形",
+    "变形",
+    "失去知觉",
+    "没有感觉",
+    "发紫",
+    "变紫",
+    "发冷",
+    "冰冷",
+    "开放性伤口",
+    "伤口开放",
+    "deformity",
+    "loss of sensation",
+    "cold foot",
+    "blue foot",
+    "open wound",
+)
+
+URGENT_REVIEW_TERMS = (
+    "无法负重",
+    "不能负重",
+    "不能承重",
+    "无法承重",
+    "走不了四步",
+    "不能走",
+    "无法行走",
+    "剧烈疼痛",
+    "疼痛加重",
+    "肿胀加重",
+    "unable to bear weight",
+    "cannot bear weight",
+    "cannot take four steps",
+    "cannot walk",
+    "severe pain",
+    "worsening pain",
+    "worsening swelling",
 )
 
 BASKETBALL_FUNCTION_MARKERS = (
@@ -730,6 +788,39 @@ def cached_question_scope_assessment(question: str) -> dict:
     return assess_question_scope(question)
 
 
+@st.cache_data(show_spinner=False, ttl=3600)
+def cached_risk_assessment(question: str) -> dict:
+    """Cache the second-stage API risk decision for an identical question."""
+    return assess_ankle_risk(question)
+
+
+def local_risk_assessment(question: str) -> dict:
+    """Conservative semantic fallback when the risk API is unavailable."""
+    normalized = question.casefold()
+    emergency_hits = [term for term in EMERGENCY_TERMS if term in normalized]
+    urgent_hits = [term for term in URGENT_REVIEW_TERMS if term in normalized]
+    if emergency_hits:
+        return {
+            "risk_level": "emergency",
+            "reason": f"命中需要立即评估的表现：{emergency_hits[0]}。",
+            "immediate_action": "停止运动、保护脚踝并立即寻求急诊评估。",
+            "source": "本地保守分级",
+        }
+    if urgent_hits:
+        return {
+            "risk_level": "urgent_review",
+            "reason": f"命中需要尽快医疗评估的表现：{urgent_hits[0]}。",
+            "immediate_action": "停止运动、保护脚踝、减少负重，并尽快接受医疗评估。",
+            "source": "本地保守分级",
+        }
+    return {
+        "risk_level": "self_care",
+        "reason": "没有识别到需要立即或尽快就医的当前危险表现。",
+        "immediate_action": "可按一般扭伤原则处理并观察症状变化。",
+        "source": "本地保守分级",
+    }
+
+
 def local_question_scope_assessment(question: str) -> dict:
     """Conservative offline fallback when the admission API is unavailable."""
     normalized = question.casefold()
@@ -814,9 +905,23 @@ def generate_detailed_chinese_answer(
     warning: bool,
     question_type: str | None = None,
     question_category: str | None = None,
+    risk_level: str | None = None,
 ) -> str:
     """Return a detailed, conservative Chinese answer from medical templates."""
-    if warning:
+    if warning and risk_level == "urgent_review":
+        return (
+            "### 现在先怎么做\n"
+            "停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，"
+            "休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n"
+            "### 就医建议\n"
+            "这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。"
+            "建议尽快或当日联系医生、急诊门诊或骨科进行评估；"
+            "在明确能够安全负重前，不要强行走路或恢复训练。\n\n"
+            "### 如果出现以下变化\n"
+            "若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，"
+            "应立即寻求急诊帮助。"
+        )
+    if warning and risk_level == "emergency":
         return (
             "### 首要建议\n"
             "你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，"
@@ -1318,11 +1423,44 @@ if active_question:
         f"· 问题类型：{scope_assessment.get('question_type', 'other')} "
         f"· 判断来源：{scope_assessment['source']}"
     )
-    warning_detected = contains_warning_term(active_question)
-    if warning_detected:
+    warning_candidate = contains_warning_term(active_question)
+    risk_assessment = {
+        "risk_level": "self_care",
+        "reason": "未命中潜在危险症状表达。",
+        "immediate_action": "",
+        "source": "本地关键词初筛",
+    }
+    if warning_candidate:
+        if api_is_configured():
+            try:
+                with st.spinner("正在对潜在危险症状进行第二阶段风险判断……"):
+                    risk_assessment = cached_risk_assessment(active_question)
+            except Exception as error:
+                risk_assessment = local_risk_assessment(active_question)
+                st.warning(
+                    "API 风险分级暂时不可用，已启用本地保守分级。"
+                    f"错误信息：{error}"
+                )
+        else:
+            risk_assessment = local_risk_assessment(active_question)
+    warning_detected = risk_assessment["risk_level"] in {
+        "emergency",
+        "urgent_review",
+    }
+    if risk_assessment["risk_level"] == "emergency":
         st.error(
-            "你的描述可能包含需要专业医疗评估的情况。"
-            "请停止运动，并及时联系医生、急诊或当地紧急医疗服务。"
+            "风险分级：需要立即医疗评估。请停止运动、避免继续负重，"
+            "并立即联系急诊或当地紧急医疗服务。"
+        )
+    elif risk_assessment["risk_level"] == "urgent_review":
+        st.warning(
+            "风险分级：可先保护脚踝、停止运动并减少负重，"
+            "同时建议尽快或当日接受医疗评估。"
+        )
+    if warning_candidate:
+        st.caption(
+            f"风险判断来源：{risk_assessment['source']} · "
+            f"原因：{risk_assessment['reason']}"
         )
 
     active_reranker = None
@@ -1398,6 +1536,7 @@ if active_question:
             warning_detected,
             scope_assessment.get("question_type"),
             scope_assessment.get("category"),
+            risk_assessment.get("risk_level"),
         )
     )
     st.caption(

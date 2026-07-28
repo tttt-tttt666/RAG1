@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import numpy as np
@@ -86,15 +87,93 @@ def retrieve(
     query_prefix: str,
     top_k: int = 3,
 ) -> list[tuple[float, dict]]:
-    prefixed_query = query_prefix + query
+    retrieval_query = canonicalize_retrieval_query(query)
+    prefixed_query = query_prefix + retrieval_query
     query_vector = model.encode(
         [prefixed_query],
         convert_to_numpy=True,
         normalize_embeddings=True,
     )[0]
     scores = embeddings @ query_vector
-    top_indices = np.argsort(scores)[-top_k:][::-1]
-    return [(float(scores[index]), chunks[index]) for index in top_indices]
+    ranked_indices = np.argsort(scores)[::-1]
+
+    # Prefer useful body text from different documents. Research PDFs contain
+    # long bibliographies whose repeated terms can otherwise outrank actual
+    # patient guidance.
+    results: list[tuple[float, dict]] = []
+    seen_documents: set[str] = set()
+    for index in ranked_indices:
+        chunk = chunks[int(index)]
+        if is_low_information_chunk(chunk["text"]):
+            continue
+        document_id = chunk["document_id"]
+        if document_id in seen_documents:
+            continue
+        results.append((float(scores[index]), chunk))
+        seen_documents.add(document_id)
+        if len(results) == top_k:
+            break
+    return results
+
+
+def canonicalize_retrieval_query(query: str) -> str:
+    """Map bilingual domain intents to the same English retrieval query."""
+    normalized = query.casefold()
+    intent_queries = (
+        (
+            ("return to sport", "returning to", "running", "basketball", "恢复运动", "恢复跑步", "打篮球"),
+            "ankle sprain criteria for return to running and sport: pain free, no swelling, full range of motion, strength, balance, agility and sport-specific drills",
+        ),
+        (
+            ("x-ray", "x ray", "hospital", "doctor", "医院", "就医", "拍片", "x光"),
+            "ankle sprain red flags and criteria for medical assessment or x-ray",
+        ),
+        (
+            ("range of motion", "strengthening", "balance exercise", "康复训练", "活动度", "力量训练", "平衡训练"),
+            "ankle sprain rehabilitation progression: range of motion, strengthening, balance and functional exercises",
+        ),
+        (
+            ("weight bearing", "walking normally", "负重", "正常走路"),
+            "ankle sprain progression to weight bearing and normal walking without pain or limping",
+        ),
+        (
+            ("mild", "moderate", "severe", "grade", "轻度", "中度", "重度", "损伤程度"),
+            "ankle sprain severity grading: mild moderate severe symptoms and functional limitations",
+        ),
+        (
+            ("brace", "bracing", "taping", "护具", "护踝", "贴扎"),
+            "ankle brace or taping after ankle sprain during rehabilitation and return to sport",
+        ),
+        (
+            ("prevent", "another ankle sprain", "再次扭伤", "预防复发"),
+            "prevent recurrent ankle sprain with balance training, strengthening, bracing and neuromuscular exercise",
+        ),
+    )
+    matched = [
+        canonical
+        for terms, canonical in intent_queries
+        if any(term in normalized for term in terms)
+    ]
+    return " ".join(matched) if matched else query
+
+
+def is_low_information_chunk(text: str) -> bool:
+    """Detect bibliography and publication-administration chunks."""
+    normalized = " ".join(text.casefold().split())
+    doi_count = normalized.count("doi:")
+    citation_years = len(re.findall(r"\((?:19|20)\d{2}\)", normalized))
+    administrative_markers = (
+        "all authors read and approved",
+        "author contributions",
+        "competing interests",
+        "publisher's note",
+        "references 1.",
+    )
+    return (
+        doi_count >= 2
+        or citation_years >= 4
+        or any(marker in normalized for marker in administrative_markers)
+    )
 
 
 def contains_warning_term(query: str) -> bool:

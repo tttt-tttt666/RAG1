@@ -9,6 +9,11 @@ The original English medical text is extracted without translation or
 paraphrasing, split into approximately 500-800 character chunks, and indexed
 with SQLite FTS5.
 
+Dense retrieval uses `intfloat/multilingual-e5-base` for Chinese-English
+cross-language search. The embedding pipeline temporarily prefixes source
+chunks with `passage: ` and user questions with `query: `, as required by E5;
+the stored source text itself remains unchanged.
+
 ## Contents
 
 - `output/pdf/ankle_sprain_patient_education/`: source PDFs, official-page PDF snapshots, and source metadata

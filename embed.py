@@ -16,7 +16,10 @@ from sentence_transformers import SentenceTransformer
 ROOT = Path(__file__).resolve().parent
 CHUNKS_PATH = ROOT / "index" / "ankle_sprain" / "chunks.jsonl"
 OUTPUT_DIR = ROOT / "index" / "ankle_sprain" / "embeddings"
-DEFAULT_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+MODEL_CACHE_DIR = ROOT / ".cache" / "huggingface" / "hub"
+DEFAULT_MODEL = "intfloat/multilingual-e5-base"
+QUERY_PREFIX = "query: "
+PASSAGE_PREFIX = "passage: "
 
 
 def sha256(path: Path) -> str:
@@ -43,9 +46,12 @@ def main() -> None:
 
     chunks = load_chunks()
     chunk_ids = [chunk["chunk_id"] for chunk in chunks]
-    texts = [chunk["text"] for chunk in chunks]
+    # Multilingual E5 is trained to distinguish retrieval questions from
+    # candidate passages through these English prefixes, regardless of the
+    # language of the text that follows.
+    texts = [PASSAGE_PREFIX + chunk["text"] for chunk in chunks]
 
-    model = SentenceTransformer(args.model)
+    model = SentenceTransformer(args.model, cache_folder=str(MODEL_CACHE_DIR))
     embeddings = model.encode(
         texts,
         batch_size=args.batch_size,
@@ -76,6 +82,8 @@ def main() -> None:
         "embedding_count": int(embeddings.shape[0]),
         "dtype": str(embeddings.dtype),
         "normalized": True,
+        "query_prefix": QUERY_PREFIX,
+        "passage_prefix": PASSAGE_PREFIX,
         "minimum_l2_norm": float(norms.min()),
         "maximum_l2_norm": float(norms.max()),
         "source_chunks": str(CHUNKS_PATH.relative_to(ROOT)),

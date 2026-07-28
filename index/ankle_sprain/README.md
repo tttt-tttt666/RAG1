@@ -53,3 +53,5 @@ The SQLite index is lexical rather than semantic. For vector retrieval, generate
 embeddings from the `text` field in `chunks.jsonl` while retaining all metadata.
 
 Run `python embed.py` from the project root to build the local semantic index.
+The current embedding model is `intfloat/multilingual-e5-base`: source chunks
+are encoded with the `passage: ` prefix and questions with `query: `.

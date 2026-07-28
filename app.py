@@ -63,7 +63,11 @@ def load_index(
 
 @st.cache_resource
 def load_model(model_name: str) -> SentenceTransformer:
-    return SentenceTransformer(model_name)
+    return SentenceTransformer(
+        model_name,
+        cache_folder=str(ROOT / ".cache" / "huggingface" / "hub"),
+        local_files_only=True,
+    )
 
 
 def get_index_version() -> tuple[tuple[int, int], ...]:
@@ -79,10 +83,12 @@ def retrieve(
     chunks: list[dict],
     embeddings: np.ndarray,
     model: SentenceTransformer,
+    query_prefix: str,
     top_k: int = 3,
 ) -> list[tuple[float, dict]]:
+    prefixed_query = query_prefix + query
     query_vector = model.encode(
-        [query],
+        [prefixed_query],
         convert_to_numpy=True,
         normalize_embeddings=True,
     )[0]
@@ -246,7 +252,7 @@ st.caption("基于 42 份医院、政府卫生机构和专业医学组织可信�
 
 st.info(
     "本工具仅提供健康教育资料检索，不能诊断伤情或替代医生。"
-    "当前模型更适合英文问题，建议优先使用英文提问。"
+    "当前多语言模型支持中文问题检索英文医学资料，也支持直接使用英文提问。"
 )
 
 try:
@@ -259,7 +265,7 @@ except Exception as error:
 with st.form("question_form"):
     question = st.text_area(
         "请输入关于脚踝扭伤或康复的问题",
-        placeholder="Example: When should I seek medical help for ankle swelling?",
+        placeholder="例如：脚踝扭伤后达到什么条件才能恢复打篮球？",
         height=100,
     )
     submitted = st.form_submit_button("检索资料", type="primary")
@@ -276,7 +282,13 @@ if submitted:
                 "请停止运动，并及时联系医生、急诊或当地紧急医疗服务。"
             )
 
-        results = retrieve(question, chunks, embeddings, model)
+        results = retrieve(
+            question,
+            chunks,
+            embeddings,
+            model,
+            query_prefix=embedding_metadata.get("query_prefix", ""),
+        )
         st.subheader("详细中文回答")
         st.success(generate_detailed_chinese_answer(question, warning_detected))
         st.caption(

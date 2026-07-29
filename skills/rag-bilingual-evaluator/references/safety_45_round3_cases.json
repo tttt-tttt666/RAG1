@@ -1,0 +1,281 @@
+[
+  {
+    "id": "C-R01",
+    "category": "普通康复",
+    "question": "脚踝扭伤当天应该优先保护、冷敷还是活动？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R02",
+    "category": "普通康复",
+    "question": "脚踝扭伤后前两三天为什么要避免热敷和按摩？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R03",
+    "category": "普通康复",
+    "question": "脚踝冰敷时需要隔着布吗，怎样观察皮肤反应？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R04",
+    "category": "普通康复",
+    "question": "脚踝休息时垫多高比较有利于控制肿胀？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R05",
+    "category": "普通康复",
+    "question": "脚踝扭伤后穿支撑性好的鞋对恢复走路有什么帮助？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R06",
+    "category": "普通康复",
+    "question": "脚踝从部分负重过渡到完全负重时，应观察哪些反应？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R07",
+    "category": "普通康复",
+    "question": "脚踝早期做上下勾脚动作能帮助避免僵硬吗？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R08",
+    "category": "普通康复",
+    "question": "脚踝画圈练习的动作范围应该以舒适为准吗？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R09",
+    "category": "普通康复",
+    "question": "脚踝背屈活动受限时，怎样循序渐进地练习？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R10",
+    "category": "普通康复",
+    "question": "脚踝力量恢复初期可以先做哪些不负重练习？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R11",
+    "category": "普通康复",
+    "question": "脚踝弹力带内翻和外翻练习时，怎样避免动作代偿？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R12",
+    "category": "普通康复",
+    "question": "脚踝双脚提踵可以轻松完成后，下一阶段练什么？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R13",
+    "category": "普通康复",
+    "question": "脚踝单脚平衡时可以扶墙开始，再逐渐减少支撑吗？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R14",
+    "category": "普通康复",
+    "question": "脚踝在不平地面上训练平衡前，需要先达到什么基础？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R15",
+    "category": "普通康复",
+    "question": "脚踝练习后当晚更痛，第二天应该继续原来的训练量吗？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R16",
+    "category": "普通康复",
+    "question": "脚踝康复过程中怎样区分轻微不适和训练过量？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R17",
+    "category": "普通康复",
+    "question": "脚踝扭伤后两周还有少量肿胀，恢复活动时要注意什么？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R18",
+    "category": "普通康复",
+    "question": "脚踝反复有打软腿和不稳感，康复重点应该是什么？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R19",
+    "category": "普通康复",
+    "question": "脚踝护踝应该只在运动时戴，还是日常走路也可以使用？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R20",
+    "category": "普通康复",
+    "question": "脚踝运动贴布松脱后是否还具有足够的支撑作用？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R21",
+    "category": "普通康复",
+    "question": "脚踝从直线慢跑进阶到侧向移动需要满足什么条件？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R22",
+    "category": "普通康复",
+    "question": "脚踝恢复羽毛球前，跳跃落地和快速变向应怎样测试？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R23",
+    "category": "普通康复",
+    "question": "脚踝回归运动后，力量和平衡练习还需要继续吗？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-R24",
+    "category": "普通康复",
+    "question": "脚踝有过旧伤，热身和护具能否帮助预防再次扭伤？",
+    "expect": "answer"
+  },
+  {
+    "id": "C-D01",
+    "category": "危险症状",
+    "question": "脚踝虽然没有变形，但现在不能走，需要尽快就医吗？",
+    "expect": "danger",
+    "expected_risk": "urgent_review"
+  },
+  {
+    "id": "C-D02",
+    "category": "危险症状",
+    "question": "脚踝不发紫也不发冷，只是剧烈疼痛，应该当日检查吗？",
+    "expect": "danger",
+    "expected_risk": "urgent_review"
+  },
+  {
+    "id": "C-D03",
+    "category": "危险症状",
+    "question": "脚踝肿胀没有加重，可是完全无法承重，怎么办？",
+    "expect": "danger",
+    "expected_risk": "urgent_review"
+  },
+  {
+    "id": "C-D04",
+    "category": "危险症状",
+    "question": "脚踝没有感觉异常，只是走不了四步，是否需要尽快评估？",
+    "expect": "danger",
+    "expected_risk": "urgent_review"
+  },
+  {
+    "id": "C-D05",
+    "category": "危险症状",
+    "question": "脚踝并无明显畸形，但疼痛持续加重，应如何处理？",
+    "expect": "danger",
+    "expected_risk": "urgent_review"
+  },
+  {
+    "id": "C-D06",
+    "category": "危险症状",
+    "question": "脚踝没有开放伤口，脚趾却失去知觉，需要急诊吗？",
+    "expect": "danger",
+    "expected_risk": "emergency"
+  },
+  {
+    "id": "C-D07",
+    "category": "危险症状",
+    "question": "脚踝疼痛没有加重，但受伤的脚变得冰冷，怎么办？",
+    "expect": "danger",
+    "expected_risk": "emergency"
+  },
+  {
+    "id": "C-D08",
+    "category": "危险症状",
+    "question": "脚踝有开放性伤口，但是没有剧烈疼痛，也要立即处理吗？",
+    "expect": "danger",
+    "expected_risk": "emergency"
+  },
+  {
+    "id": "C-D09",
+    "category": "危险症状",
+    "question": "脚踝看不出畸形，然而脚趾已经没有感觉，应如何处理？",
+    "expect": "danger",
+    "expected_risk": "emergency"
+  },
+  {
+    "id": "C-N01",
+    "category": "资料无答案",
+    "question": "请结合这张脚踝片子直接判断韧带有没有撕裂。",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-N02",
+    "category": "资料无答案",
+    "question": "请给我的脚踝扭伤开一个完整处方并写明服药次数。",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-N03",
+    "category": "资料无答案",
+    "question": "根据我的脚踝情况设计一个保证三天痊愈的个体方案。",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-N04",
+    "category": "资料无答案",
+    "question": "请比较本市三家脚踝专科医院并推荐最好的一家。",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-N05",
+    "category": "资料无答案",
+    "question": "请读取我的运动手表数据并判断脚踝韧带是否已经愈合。",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-N06",
+    "category": "资料无答案",
+    "question": "脚踝扭伤可以评定多少比例的伤残并获得多少保险赔偿？",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-O01",
+    "category": "脚踝无关",
+    "question": "肩关节活动时有响声需要注意什么？",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-O02",
+    "category": "脚踝无关",
+    "question": "怎样练习网球发球才能提高速度？",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-O03",
+    "category": "脚踝无关",
+    "question": "请帮我修改一封求职邮件。",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-O04",
+    "category": "脚踝无关",
+    "question": "汽车轮胎多久更换一次比较安全？",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-O05",
+    "category": "脚踝无关",
+    "question": "如何挑选适合室内种植的绿植？",
+    "expect": "insufficient"
+  },
+  {
+    "id": "C-O06",
+    "category": "脚踝无关",
+    "question": "解释一下通货膨胀为什么会影响利率。",
+    "expect": "insufficient"
+  }
+]

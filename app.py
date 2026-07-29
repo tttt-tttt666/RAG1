@@ -182,6 +182,29 @@ def is_load_response_query(query: str) -> bool:
     return concept_match or any(marker in normalized for marker in fixed_markers)
 
 
+def is_non_weight_bearing_strength_query(query: str) -> bool:
+    """Return whether a question asks for early seated or isometric strengthening."""
+    normalized = query.casefold()
+    strength = any(
+        term in normalized
+        for term in ("力量", "强化", "strength", "strengthening")
+    )
+    unloaded = any(
+        term in normalized
+        for term in (
+            "不负重",
+            "非负重",
+            "坐着",
+            "躺着",
+            "non-weight-bearing",
+            "non weight bearing",
+            "seated",
+            "isometric",
+        )
+    )
+    return strength and unloaded
+
+
 def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
     """Return strict evidence terms for topics prone to keyword-only matches."""
     normalized = query.casefold()
@@ -258,6 +281,15 @@ def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
             "stop",
             "reduce",
             "progress",
+        )
+    if is_non_weight_bearing_strength_query(query):
+        return (
+            "isometric",
+            "resistance band",
+            "theraband",
+            "seated",
+            "strengthening",
+            "resisted",
         )
     if contains_warning_term(query):
         return DANGER_EVIDENCE_TERMS
@@ -568,6 +600,11 @@ def canonicalize_retrieval_query(query: str) -> str:
             "numbness, cold or blue foot, severe or worsening pain, and when to seek "
             "urgent medical assessment"
         )
+    if is_non_weight_bearing_strength_query(query):
+        return (
+            "early ankle strengthening without standing or weight bearing: "
+            "seated isometric exercises and resisted movements using a resistance band"
+        )
     if any(
         marker in normalized
         for marker in (
@@ -814,7 +851,7 @@ def term_is_affirmed(text: str, term: str) -> bool:
         )
         negated = bool(
             re.search(
-                r"(?:没有|并无|未见|看不出|无)(?:明显)?\s*$"
+                r"(?:没有|并无|未见|看不出|无|不)(?:明显)?\s*$"
                 r"|(?:没有|并无|未见|无)(?:明显)?[^，。；;]{1,10}(?:或|和|及|、)\s*$"
                 r"|(?:no|without|not)\s+(?:obvious\s+)?$"
                 r"|(?:no|without|not)\s+[^,.;]{1,20}(?:or|and)\s+$",
@@ -831,7 +868,8 @@ def has_worsening_pain_or_swelling(query: str) -> bool:
     normalized = query.casefold()
     return bool(
         re.search(
-            r"(?:疼痛|痛感)\s*(?:和|或|、|以及)\s*肿胀(?:都|均)?(?:持续)?加重"
+            r"(?:疼痛|痛感|肿胀)(?:持续|明显|逐渐|越来越)?加重"
+            r"|(?:疼痛|痛感)\s*(?:和|或|、|以及)\s*肿胀(?:都|均)?(?:持续)?加重"
             r"|肿胀\s*(?:和|或|、|以及)\s*(?:疼痛|痛感)(?:都|均)?(?:持续)?加重"
             r"|(?:pain|swelling)\s+(?:and|or)\s+(?:pain|swelling)"
             r"\s+(?:is|are|keeps?|continue(?:s)? to)?\s*worsen",
@@ -995,6 +1033,11 @@ def unsupported_request_reason(question: str) -> str | None:
         "注射什么",
         "开哪种药",
         "用药剂量",
+        "开一个完整处方",
+        "开处方",
+        "处方",
+        "服药次数",
+        "用法用量",
         "what dose",
         "how many mg",
         "how much medication",
@@ -1013,6 +1056,9 @@ def unsupported_request_reason(question: str) -> str | None:
         "mri片",
         "x光片",
         "ct图像",
+        "片子",
+        "检查片",
+        "影像资料",
         "uploaded",
         "photo",
         "image",
@@ -1047,6 +1093,16 @@ def unsupported_request_reason(question: str) -> str | None:
     if exact_prediction:
         return "资料只能提供一般恢复范围，不能精确预测个人恢复日期。"
 
+    guaranteed_outcome = (
+        any(term in normalized for term in ("保证", "确保", "承诺", "guarantee"))
+        and any(
+            term in normalized
+            for term in ("痊愈", "治愈", "恢复", "康复", "完全好", "recover", "cure")
+        )
+    )
+    if guaranteed_outcome:
+        return "患者教育资料不能保证个人在指定时间内痊愈或提供疗效承诺。"
+
     provider_terms = (
         "医院",
         "诊所",
@@ -1074,11 +1130,55 @@ def unsupported_request_reason(question: str) -> str | None:
         "appointment",
         "cost",
         "recommend",
+        "推荐",
+        "最好",
+        "最佳",
+        "本市",
+        "当地",
     )
     if any(term in normalized for term in provider_terms) and any(
         term in normalized for term in external_action_terms
     ):
         return "当前资料库不提供本地机构查询、医生推荐、费用信息或预约服务。"
+
+    device_data = (
+        "运动手表",
+        "智能手表",
+        "可穿戴",
+        "设备数据",
+        "手表数据",
+        "wearable",
+        "smartwatch",
+        "device data",
+    )
+    device_judgments = (
+        "判断",
+        "诊断",
+        "愈合",
+        "恢复",
+        "分析",
+        "interpret",
+        "diagnose",
+        "healed",
+        "recovered",
+    )
+    if any(term in normalized for term in device_data) and any(
+        term in normalized for term in device_judgments
+    ):
+        return "当前系统不能读取个人设备数据或据此判断组织是否愈合。"
+
+    legal_financial_terms = (
+        "伤残",
+        "保险赔偿",
+        "保险理赔",
+        "赔偿金额",
+        "工伤认定",
+        "disability rating",
+        "insurance compensation",
+        "insurance claim",
+    )
+    if any(term in normalized for term in legal_financial_terms):
+        return "当前资料库不支持伤残鉴定、工伤认定或保险赔偿判断。"
 
     unsupported_treatments = (
         "针灸",

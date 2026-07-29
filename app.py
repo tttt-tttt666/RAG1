@@ -1311,20 +1311,235 @@ def generate_detailed_chinese_answer(
 
 st.set_page_config(
     page_title="脚踝康复资料助手",
-    page_icon="🦶",
-    layout="centered",
+    page_icon=":material/health_and_safety:",
+    layout="wide",
 )
 
-st.title("脚踝康复资料助手")
-st.caption("基于 55 份医院、政府卫生机构和专业医学组织可信资料的本地语义检索 Demo")
+st.html(
+    """
+    <style>
+      :root {
+        --rag-navy: #07162f;
+        --rag-blue: #1236f5;
+        --rag-cyan: #25d6c8;
+        --rag-ink: #17213a;
+        --rag-muted: #61708f;
+        --rag-surface: #ffffff;
+        --rag-soft: #f3f7ff;
+        --rag-line: #dfe7f4;
+      }
 
+      .stApp {
+        background:
+          radial-gradient(circle at 8% 4%, rgba(37, 214, 200, 0.10), transparent 22rem),
+          linear-gradient(180deg, #f7faff 0%, #ffffff 32rem);
+      }
+
+      [data-testid="stMainBlockContainer"] {
+        max-width: 1120px;
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+      }
+
+      .rag-hero {
+        position: relative;
+        overflow: hidden;
+        min-height: 290px;
+        padding: clamp(28px, 5vw, 62px);
+        border-radius: 28px;
+        color: white;
+        background:
+          radial-gradient(circle at 82% 18%, rgba(37, 214, 200, 0.42), transparent 18%),
+          radial-gradient(circle at 92% 92%, rgba(84, 109, 255, 0.70), transparent 24%),
+          linear-gradient(125deg, #07162f 0%, #1236f5 62%, #07162f 130%);
+        box-shadow: 0 28px 70px rgba(16, 43, 130, 0.22);
+      }
+
+      .rag-hero::after {
+        content: "";
+        position: absolute;
+        right: -7%;
+        top: -20%;
+        width: 46%;
+        aspect-ratio: 1;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 34px rgba(255, 255, 255, 0.035),
+          0 0 0 72px rgba(255, 255, 255, 0.025);
+      }
+
+      .rag-eyebrow {
+        margin: 0 0 16px;
+        color: #a9fff5;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .rag-hero h1 {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        margin: 0;
+        color: white;
+        font-size: clamp(2.25rem, 6vw, 4.3rem);
+        line-height: 1.03;
+        letter-spacing: -0.04em;
+      }
+
+      .rag-hero-copy {
+        position: relative;
+        z-index: 1;
+        max-width: 670px;
+        margin: 20px 0 26px;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: clamp(1rem, 2vw, 1.16rem);
+        line-height: 1.75;
+      }
+
+      .rag-chips {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .rag-chip {
+        padding: 8px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.10);
+        color: white;
+        font-size: 0.82rem;
+        backdrop-filter: blur(10px);
+      }
+
+      .rag-intro {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin: 18px 0 28px;
+      }
+
+      .rag-intro-card {
+        padding: 17px 18px;
+        border: 1px solid var(--rag-line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.86);
+        color: var(--rag-muted);
+        box-shadow: 0 8px 24px rgba(24, 51, 105, 0.06);
+      }
+
+      .rag-intro-card strong {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--rag-ink);
+      }
+
+      .st-key-question_form {
+        margin-top: 8px;
+        padding: clamp(20px, 4vw, 34px);
+        border: 1px solid var(--rag-line);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 18px 48px rgba(24, 51, 105, 0.10);
+      }
+
+      .st-key-question_form textarea {
+        min-height: 128px;
+        border-radius: 16px;
+        background: #f7f9ff;
+        font-size: 1rem;
+        line-height: 1.65;
+      }
+
+      .st-key-question_form [data-testid="stFormSubmitButton"] button {
+        min-height: 48px;
+        border: 0;
+        border-radius: 14px;
+        background: linear-gradient(105deg, var(--rag-blue), #3158ff);
+        box-shadow: 0 12px 24px rgba(18, 54, 245, 0.22);
+        font-weight: 700;
+      }
+
+      [data-testid="stAlert"] {
+        border-radius: 16px;
+      }
+
+      [data-testid="stExpander"] {
+        overflow: hidden;
+        border-color: var(--rag-line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 0 7px 22px rgba(24, 51, 105, 0.055);
+      }
+
+      [data-testid="stCode"] {
+        border-radius: 12px;
+      }
+
+      h2, h3 {
+        color: var(--rag-ink);
+        letter-spacing: -0.025em;
+      }
+
+      @media (max-width: 700px) {
+        [data-testid="stMainBlockContainer"] {
+          padding-top: 1rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .rag-hero {
+          min-height: 0;
+          border-radius: 20px;
+        }
+
+        .rag-hero::after {
+          opacity: 0.5;
+        }
+
+        .rag-intro {
+          grid-template-columns: 1fr;
+        }
+
+        .st-key-question_form {
+          border-radius: 19px;
+        }
+      }
+    </style>
+    """
+)
+
+st.html(
+    """
+    <section class="rag-hero">
+      <p class="rag-eyebrow">Evidence-guided bilingual RAG</p>
+      <h1>脚踝康复资料助手</h1>
+      <p class="rag-hero-copy">
+        用中文或英文提问，从医院、政府卫生机构与专业医学组织资料中检索依据，
+        获得结构清晰、可追溯来源的中文健康教育回答。
+      </p>
+      <div class="rag-chips">
+        <span class="rag-chip">55 份可信资料</span>
+        <span class="rag-chip">中英双语检索</span>
+        <span class="rag-chip">风险分级提醒</span>
+      </div>
+    </section>
+    <section class="rag-intro">
+      <div class="rag-intro-card"><strong>循证检索</strong>回答与原始资料段落同时呈现</div>
+      <div class="rag-intro-card"><strong>双模型模式</strong>快速召回或 CrossEncoder 精排</div>
+      <div class="rag-intro-card"><strong>安全边界</strong>资料不足时拒绝强行生成结论</div>
+    </section>
+    """
+)
 st.info(
     "本工具仅提供健康教育资料检索，不能诊断伤情或替代医生。"
-    "当前多语言模型支持中文问题检索英文医学资料，也支持直接使用英文提问。"
-)
-st.caption(
-    "提交问题后，问题文本会先发送至 DeepSeek API 进行范围判断；"
-    "只有通过准入判断的问题才会进入本地检索与回答流程。"
+    "提交的问题会先进行范围与风险判断，通过后才进入本地检索。",
+    icon=":material/health_and_safety:",
 )
 
 try:
@@ -1334,41 +1549,49 @@ except Exception as error:
     st.error(f"索引加载失败：{error}")
     st.stop()
 
-with st.form("question_form"):
-    search_mode = st.radio(
+with st.form("question_form", border=False):
+    st.subheader("开始提问", anchor=False)
+    st.caption("描述受伤时间、症状、负重能力和你想了解的具体问题，会更容易找到合适资料。")
+    question = st.text_area(
+        "你的问题",
+        placeholder="例如：脚踝扭伤后达到什么条件才能恢复打篮球？",
+        height=128,
+    )
+    search_mode = st.segmented_control(
         "检索模式",
         ("Bi-Encoder 快速检索", "Bi-Encoder + CrossEncoder 精排"),
-        horizontal=True,
+        default="Bi-Encoder 快速检索",
         help=(
             "快速检索只使用现有 E5 向量；精排模式先召回 20 个候选段落，"
             "再让 CrossEncoder 同时阅读问题和段落并重新排序。"
         ),
     )
-    source_threshold = st.slider(
-        "资料显示相关性阈值",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.50,
-        step=0.05,
-        help="低于这个分数的资料段落不会显示。数值越高，筛选越严格。",
+    with st.expander("高级检索设置", icon=":material/tune:"):
+        source_threshold = st.slider(
+            "资料显示相关性阈值",
+            min_value=0.0,
+            max_value=1.0,
+            value=0.50,
+            step=0.05,
+            help="低于这个分数的资料段落不会显示。数值越高，筛选越严格。",
+        )
+        answer_threshold = st.slider(
+            "回答生成相关性阈值",
+            min_value=0.0,
+            max_value=1.0,
+            value=0.60,
+            step=0.05,
+            help=(
+                "如果最佳资料仍低于这个分数，系统不会生成回答或展示资料，"
+                "而是直接提示当前资料不足。"
+            ),
+        )
+    submitted = st.form_submit_button(
+        "检索可信资料",
+        type="primary",
+        icon=":material/search:",
+        width="stretch",
     )
-    answer_threshold = st.slider(
-        "回答生成相关性阈值",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.60,
-        step=0.05,
-        help=(
-            "如果最佳资料仍低于这个分数，系统不会生成回答或展示资料，"
-            "而是直接提示当前资料不足。"
-        ),
-    )
-    question = st.text_area(
-        "请输入关于脚踝扭伤或康复的问题",
-        placeholder="例如：脚踝扭伤后达到什么条件才能恢复打篮球？",
-        height=100,
-    )
-    submitted = st.form_submit_button("检索资料", type="primary")
 
 if submitted:
     question = question.strip()

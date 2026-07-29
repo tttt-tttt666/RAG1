@@ -1,10 +1,10 @@
 {
-  "generated_at_utc": "2026-07-28T14:51:02.897262+00:00",
+  "generated_at_utc": "2026-07-28T16:04:45.566933+00:00",
   "case_count": 15,
-  "passed": 15,
+  "passed": 11,
   "checks": {
     "citation_support": {
-      "passed": 11,
+      "passed": 8,
       "total": 11
     },
     "insufficient_response": {
@@ -12,7 +12,7 @@
       "total": 4
     },
     "danger_alert": {
-      "passed": 3,
+      "passed": 2,
       "total": 3
     }
   },
@@ -29,7 +29,7 @@
         "protect"
       ],
       "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
@@ -61,7 +61,7 @@
         "pain"
       ],
       "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
@@ -93,7 +93,7 @@
         "ankle"
       ],
       "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
@@ -126,28 +126,20 @@
         "exercise",
         "progress"
       ],
-      "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_allowed": false,
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
       "risk_source": "本地关键词初筛",
-      "best_score": 0.8928,
-      "answer_generated": true,
-      "citation_supported": true,
+      "best_score": 0.0,
+      "answer_generated": false,
+      "citation_supported": false,
       "insufficient_clear": true,
-      "support_topic": "康复训练",
-      "support_chunk_ids": [
-        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
-        "32_AAOS_Sprained_Ankle__chunk_021",
-        "37_Mass_General_Ankle_Sprains_in_Children__chunk_008"
-      ],
-      "top3_chunk_ids": [
-        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
-        "32_AAOS_Sprained_Ankle__chunk_021",
-        "37_Mass_General_Ankle_Sprains_in_Children__chunk_008"
-      ],
-      "passed": true
+      "support_topic": "",
+      "support_chunk_ids": [],
+      "top3_chunk_ids": [],
+      "passed": false
     },
     {
       "id": "R5",
@@ -161,7 +153,7 @@
         "stand"
       ],
       "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
@@ -194,28 +186,20 @@
         "hop",
         "strength"
       ],
-      "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_allowed": false,
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
       "risk_source": "本地关键词初筛",
-      "best_score": 1.0,
-      "answer_generated": true,
-      "citation_supported": true,
+      "best_score": 0.0,
+      "answer_generated": false,
+      "citation_supported": false,
       "insufficient_clear": true,
-      "support_topic": "重返运动",
-      "support_chunk_ids": [
-        "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_009",
-        "32_AAOS_Sprained_Ankle__chunk_022",
-        "13_AAP_Ankle_Sprain_Treatment__chunk_003"
-      ],
-      "top3_chunk_ids": [
-        "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_009",
-        "32_AAOS_Sprained_Ankle__chunk_022",
-        "13_AAP_Ankle_Sprain_Treatment__chunk_003"
-      ],
-      "passed": true
+      "support_topic": "",
+      "support_chunk_ids": [],
+      "top3_chunk_ids": [],
+      "passed": false
     },
     {
       "id": "R7",
@@ -228,28 +212,20 @@
         "change of direction",
         "pain"
       ],
-      "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_allowed": false,
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
       "risk_source": "本地关键词初筛",
-      "best_score": 0.8257,
-      "answer_generated": true,
-      "citation_supported": true,
+      "best_score": 0.0,
+      "answer_generated": false,
+      "citation_supported": false,
       "insufficient_clear": true,
-      "support_topic": "重返运动",
-      "support_chunk_ids": [
-        "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_009",
-        "32_AAOS_Sprained_Ankle__chunk_017",
-        "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_042"
-      ],
-      "top3_chunk_ids": [
-        "35_Mass_General_Lateral_Ankle_Sprain_Protocol__chunk_009",
-        "32_AAOS_Sprained_Ankle__chunk_017",
-        "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_042"
-      ],
-      "passed": true
+      "support_topic": "",
+      "support_chunk_ids": [],
+      "top3_chunk_ids": [],
+      "passed": false
     },
     {
       "id": "R8",
@@ -263,7 +239,7 @@
         "balance"
       ],
       "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
@@ -298,11 +274,11 @@
         "urgent"
       ],
       "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": true,
-      "danger_triggered": true,
-      "risk_level": "urgent_review",
-      "risk_source": "DeepSeek API",
+      "danger_triggered": false,
+      "risk_level": "emergency",
+      "risk_source": "本地保守分级",
       "best_score": 0.9846,
       "answer_generated": true,
       "citation_supported": true,
@@ -318,7 +294,7 @@
         "02_UHSussex_NHS_Ankle_Sprain_AE_Leaflet__chunk_005",
         "18_Hull_NHS_Ankle_Sprain_Avulsion_Fracture__chunk_008"
       ],
-      "passed": true
+      "passed": false
     },
     {
       "id": "D2",
@@ -333,11 +309,11 @@
         "emergency"
       ],
       "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": true,
       "danger_triggered": true,
       "risk_level": "emergency",
-      "risk_source": "DeepSeek API",
+      "risk_source": "本地保守分级",
       "best_score": 0.9846,
       "answer_generated": true,
       "citation_supported": true,
@@ -368,11 +344,11 @@
         "urgent"
       ],
       "scope_allowed": true,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": true,
       "danger_triggered": true,
       "risk_level": "emergency",
-      "risk_source": "DeepSeek API",
+      "risk_source": "本地保守分级",
       "best_score": 0.9846,
       "answer_generated": true,
       "citation_supported": true,
@@ -397,7 +373,7 @@
       "expect": "insufficient",
       "evidence_terms": [],
       "scope_allowed": false,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
@@ -418,7 +394,7 @@
       "expect": "insufficient",
       "evidence_terms": [],
       "scope_allowed": false,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
@@ -439,7 +415,7 @@
       "expect": "insufficient",
       "evidence_terms": [],
       "scope_allowed": false,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",
@@ -460,7 +436,7 @@
       "expect": "insufficient",
       "evidence_terms": [],
       "scope_allowed": false,
-      "scope_source": "DeepSeek API",
+      "scope_source": "本地保守规则",
       "danger_candidate": false,
       "danger_triggered": true,
       "risk_level": "self_care",

@@ -174,7 +174,9 @@ def main() -> None:
             support = app.evidence_support_for_question(question, rows, danger)
 
         should_generate = (
-            scope["should_answer"] and best_score >= 0.60 and support["supported"]
+            scope["should_answer"]
+            and best_score >= app.DEFAULT_ANSWER_THRESHOLD
+            and support["supported"]
         )
         answer = (
             app.generate_detailed_chinese_answer(

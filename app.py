@@ -27,6 +27,7 @@ EMBEDDING_METADATA_PATH = INDEX_DIR / "embeddings" / "metadata.json"
 CROSS_ENCODER_MODEL = "BAAI/bge-reranker-v2-m3"
 CROSS_ENCODER_CANDIDATES = 20
 CROSS_ENCODER_MIN_SCORE = 0.50
+DEFAULT_ANSWER_THRESHOLD = 0.65
 
 WARNING_TERMS = (
     "畸形",
@@ -765,9 +766,31 @@ def chunk_quality_adjustment(text: str) -> float:
     return adjustment
 
 
+def term_is_affirmed(text: str, term: str) -> bool:
+    """Return whether a risk term appears outside a simple negated context."""
+    start = 0
+    while True:
+        index = text.find(term, start)
+        if index < 0:
+            return False
+        prefix = text[max(0, index - 12) : index]
+        negated = bool(
+            re.search(
+                r"(?:没有|并无|未见|看不出|无)(?:明显)?\s*$"
+                r"|(?:no|without|not)\s+(?:obvious\s+)?$",
+                prefix,
+            )
+        )
+        if not negated:
+            return True
+        start = index + len(term)
+
+
 def contains_warning_term(query: str) -> bool:
     normalized = query.casefold()
-    return any(term.casefold() in normalized for term in WARNING_TERMS)
+    return any(
+        term_is_affirmed(normalized, term.casefold()) for term in WARNING_TERMS
+    )
 
 
 def evidence_support_for_question(
@@ -876,8 +899,12 @@ def cached_risk_assessment(question: str) -> dict:
 def local_risk_assessment(question: str) -> dict:
     """Conservative semantic fallback when the risk API is unavailable."""
     normalized = question.casefold()
-    emergency_hits = [term for term in EMERGENCY_TERMS if term in normalized]
-    urgent_hits = [term for term in URGENT_REVIEW_TERMS if term in normalized]
+    emergency_hits = [
+        term for term in EMERGENCY_TERMS if term_is_affirmed(normalized, term)
+    ]
+    urgent_hits = [
+        term for term in URGENT_REVIEW_TERMS if term_is_affirmed(normalized, term)
+    ]
     if emergency_hits:
         return {
             "risk_level": "emergency",
@@ -924,6 +951,22 @@ def local_question_scope_assessment(question: str) -> dict:
         "amoxicillin",
         "antibiotic dose",
         "acupuncture point",
+        "哪位医生",
+        "医生推荐",
+        "费用是多少",
+        "手术费用",
+        "中药",
+        "中成药",
+        "配方",
+        "具体剂量",
+        "基因检测",
+        "基因预测",
+        "which doctor",
+        "doctor recommendation",
+        "surgery cost",
+        "herbal formula",
+        "traditional chinese medicine",
+        "genetic test",
     )
     in_scope_terms = (
         "脚踝",
@@ -938,6 +981,28 @@ def local_question_scope_assessment(question: str) -> dict:
         "贴扎",
         "brace",
         "taping",
+    )
+    rehabilitation_scope_terms = (
+        "恢复走路",
+        "调整负重",
+        "跛行",
+        "单脚站立",
+        "平衡训练",
+        "提踵",
+        "跳跃",
+        "变向",
+        "重返运动",
+        "恢复跑步",
+        "参加篮球",
+        "return to walking",
+        "adjust weight bearing",
+        "limping",
+        "single-leg stance",
+        "balance training",
+        "heel raise",
+        "hopping",
+        "cutting",
+        "return to sport",
     )
     if any(term in normalized for term in ("区别", "比较", "difference", "compare")):
         question_type = "comparison"
@@ -965,7 +1030,9 @@ def local_question_scope_assessment(question: str) -> dict:
             "reason": "问题要求的具体内容不在当前脚踝扭伤资料库支持范围内。",
             "source": "本地保守规则",
         }
-    allowed = any(term in normalized for term in in_scope_terms)
+    allowed = any(term in normalized for term in in_scope_terms) or any(
+        term in normalized for term in rehabilitation_scope_terms
+    )
     return {
         "should_answer": allowed,
         "category": "脚踝扭伤患者教育" if allowed else "超出资料范围",
@@ -1658,7 +1725,7 @@ with st.form("question_form", border=False):
             "回答生成相关性阈值",
             min_value=0.0,
             max_value=1.0,
-            value=0.60,
+            value=DEFAULT_ANSWER_THRESHOLD,
             step=0.05,
             help=(
                 "如果最佳资料仍低于这个分数，系统不会生成回答或展示资料，"
@@ -1694,7 +1761,7 @@ if active_question:
     )
     active_answer_threshold = st.session_state.get(
         "active_answer_threshold",
-        0.60,
+        DEFAULT_ANSWER_THRESHOLD,
     )
 
     if api_is_configured():

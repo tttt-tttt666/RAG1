@@ -150,6 +150,38 @@ DANGER_EVIDENCE_TERMS = (
 )
 
 
+def is_load_response_query(query: str) -> bool:
+    """Return whether a question asks how to react to post-exercise symptoms."""
+    normalized = query.casefold()
+    fixed_markers = (
+        "pain and swelling increase the day after",
+        "continue training or reduce",
+        "worse the next day",
+        "第二天疼痛和肿胀增加",
+        "继续训练还是降低",
+        "训练后疼痛或肿胀",
+        "次日肿胀增加",
+    )
+    concept_match = (
+        any(term in normalized for term in ("训练", "练习", "exercise", "training"))
+        and any(term in normalized for term in ("第二天", "次日", "next day"))
+        and any(
+            term in normalized
+            for term in (
+                "更肿",
+                "肿胀增加",
+                "疼痛增加",
+                "症状加重",
+                "more swollen",
+                "increased swelling",
+                "more pain",
+                "worse",
+            )
+        )
+    )
+    return concept_match or any(marker in normalized for marker in fixed_markers)
+
+
 def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
     """Return strict evidence terms for topics prone to keyword-only matches."""
     normalized = query.casefold()
@@ -216,6 +248,16 @@ def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
             "x ray",
             "radiograph",
             "ottawa ankle",
+        )
+    if is_load_response_query(query):
+        return (
+            "exercise",
+            "pain",
+            "swelling",
+            "increase",
+            "stop",
+            "reduce",
+            "progress",
         )
     if contains_warning_term(query):
         return DANGER_EVIDENCE_TERMS
@@ -554,16 +596,7 @@ def canonicalize_retrieval_query(query: str) -> str:
             "and why high ankle sprains take longer to recover"
         )
 
-    load_response_markers = (
-        "pain and swelling increase the day after",
-        "continue training or reduce",
-        "worse the next day",
-        "第二天疼痛和肿胀增加",
-        "继续训练还是降低",
-        "训练后疼痛或肿胀",
-        "次日肿胀增加",
-    )
-    if any(marker in normalized for marker in load_response_markers):
+    if is_load_response_query(query):
         return (
             "ankle rehabilitation exercise dosage: reduce intensity or pause "
             "when pain and swelling increase after exercise or the next day"
@@ -774,21 +807,42 @@ def term_is_affirmed(text: str, term: str) -> bool:
         if index < 0:
             return False
         prefix = text[max(0, index - 12) : index]
+        suffix = text[index + len(term) : index + len(term) + 8]
+        misleading_no_sensation_phrase = (
+            term in {"没有感觉", "loss of sensation"}
+            and re.match(r"\s*(?:异常|变化|问题|abnormality|change)", suffix)
+        )
         negated = bool(
             re.search(
                 r"(?:没有|并无|未见|看不出|无)(?:明显)?\s*$"
-                r"|(?:no|without|not)\s+(?:obvious\s+)?$",
+                r"|(?:没有|并无|未见|无)(?:明显)?[^，。；;]{1,10}(?:或|和|及|、)\s*$"
+                r"|(?:no|without|not)\s+(?:obvious\s+)?$"
+                r"|(?:no|without|not)\s+[^,.;]{1,20}(?:or|and)\s+$",
                 prefix,
             )
         )
-        if not negated:
+        if not negated and not misleading_no_sensation_phrase:
             return True
         start = index + len(term)
 
 
+def has_worsening_pain_or_swelling(query: str) -> bool:
+    """Recognize worsening symptoms when pain and swelling share one predicate."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:疼痛|痛感)\s*(?:和|或|、|以及)\s*肿胀(?:都|均)?(?:持续)?加重"
+            r"|肿胀\s*(?:和|或|、|以及)\s*(?:疼痛|痛感)(?:都|均)?(?:持续)?加重"
+            r"|(?:pain|swelling)\s+(?:and|or)\s+(?:pain|swelling)"
+            r"\s+(?:is|are|keeps?|continue(?:s)? to)?\s*worsen",
+            normalized,
+        )
+    )
+
+
 def contains_warning_term(query: str) -> bool:
     normalized = query.casefold()
-    return any(
+    return has_worsening_pain_or_swelling(query) or any(
         term_is_affirmed(normalized, term.casefold()) for term in WARNING_TERMS
     )
 
@@ -905,6 +959,8 @@ def local_risk_assessment(question: str) -> dict:
     urgent_hits = [
         term for term in URGENT_REVIEW_TERMS if term_is_affirmed(normalized, term)
     ]
+    if has_worsening_pain_or_swelling(question):
+        urgent_hits.append("疼痛和肿胀持续加重")
     if emergency_hits:
         return {
             "risk_level": "emergency",
@@ -927,6 +983,121 @@ def local_risk_assessment(question: str) -> dict:
     }
 
 
+def unsupported_request_reason(question: str) -> str | None:
+    """Identify requests that the text-only patient-education corpus cannot support."""
+    normalized = question.casefold()
+    medication_markers = (
+        "多少毫克",
+        "具体剂量",
+        "每次应该吃",
+        "每天应该吃",
+        "注射哪一种",
+        "注射什么",
+        "开哪种药",
+        "用药剂量",
+        "what dose",
+        "how many mg",
+        "how much medication",
+        "which injection",
+        "prescribe",
+    )
+    if any(marker in normalized for marker in medication_markers):
+        return "当前资料不能提供个体化处方、注射选择或具体用药剂量。"
+
+    visual_inputs = (
+        "上传的",
+        "照片",
+        "图片",
+        "影像图",
+        "mri图像",
+        "mri片",
+        "x光片",
+        "ct图像",
+        "uploaded",
+        "photo",
+        "image",
+        "scan",
+    )
+    visual_judgments = (
+        "判断",
+        "诊断",
+        "解读",
+        "指出",
+        "分析",
+        "几级",
+        "断裂",
+        "interpret",
+        "diagnose",
+        "identify",
+        "grade",
+        "torn",
+    )
+    if any(term in normalized for term in visual_inputs) and any(
+        term in normalized for term in visual_judgments
+    ):
+        return "当前系统只能检索文字资料，不能查看或诊断照片及医学影像。"
+
+    exact_prediction = (
+        any(term in normalized for term in ("精确", "准确计算", "具体日期", "哪一天", "exact"))
+        and any(
+            term in normalized
+            for term in ("恢复日期", "恢复时间", "多久恢复", "康复日期", "recovery date")
+        )
+    )
+    if exact_prediction:
+        return "资料只能提供一般恢复范围，不能精确预测个人恢复日期。"
+
+    provider_terms = (
+        "医院",
+        "诊所",
+        "医生",
+        "专科",
+        "hospital",
+        "clinic",
+        "doctor",
+        "specialist",
+    )
+    external_action_terms = (
+        "离我最近",
+        "附近",
+        "电话",
+        "地址",
+        "替我预约",
+        "帮我预约",
+        "挂号",
+        "费用",
+        "哪位",
+        "nearest",
+        "phone",
+        "address",
+        "book",
+        "appointment",
+        "cost",
+        "recommend",
+    )
+    if any(term in normalized for term in provider_terms) and any(
+        term in normalized for term in external_action_terms
+    ):
+        return "当前资料库不提供本地机构查询、医生推荐、费用信息或预约服务。"
+
+    unsupported_treatments = (
+        "针灸",
+        "穴位",
+        "留针",
+        "中药",
+        "中成药",
+        "基因检测",
+        "基因预测",
+        "acupuncture",
+        "herbal formula",
+        "traditional chinese medicine",
+        "genetic test",
+    )
+    if any(term in normalized for term in unsupported_treatments):
+        return "问题要求的治疗或检测不在当前资料库支持范围内。"
+    return None
+
+
 def local_question_scope_assessment(question: str) -> dict:
     """Conservative offline fallback when the admission API is unavailable."""
     normalized = question.casefold()
@@ -944,29 +1115,9 @@ def local_question_scope_assessment(question: str) -> dict:
         "recipe",
         "阿莫西林",
         "抗生素",
-        "多少毫克",
-        "针灸",
-        "穴位",
-        "留针",
         "amoxicillin",
         "antibiotic dose",
         "acupuncture point",
-        "哪位医生",
-        "医生推荐",
-        "费用是多少",
-        "手术费用",
-        "中药",
-        "中成药",
-        "配方",
-        "具体剂量",
-        "基因检测",
-        "基因预测",
-        "which doctor",
-        "doctor recommendation",
-        "surgery cost",
-        "herbal formula",
-        "traditional chinese medicine",
-        "genetic test",
     )
     in_scope_terms = (
         "脚踝",
@@ -1022,13 +1173,17 @@ def local_question_scope_assessment(question: str) -> dict:
         question_type = "how_to"
     else:
         question_type = "other"
-    if any(term in normalized for term in out_of_scope_terms):
+    unsupported_reason = unsupported_request_reason(question)
+    if unsupported_reason or any(term in normalized for term in out_of_scope_terms):
         return {
             "should_answer": False,
             "category": "超出资料范围",
             "question_type": question_type,
-            "reason": "问题要求的具体内容不在当前脚踝扭伤资料库支持范围内。",
-            "source": "本地保守规则",
+            "reason": unsupported_reason
+            or "问题要求的具体内容不在当前脚踝扭伤资料库支持范围内。",
+            "source": (
+                "本地能力边界审查" if unsupported_reason else "本地保守规则"
+            ),
         }
     allowed = any(term in normalized for term in in_scope_terms) or any(
         term in normalized for term in rehabilitation_scope_terms
@@ -1136,16 +1291,7 @@ def generate_detailed_chinese_answer(
             "按压胫腓骨之间明显疼痛，或症状没有逐步改善，应由医生或运动医学专业人员评估。"
         )
 
-    load_response_markers = (
-        "pain and swelling increase the day after",
-        "continue training or reduce",
-        "worse the next day",
-        "第二天疼痛和肿胀增加",
-        "继续训练还是降低",
-        "训练后疼痛或肿胀",
-        "次日肿胀增加",
-    )
-    if any(marker in normalized for marker in load_response_markers):
+    if is_load_response_query(query):
         return (
             "**应该降低强度；如果症状增加明显，应暂停当前练习，而不是按原强度继续。**\n\n"
             "训练后或第二天疼痛、肿胀比训练前明显增加，通常说明这次训练负荷超过了脚踝目前"
@@ -1764,7 +1910,16 @@ if active_question:
         DEFAULT_ANSWER_THRESHOLD,
     )
 
-    if api_is_configured():
+    capability_block = unsupported_request_reason(active_question)
+    if capability_block:
+        scope_assessment = {
+            "should_answer": False,
+            "category": "超出资料与系统能力范围",
+            "question_type": "other",
+            "reason": capability_block,
+            "source": "本地能力边界审查",
+        }
+    elif api_is_configured():
         try:
             with st.spinner("正在判断该问题是否适合由脚踝资料助手回答……"):
                 scope_assessment = cached_question_scope_assessment(active_question)

@@ -2,3 +2,31 @@
 # Hide localhost developer controls such as Deploy, Rerun, and Clear cache.
 # Viewer mode leaves normal text selection and browser clipboard shortcuts free.
 toolbarMode = "viewer"
+
+[theme]
+base = "light"
+primaryColor = "#1236F5"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F7FF"
+textColor = "#17213A"
+linkColor = "#1236F5"
+borderColor = "#DFE7F4"
+showWidgetBorder = true
+baseRadius = "12px"
+buttonRadius = "12px"
+font = "'Noto Sans SC':https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+headingFont = "'Noto Sans SC':https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@600;700&display=swap"
+baseFontSize = 16
+headingFontSizes = ["44px", "30px", "24px", "19px", "16px", "14px"]
+headingFontWeights = [700, 700, 700, 600, 600, 600]
+greenColor = "#158A7D"
+greenBackgroundColor = "#E7F8F5"
+blueColor = "#1236F5"
+blueBackgroundColor = "#ECF0FF"
+redColor = "#C9384B"
+redBackgroundColor = "#FDECEF"
+orangeColor = "#B96200"
+orangeBackgroundColor = "#FFF3E2"
+grayColor = "#61708F"
+grayBackgroundColor = "#F2F5FA"
+linkUnderline = false

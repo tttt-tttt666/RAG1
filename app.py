@@ -13,6 +13,7 @@ from sentence_transformers import CrossEncoder, SentenceTransformer
 
 from deepseek_translator import (
     api_is_configured,
+    assess_ankle_risk,
     assess_question_scope,
     translate_to_chinese,
 )
@@ -26,26 +27,217 @@ EMBEDDING_METADATA_PATH = INDEX_DIR / "embeddings" / "metadata.json"
 CROSS_ENCODER_MODEL = "BAAI/bge-reranker-v2-m3"
 CROSS_ENCODER_CANDIDATES = 20
 CROSS_ENCODER_MIN_SCORE = 0.50
+DEFAULT_ANSWER_THRESHOLD = 0.65
+SEMANTIC_EMERGENCY_THRESHOLD = 0.85
+SEMANTIC_URGENT_THRESHOLD = 0.85
+SEMANTIC_RISK_MARGIN = -0.012
+SEMANTIC_EMERGENCY_CLASS_MARGIN = 0.008
+
+SEMANTIC_RISK_PROTOTYPES = {
+    "emergency": (
+        "脚或脚趾失去感觉并且冰冷、苍白、发紫或血液循环异常",
+        "足部脉搏消失，脚趾感觉或活动能力下降",
+        "脚踝明显畸形、错位、移位或呈异常角度",
+        "开放性伤口能看到骨头或骨头刺破皮肤",
+        "脚踝深伤口大量出血，持续按压也无法止血",
+        "单侧小腿突然肿痛并伴胸痛、气短或呼吸困难",
+        "foot is cold blue pale numb or pulseless after ankle injury",
+        "visible ankle deformity dislocation or bone protruding through skin",
+        "uncontrolled bleeding from a deep open ankle wound",
+        "unilateral calf swelling with chest pain or shortness of breath",
+    ),
+    "urgent_review": (
+        "脚踝受伤后完全不能负重或不能走四步",
+        "内踝外踝舟骨或第五跖骨出现明确骨性压痛",
+        "疼痛肿胀持续加重、范围扩大或功能不断下降",
+        "伤口流脓、红热扩散并伴发热寒战",
+        "脚踝疼痛非常严重、无法缓解或影响整晚睡眠",
+        "跟腱处出现凹陷或爆裂声并且无法提踵踮脚",
+        "儿童持续拒绝使用受伤脚或无法行走",
+        "unable to bear weight or take four steps after ankle injury",
+        "focal malleolar navicular or fifth metatarsal bony tenderness",
+        "worsening ankle pain swelling infection weakness or loss of function",
+    ),
+    "self_care": (
+        "脚踝扭伤后轻微疼痛肿胀，能够走路且症状逐渐改善",
+        "脚踝没有变形，没有麻木发冷，也可以正常负重",
+        "询问冰敷抬高包扎和早期活动的一般康复方法",
+        "询问平衡训练、力量训练和重返运动的正常进阶",
+        "训练后短暂轻微酸胀，休息后很快恢复",
+        "mild ankle sprain improving with normal walking and no red flags",
+        "general ankle rehabilitation exercise without emergency symptoms",
+    ),
+}
 
 WARNING_TERMS = (
     "畸形",
+    "变形",
     "无法负重",
+    "不能负重",
+    "不能承重",
+    "无法承重",
+    "走不了四步",
     "不能走",
+    "无法行走",
     "麻木",
+    "越来越麻",
     "失去知觉",
+    "没有感觉",
+    "没有知觉",
+    "失去感觉",
+    "完全失去感觉",
+    "麻痹",
+    "感觉减退",
     "发紫",
+    "变紫",
+    "变蓝",
     "发冷",
+    "冰冷",
     "剧烈疼痛",
+    "疼痛加重",
+    "肿胀加重",
+    "开放性伤口",
+    "伤口开放",
+    "骨头外露",
+    "看到骨头",
+    "大量出血",
+    "持续出血",
+    "止不住",
+    "持续渗血",
+    "不断流出鲜血",
+    "脉搏摸不到",
+    "摸不到脉搏",
+    "颜色苍白",
+    "发白",
+    "活动不了脚趾",
+    "无法活动脚趾",
+    "疼得无法入睡",
+    "爆裂声",
+    "爆裂响声",
+    "无法用脚尖站立",
+    "无法踮脚",
+    "无法正常步行",
+    "功能越来越差",
+    "不能踩地",
+    "无法着地",
+    "着地都做不到",
+    "一步都走不了",
+    "走四步",
+    "不肯走路",
+    "骨点压痛",
+    "骨头压痛",
+    "舟骨压痛",
+    "生长板",
+    "骨骺",
+    "发烧",
+    "高热",
+    "红肿发热",
+    "又红又热",
+    "流脓",
+    "红线",
+    "大量出血",
+    "小腿突然肿痛",
+    "单侧肿痛",
+    "胸闷",
+    "喘不上气",
     "呼吸困难",
     "高烧",
     "deformity",
     "cannot walk",
     "unable to bear weight",
+    "cannot bear weight",
+    "cannot take four steps",
     "numb",
+    "loss of sensation",
     "cold foot",
     "blue foot",
     "severe pain",
+    "worsening pain",
+    "worsening swelling",
+    "open wound",
     "difficulty breathing",
+)
+
+EMERGENCY_TERMS = (
+    "畸形",
+    "变形",
+    "失去知觉",
+    "没有感觉",
+    "没有知觉",
+    "失去感觉",
+    "完全失去感觉",
+    "麻木",
+    "越来越麻",
+    "麻痹",
+    "感觉减退",
+    "发紫",
+    "变紫",
+    "变蓝",
+    "冰冷",
+    "开放性伤口",
+    "伤口开放",
+    "骨头外露",
+    "看到骨头",
+    "大量出血",
+    "持续出血",
+    "止不住",
+    "持续渗血",
+    "不断流出鲜血",
+    "脉搏摸不到",
+    "摸不到脉搏",
+    "活动不了脚趾",
+    "无法活动脚趾",
+    "呼吸困难",
+    "喘不上气",
+    "deformity",
+    "loss of sensation",
+    "cold foot",
+    "blue foot",
+    "open wound",
+)
+
+URGENT_REVIEW_TERMS = (
+    "无法负重",
+    "不能负重",
+    "不能承重",
+    "无法承重",
+    "走不了四步",
+    "不能走",
+    "无法行走",
+    "不能踩地",
+    "无法着地",
+    "着地都做不到",
+    "一步都走不了",
+    "走四步",
+    "不肯走路",
+    "剧烈疼痛",
+    "疼得无法入睡",
+    "爆裂声",
+    "爆裂响声",
+    "无法用脚尖站立",
+    "无法踮脚",
+    "无法正常步行",
+    "功能越来越差",
+    "疼痛加重",
+    "肿胀加重",
+    "骨点压痛",
+    "骨头压痛",
+    "舟骨压痛",
+    "生长板",
+    "骨骺",
+    "发烧",
+    "高热",
+    "红肿发热",
+    "又红又热",
+    "流脓",
+    "红线",
+    "unable to bear weight",
+    "cannot bear weight",
+    "cannot take four steps",
+    "cannot walk",
+    "severe pain",
+    "worsening pain",
+    "worsening swelling",
 )
 
 BASKETBALL_FUNCTION_MARKERS = (
@@ -88,12 +280,123 @@ DANGER_EVIDENCE_TERMS = (
     "symptoms get worse",
     "pain or swelling hasn’t improved",
     "severe pain",
+    "bone tenderness",
+    "bony tenderness",
+    "malleol",
+    "navicular",
+    "four steps",
+    "ottawa ankle",
+    "radiograph",
+    "x-ray",
 )
+
+
+def is_load_response_query(query: str) -> bool:
+    """Return whether a question asks how to react to post-exercise symptoms."""
+    normalized = query.casefold()
+    fixed_markers = (
+        "pain and swelling increase the day after",
+        "continue training or reduce",
+        "worse the next day",
+        "第二天疼痛和肿胀增加",
+        "继续训练还是降低",
+        "训练后疼痛或肿胀",
+        "次日肿胀增加",
+    )
+    concept_match = (
+        any(term in normalized for term in ("训练", "练习", "exercise", "training"))
+        and any(term in normalized for term in ("第二天", "次日", "next day"))
+        and any(
+            term in normalized
+            for term in (
+                "更肿",
+                "肿胀增加",
+                "疼痛增加",
+                "症状加重",
+                "more swollen",
+                "increased swelling",
+                "more pain",
+                "worse",
+            )
+        )
+    )
+    return concept_match or any(marker in normalized for marker in fixed_markers)
+
+
+def is_non_weight_bearing_strength_query(query: str) -> bool:
+    """Return whether a question asks for early seated or isometric strengthening."""
+    normalized = query.casefold()
+    strength = any(
+        term in normalized
+        for term in ("力量", "强化", "strength", "strengthening")
+    )
+    unloaded = any(
+        term in normalized
+        for term in (
+            "不负重",
+            "非负重",
+            "坐着",
+            "躺着",
+            "non-weight-bearing",
+            "non weight bearing",
+            "seated",
+            "isometric",
+        )
+    )
+    return strength and unloaded
 
 
 def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
     """Return strict evidence terms for topics prone to keyword-only matches."""
     normalized = query.casefold()
+    if any(
+        term in normalized
+        for term in (
+            "腓总神经",
+            "腓骨神经",
+            "足下垂",
+            "脚背麻木",
+            "common peroneal nerve",
+            "common fibular nerve",
+            "foot drop",
+            "dorsum of the foot",
+        )
+    ):
+        return (
+            "common peroneal nerve",
+            "common fibular nerve",
+            "foot drop",
+            "dorsum of the foot",
+            "numbness",
+            "tingling",
+        )
+    if any(
+        term in normalized
+        for term in (
+            "踝关节周围",
+            "踝关节解剖",
+            "骨骼、韧带",
+            "骨骼和韧带",
+            "肌肉、神经",
+            "肌肉和神经",
+            "blood vessels",
+            "ankle anatomy",
+            "bones, ligaments",
+            "muscles, nerves",
+        )
+    ):
+        return (
+            "bones in the ankle",
+            "ligaments in the ankle",
+            "muscles in the ankle",
+            "nerves in the ankle",
+            "blood vessels in the ankle",
+        )
+    if (
+        any(term in normalized for term in ("六周", "6周", "6 weeks", "persistent", "持续"))
+        and any(term in normalized for term in ("x-ray", "x ray", "mri", "影像", "拍片", "x光"))
+    ):
+        return ("chronic ankle pain", "6 weeks", "x-ray", "mri", "ultrasound", "ct")
     if any(
         term in normalized
         for term in (
@@ -109,6 +412,25 @@ def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
             "x ray",
             "radiograph",
             "ottawa ankle",
+        )
+    if is_load_response_query(query):
+        return (
+            "exercise",
+            "pain",
+            "swelling",
+            "increase",
+            "stop",
+            "reduce",
+            "progress",
+        )
+    if is_non_weight_bearing_strength_query(query):
+        return (
+            "isometric",
+            "resistance band",
+            "theraband",
+            "seated",
+            "strengthening",
+            "resisted",
         )
     if contains_warning_term(query):
         return DANGER_EVIDENCE_TERMS
@@ -130,6 +452,18 @@ def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
         )
     ):
         return ("grade i", "grade ii", "grade iii", "grade 1", "grade 2", "grade 3")
+    if any(
+        term in normalized
+        for term in (
+            "再次扭伤",
+            "预防复发",
+            "prevent",
+            "another ankle sprain",
+            "reduce the risk",
+            "recurrent",
+        )
+    ):
+        return ()
     if any(
         term in normalized
         for term in (
@@ -259,7 +593,7 @@ def retrieve(
                 rerank_scores[index] -= 0.10
         ranked_indices = np.argsort(rerank_scores)[::-1]
         result_scores = rerank_scores
-    elif not danger_query:
+    elif not danger_query and not priority_evidence_terms:
         ranked_indices = np.argsort(scores)[::-1]
         result_scores = scores
 
@@ -357,11 +691,75 @@ def retrieve(
 def canonicalize_retrieval_query(query: str) -> str:
     """Map bilingual domain intents to the same English retrieval query."""
     normalized = query.casefold()
+    if any(
+        term in normalized
+        for term in (
+            "抗阻",
+            "小腿力量",
+            "小腿训练",
+            "弹力带",
+            "resistance",
+            "strengthening",
+        )
+    ):
+        return (
+            "ankle sprain strengthening progression: calf strengthening, "
+            "resisted ankle movements and resistance band exercises"
+        )
+    if any(
+        term in normalized
+        for term in (
+            "腓总神经",
+            "腓骨神经",
+            "足下垂",
+            "脚背麻木",
+            "common peroneal nerve",
+            "common fibular nerve",
+            "foot drop",
+            "dorsum of the foot",
+        )
+    ):
+        return (
+            "common peroneal nerve injury anatomy and function: foot drop, "
+            "weak ankle dorsiflexion, numbness or tingling on the dorsum of the foot"
+        )
+    if any(
+        term in normalized
+        for term in (
+            "踝关节周围",
+            "踝关节解剖",
+            "骨骼、韧带",
+            "骨骼和韧带",
+            "肌肉、神经",
+            "肌肉和神经",
+            "blood vessels",
+            "ankle anatomy",
+            "bones, ligaments",
+            "muscles, nerves",
+        )
+    ):
+        return (
+            "ankle anatomy: names of bones, cartilage, ligaments, muscles, "
+            "nerves and blood vessels around the ankle joint"
+        )
+    if (
+        any(term in normalized for term in ("六周", "6周", "6 weeks", "persistent", "持续"))
+        and any(term in normalized for term in ("x-ray", "x ray", "mri", "影像", "拍片", "x光"))
+    ):
+        return (
+            "chronic ankle pain persisting for 6 weeks or more: x-ray as first "
+            "imaging test and when MRI, CT or ultrasound may be appropriate"
+        )
     if contains_warning_term(query):
         return (
             "ankle injury emergency red flags: deformity, inability to bear weight, "
             "numbness, cold or blue foot, severe or worsening pain, and when to seek "
             "urgent medical assessment"
+        )
+    if is_non_weight_bearing_strength_query(query):
+        return (
+            "early ankle strengthening without standing or weight bearing: "
+            "seated isometric exercises and resisted movements using a resistance band"
         )
     if any(
         marker in normalized
@@ -391,16 +789,7 @@ def canonicalize_retrieval_query(query: str) -> str:
             "and why high ankle sprains take longer to recover"
         )
 
-    load_response_markers = (
-        "pain and swelling increase the day after",
-        "continue training or reduce",
-        "worse the next day",
-        "第二天疼痛和肿胀增加",
-        "继续训练还是降低",
-        "训练后疼痛或肿胀",
-        "次日肿胀增加",
-    )
-    if any(marker in normalized for marker in load_response_markers):
+    if is_load_response_query(query):
         return (
             "ankle rehabilitation exercise dosage: reduce intensity or pause "
             "when pain and swelling increase after exercise or the next day"
@@ -410,6 +799,15 @@ def canonicalize_retrieval_query(query: str) -> str:
         return (
             "ankle sprain return to basketball functional criteria: pain-free "
             "single-leg heel raises, balance, hopping, cutting and sport-specific drills"
+        )
+
+    if any(
+        marker in normalized
+        for marker in ("ankle brace", "bracing", "taping", "护具", "护踝", "贴扎")
+    ):
+        return (
+            "ankle brace or taping after ankle sprain during rehabilitation "
+            "and return to sport"
         )
 
     recurrence_markers = (
@@ -594,9 +992,779 @@ def chunk_quality_adjustment(text: str) -> float:
     return adjustment
 
 
+def term_is_affirmed(text: str, term: str) -> bool:
+    """Return whether a risk term appears outside a simple negated context."""
+    start = 0
+    while True:
+        index = text.find(term, start)
+        if index < 0:
+            return False
+        prefix = text[max(0, index - 12) : index]
+        suffix = text[index + len(term) : index + len(term) + 8]
+        misleading_no_sensation_phrase = (
+            term in {"没有感觉", "loss of sensation"}
+            and re.match(r"\s*(?:异常|变化|问题|abnormality|change)", suffix)
+        )
+        negated = bool(
+            re.search(
+                r"(?:没有|并无|未见|看不出|无|不)(?:明显)?\s*$"
+                r"|(?:没有|并无|未见|无)(?:明显)?[^，。；;]{1,10}(?:或|和|及|、)\s*$"
+                r"|(?:no|without|not)\s+(?:obvious\s+)?$"
+                r"|(?:no|without|not)\s+[^,.;]{1,20}(?:or|and)\s+$",
+                prefix,
+            )
+        )
+        if not negated and not misleading_no_sensation_phrase:
+            return True
+        start = index + len(term)
+
+
+def has_worsening_pain_or_swelling(query: str) -> bool:
+    """Recognize worsening symptoms when pain and swelling share one predicate."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:疼痛|痛感|肿胀)(?:持续|明显|逐渐|越来越)?加重"
+            r"|(?:疼痛|痛感)\s*(?:和|或|、|以及)\s*肿胀(?:都|均)?(?:持续)?加重"
+            r"|肿胀\s*(?:和|或|、|以及)\s*(?:疼痛|痛感)(?:都|均)?(?:持续)?加重"
+            r"|(?=[^。；;]*(?:疼痛|痛感|肿胀|肿痛))[^。；;]*"
+            r"(?:一天比一天|越来越|逐日|每天(?:都)?)(?:更)?(?:严重|厉害)"
+            r"|(?=[^。；;]*(?:脚踝|踝部|疼|痛|肿|症状|活动))[^。；;]*"
+            r"(?:持续恶化|不断恶化|反而加剧|持续加剧|明显加重|突然加重|"
+            r"不断变严重|一晚比一晚更痛|一天比一天重|逐日升级|快速升级|"
+            r"逐渐加深|持续加深|连续数日递增|逐晚恶化|显著增加|"
+            r"范围扩大|不断扩大|快速下降|越来越困难|越来越差|功能越来越差|"
+            r"都在加重|继续加剧)"
+            r"|(?:pain|swelling)\s+(?:and|or)\s+(?:pain|swelling)"
+            r"\s+(?:is|are|keeps?|continue(?:s)? to)?\s*worsen",
+            normalized,
+        )
+    )
+
+
+def has_deformity_concept(query: str) -> bool:
+    """Recognize visible loss of normal ankle alignment."""
+    normalized = query.casefold()
+    if re.search(
+        r"(?:没有|并无|无|未见|看不出)[^，。；;]{0,4}"
+        r"(?:畸形|变形|错位|歪斜|移位)",
+        normalized,
+    ):
+        return False
+    return bool(
+        re.search(
+            r"(?:外形|外观|形状|轮廓|角度|位置|脚踝|踝关节|伤脚)"
+            r"[^，。；;]{0,16}(?:不对|歪斜|歪了|偏斜|向一边歪|"
+            r"扭曲|错位|移位|变形|畸形|不自然)"
+            r"|(?:踝关节|脚踝)[^，。；;]{0,12}(?:向外|向内|一边)"
+            r"[^，。；;]{0,8}(?:歪|偏|斜)"
+            r"|(?:踝关节|脚踝)[^，。；;]{0,12}不在正常位置"
+            r"|(?:脚|足)[^，。；;]{0,12}(?:方向|位置)[^，。；;]{0,12}"
+            r"(?:不对齐|不一致)"
+            r"|(?:踝部|脚踝)[^，。；;]{0,10}(?:不自然|异常)[^，。；;]{0,6}角度"
+            r"|(?:歪斜|错位|移位|畸形|变形)[^，。；;]{0,10}(?:脚踝|踝部|关节)"
+            r"|visibly\s+(?:crooked|misaligned)",
+            normalized,
+        )
+    )
+
+
+def has_neurovascular_emergency_concept(query: str) -> bool:
+    """Recognize threatened circulation or progressive sensory loss."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:足背动脉|足部脉搏|脚背脉搏|脉搏)[^，。；;]{0,12}"
+            r"(?:摸不到|触不到|消失|没有|减弱)"
+            r"|(?:足趾|脚趾|足部|受伤脚)[^，。；;]{0,18}"
+            r"(?:苍白|发白|变蓝|发紫|冰冷|冰凉|发凉|没有知觉|"
+            r"失去知觉|感觉减退|感觉消失|麻木|麻痹|不能活动|无法活动)"
+            r"|(?:(?:足底|脚掌|足部|脚趾|足趾)?[^，。；;]{0,8}"
+            r"(?:感觉|知觉)[^，。；;]{0,12}(?:减退|消失|没有)"
+            r"[^。；;]{0,36}(?:冷|凉|紫|蓝|白|温度[^，。；;]{0,6}(?:下降|降低)))"
+            r"|(?:胸闷|呼吸困难|喘不上气)",
+            normalized,
+        )
+    )
+
+
+def has_open_injury_emergency_concept(query: str) -> bool:
+    """Recognize exposed bone or uncontrolled bleeding."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:骨头|骨面|骨组织)[^，。；;]{0,16}"
+            r"(?:露出|露出来|外露|穿破|刺破|看见|看到|可见)"
+            r"|(?:骨头|骨面|骨组织)[^，。；;]{0,16}(?:穿破|刺破)[^，。；;]{0,6}皮肤"
+            r"|(?:看见|看到|露出|露着)[^，。；;]{0,10}(?:骨头|骨面|骨组织)"
+            r"|(?:深伤口|伤口|裂口|割伤|开放性踝伤|开放伤|开放损伤)"
+            r"[^，。；;]{0,28}"
+            r"(?:止不住|不停流血|不断涌出|大量出血|持续出血|持续渗血|"
+            r"不断流出鲜血|无法控制|压迫[^，。；;]{0,12}仍)",
+            normalized,
+        )
+    )
+
+
+def has_severe_pain_concept(query: str) -> bool:
+    """Recognize current severe pain that merits prompt review."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:疼痛|痛感)[^，。；;]{0,8}(?:极其|非常|特别|难以忍受)?"
+            r"(?:严重|剧烈|剧痛|强烈|无法入睡|夜间反复惊醒)"
+            r"|(?:极其|非常|特别|难以忍受)[^，。；;]{0,6}(?:疼|痛)"
+            r"|(?:持续|特别|强烈|严重)[^，。；;]{0,6}(?:剧痛|疼|痛)"
+            r"|(?:疼到|痛到|疼得|痛得)[^，。；;]{0,12}"
+            r"(?:无法|不能|反复惊醒|特别严重|非常严重|难以忍受)"
+            r"|(?:踝痛|脚踝痛|疼痛)[^，。；;]{0,16}"
+            r"(?:反复从睡眠中惊醒|整夜无法休息|无法休息)",
+            normalized,
+        )
+    )
+
+
+def has_bony_tenderness_concept(query: str) -> bool:
+    """Recognize Ottawa-rule-style focal bony tenderness phrasing."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:内踝|外踝|内外踝|踝骨|骨点|骨尖|骨头|舟骨|"
+            r"第五跖骨|跖骨基底|骨骺)[^，。；;]{0,16}"
+            r"(?:压痛|按压|一按|一碰|触痛|很痛|明显疼|疼痛|骨痛|剧痛)"
+            r"|(?:malleol|navicular|fifth metatarsal)[^,.;]{0,20}"
+            r"(?:tender|pain)",
+            normalized,
+        )
+    )
+
+
+def has_dvt_respiratory_concept(query: str) -> bool:
+    """Recognize unilateral calf symptoms with acute respiratory symptoms."""
+    normalized = query.casefold()
+    calf = re.search(
+        r"(?:(?:单侧|一侧|一边|单腿|一条腿|受伤腿)[^，。；;]{0,16}"
+        r"(?:肿|肿胀|肿痛|疼|痛|发紧|变粗|明显变粗)"
+        r"|(?:小腿|腿肚)[^，。；;]{0,12}(?:肿|肿胀|肿痛|疼|痛|发紧|变粗))",
+        normalized,
+    )
+    breathing = re.search(
+        r"(?:呼吸困难|呼吸不畅|呼吸急促|喘不上气|气短|气喘|喘憋|"
+        r"胸闷|胸痛|吸不上气|无法深呼吸|不能深呼吸)",
+        normalized,
+    )
+    return bool(calf and breathing)
+
+
+def has_weight_bearing_failure_concept(query: str) -> bool:
+    """Recognize inability to bear weight or take four steps."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:不能|无法|完全不能|一点都不能|不敢)[^，。；;]{0,8}"
+            r"(?:承重|负重|踩地|着地|下地|行走|走路|走四步)"
+            r"|(?:一步|四步)[^，。；;]{0,6}(?:走不了|不能走|无法完成)"
+            r"|(?:连)?四步[^，。；;]{0,8}(?:无法|不能)[^，。；;]{0,4}(?:完成|走)"
+            r"|(?:不能|无法)[^，。；;]{0,8}(?:完成|走完)[^，。；;]{0,6}(?:四步|连续四步)"
+            r"|(?:不能|无法)[^，。；;]{0,10}(?:用受伤侧站立|单脚站立)"
+            r"|(?:一点|任何)[^，。；;]{0,6}(?:重量|体重)[^，。；;]{0,8}"
+            r"(?:承受不了|不能承受)"
+            r"|(?:站不住|无法独立走四步)",
+            normalized,
+        )
+    )
+
+
+def has_infection_concept(query: str) -> bool:
+    """Recognize spreading local infection or systemic illness."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:伤口|切口|擦伤|踝部|脚踝)[^，。；;]{0,18}"
+            r"(?:流脓|渗脓|脓液|脓性分泌物|异味|红线|红色条纹|"
+            r"红肿热|红肿热痛|红热|发烫|越来越烫)"
+            r"|(?:红线|红色条纹)[^，。；;]{0,12}(?:扩散|延伸|向上)"
+            r"|(?:发烧|发热|高热|寒战|打颤)[^，。；;]{0,18}"
+            r"(?:红|热|烫|脓|伤口|切口|脚踝|踝部)",
+            normalized,
+        )
+    )
+
+
+def has_achilles_function_loss_concept(query: str) -> bool:
+    """Recognize possible Achilles rupture with sudden functional loss."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:跟腱|脚后跟)[^，。；;]{0,18}(?:凹陷|断裂|爆裂声|无法提踵|"
+            r"不能提踵|无法用脚尖站立)"
+            r"|(?:爆裂声|爆裂响声|爆响|啪响)[^，。；;]{0,28}(?:无法|不能)"
+            r"(?:提踵|用脚尖站立|踮脚)",
+            normalized,
+        )
+    )
+
+
+def has_progressive_function_loss_concept(query: str) -> bool:
+    """Recognize worsening weakness or complete refusal to use the injured limb."""
+    normalized = query.casefold()
+    return bool(
+        re.search(
+            r"(?:儿童|孩子)[^，。；;]{0,24}(?:完全拒绝|不肯|一直不)"
+            r"[^，。；;]{0,8}(?:使用|用|踩|走|负重)[^，。；;]{0,6}(?:伤脚|受伤脚)?"
+            r"|(?:无力|打软腿|活动能力)[^，。；;]{0,16}"
+            r"(?:恶化|加重|越来越差|不断)"
+            r"|(?:无法|不能)[^，。；;]{0,10}(?:正常步行|正常走路)"
+            r"[^，。；;]{0,18}(?:功能|能力)[^，。；;]{0,8}(?:变差|下降|恶化)",
+            normalized,
+        )
+    )
+
+
+def standardized_symptom_components(query: str) -> dict[str, bool]:
+    """Map varied wording to stable clinical warning-signal components."""
+    normalized = query.casefold()
+
+    def affirmed_any(terms: tuple[str, ...]) -> bool:
+        return any(term_is_affirmed(normalized, term) for term in terms)
+
+    sensory_loss = affirmed_any(
+        (
+            "没有感觉",
+            "没有知觉",
+            "失去感觉",
+            "失去知觉",
+            "感觉消失",
+            "知觉消失",
+            "触觉消失",
+            "感觉减退",
+            "感觉迟钝",
+            "毫无知觉",
+            "麻木",
+            "麻痹",
+            "又冷又麻",
+            "感觉不断下降",
+            "知觉没有恢复",
+        )
+    )
+    circulation_loss = affirmed_any(
+        (
+            "脉搏消失",
+            "脉搏触不到",
+            "脉搏摸不到",
+            "脉搏微弱",
+            "脉搏减弱",
+            "苍白",
+            "发白",
+            "发紫",
+            "青紫",
+            "变蓝",
+            "冰冷",
+            "冰凉",
+            "又冷又麻",
+            "温度下降",
+            "温度降低",
+            "皮肤低温",
+            "足部仍低温",
+            "末端发蓝低温",
+            "逐渐发冷",
+            "颜色迟迟不恢复",
+        )
+    )
+    motor_loss = affirmed_any(
+        (
+            "无法活动脚趾",
+            "不能活动脚趾",
+            "脚趾活动消失",
+            "无法弯曲",
+            "无法伸直",
+            "活动和感觉同时消失",
+            "丧失活动能力",
+        )
+    )
+    deformity = has_deformity_concept(query) or affirmed_any(
+        (
+            "不对正",
+            "无法对正",
+            "异常角度",
+            "不自然角度",
+            "错位",
+            "移位",
+            "移出了原位",
+            "轮廓突然改变",
+            "方向明显异常",
+        )
+    )
+    open_bone = affirmed_any(
+        (
+            "骨头外露",
+            "骨面外露",
+            "骨质可见",
+            "看到骨质",
+            "露出骨组织",
+            "穿出皮肤",
+            "穿破皮肤",
+            "骨端穿出",
+            "看到白色骨面",
+            "骨质暴露",
+        )
+    )
+    open_wound = affirmed_any(
+        (
+            "开放性伤口",
+            "开放伤口",
+            "伤口开放",
+            "开放性损伤",
+            "开放踝伤",
+        )
+    )
+    uncontrolled_bleeding = affirmed_any(
+        (
+            "大量出血",
+            "持续出血",
+            "活动性出血",
+            "无法控制",
+            "止不住",
+            "喷涌鲜血",
+            "不断失血",
+            "纱布很快被浸透",
+            "持续渗出",
+        )
+    )
+    leg_symptom = bool(
+        re.search(
+            r"(?:单侧|一侧|一条腿|单腿|腿肚|小腿)[^，。；;]{0,18}"
+            r"(?:肿|肿大|肿胀|肿痛|疼痛|发紧|紧绷|变粗)",
+            normalized,
+        )
+    )
+    respiratory = affirmed_any(
+        (
+            "呼吸困难",
+            "呼吸急促",
+            "呼吸变快",
+            "呼吸不畅",
+            "无法顺畅呼吸",
+            "气短",
+            "气喘",
+            "喘憋",
+            "胸闷",
+            "胸痛",
+            "无法深呼吸",
+            "无法深吸气",
+            "不能深呼吸",
+        )
+    )
+    weight_failure = has_weight_bearing_failure_concept(query) or affirmed_any(
+        (
+            "无法支撑身体",
+            "不能支撑身体",
+            "无法承担任何体重",
+            "落不了地",
+            "一步都不能",
+            "走不出四步",
+            "不能完成连续四步",
+            "任何重量都不能放",
+        )
+    )
+    bony_tenderness = has_bony_tenderness_concept(query) or (
+        affirmed_any(
+            (
+                "骨面",
+                "骨头上",
+                "骨缘",
+                "舟骨",
+                "第五跖骨",
+                "骨骺",
+                "踝骨",
+                "外踝",
+                "内踝",
+            )
+        )
+        and affirmed_any(
+            ("按压痛", "压痛点", "触压", "一碰就痛", "骨痛", "尖锐的痛点")
+        )
+    )
+    infection_local = affirmed_any(
+        (
+            "流脓",
+            "渗脓",
+            "脓液",
+            "黄色脓液",
+            "脓性分泌物",
+            "红热扩散",
+            "红肿范围",
+            "红色线条",
+            "红色条带",
+            "红线",
+            "发烫",
+            "气味异常",
+            "异味",
+            "感染样表现",
+        )
+    )
+    systemic_infection = affirmed_any(
+        ("发烧", "发热", "高热", "寒战", "打颤", "体温升高", "全身不适")
+    )
+    pain_or_swelling = affirmed_any(
+        (
+            "疼痛",
+            "痛感",
+            "踝痛",
+            "剧痛",
+            "骨痛",
+            "僵痛",
+            "肿胀",
+            "肿痛",
+            "肿起",
+            "疼和肿",
+            "症状",
+            "伤情",
+        )
+    )
+    worsening = has_worsening_pain_or_swelling(query) or affirmed_any(
+        (
+            "递增",
+            "逐渐变坏",
+            "重于昨天",
+            "同步增强",
+            "持续升级",
+            "继续外扩",
+            "继续下降",
+            "继续增强",
+            "持续不退",
+            "没有缓和趋势",
+            "连续两天上升",
+            "逐渐变坏",
+            "重于昨天",
+            "越来越僵痛",
+            "不但没改善",
+            "一天比一天大",
+            "次数越来越多",
+            "向外蔓延",
+            "朝膝盖方向延伸",
+            "持续增强",
+            "较昨日继续上升",
+            "每天递进",
+            "反而继续变差",
+            "向小腿上方蔓延",
+            "向小腿延伸",
+            "向上发展",
+            "不断增大",
+            "继续变差",
+        )
+    )
+    severe_pain = has_severe_pain_concept(query) or affirmed_any(
+        (
+            "无法忍受",
+            "剧烈疼痛",
+            "整夜无法休息",
+            "整晚睡眠",
+            "整晚醒来多次",
+            "强烈疼痛不减",
+            "剧痛持续不退",
+            "反复把人痛醒",
+        )
+    )
+    achilles_loss = has_achilles_function_loss_concept(query) or (
+        affirmed_any(("跟腱", "啪的一声", "爆裂响声"))
+        and affirmed_any(
+            (
+                "无法提踵",
+                "不能提踵",
+                "无法做提踵",
+                "无法踮起脚尖",
+                "不能踮起脚尖",
+                "不能踮脚",
+                "凹下去",
+            )
+        )
+    )
+    function_loss = has_progressive_function_loss_concept(query) or (
+        affirmed_any(("无力", "打软腿", "步行功能", "活动能力", "功能"))
+        and affirmed_any(("下降", "恶化", "越来越多", "越来越差", "未恢复"))
+    ) or (
+        affirmed_any(("孩子", "儿童"))
+        and affirmed_any(("保护伤脚", "不愿踩地", "拒绝走路", "不肯走路"))
+    )
+    return {
+        "sensory_loss": sensory_loss,
+        "circulation_loss": circulation_loss,
+        "motor_loss": motor_loss,
+        "deformity": deformity,
+        "open_bone": open_bone,
+        "open_wound": open_wound,
+        "uncontrolled_bleeding": uncontrolled_bleeding,
+        "leg_symptom": leg_symptom,
+        "respiratory": respiratory,
+        "weight_failure": weight_failure,
+        "bony_tenderness": bony_tenderness,
+        "infection_local": infection_local,
+        "systemic_infection": systemic_infection,
+        "pain_or_swelling": pain_or_swelling,
+        "worsening": worsening,
+        "severe_pain": severe_pain,
+        "achilles_loss": achilles_loss,
+        "function_loss": function_loss,
+    }
+
+
+def score_standardized_symptoms(query: str) -> dict:
+    """Score standardized components and return a conservative risk tier."""
+    components = standardized_symptom_components(query)
+    emergency_hits = []
+    urgent_hits = []
+    if components["deformity"]:
+        emergency_hits.append("明显畸形或错位")
+    if components["open_bone"]:
+        emergency_hits.append("开放伤口伴骨外露")
+    if components["open_wound"]:
+        emergency_hits.append("开放性伤口")
+    if components["uncontrolled_bleeding"]:
+        emergency_hits.append("无法控制的出血")
+    if components["sensory_loss"]:
+        emergency_hits.append("足部感觉丧失")
+    if components["circulation_loss"]:
+        emergency_hits.append("足部循环异常")
+    if components["motor_loss"] and components["circulation_loss"]:
+        emergency_hits.append("循环异常伴运动障碍")
+    if components["leg_symptom"] and components["respiratory"]:
+        emergency_hits.append("单腿症状伴急性呼吸表现")
+    if components["weight_failure"]:
+        urgent_hits.append("不能负重或无法走四步")
+    if components["bony_tenderness"]:
+        urgent_hits.append("踝足骨性压痛")
+    if components["infection_local"] and (
+        components["systemic_infection"] or components["worsening"]
+    ):
+        urgent_hits.append("局部感染伴扩散或全身表现")
+    if components["pain_or_swelling"] and components["worsening"]:
+        urgent_hits.append("疼痛或肿胀持续恶化")
+    if components["severe_pain"]:
+        urgent_hits.append("严重或无法缓解的疼痛")
+    if components["achilles_loss"]:
+        urgent_hits.append("跟腱异常伴功能丧失")
+    if components["function_loss"]:
+        urgent_hits.append("进行性功能下降")
+    risk_level = (
+        "emergency"
+        if emergency_hits
+        else "urgent_review"
+        if urgent_hits
+        else "self_care"
+    )
+    return {
+        "risk_level": risk_level,
+        "emergency_hits": emergency_hits,
+        "urgent_hits": urgent_hits,
+        "components": components,
+        "score": 3 if emergency_hits else 2 if urgent_hits else 0,
+    }
+
+
+@st.cache_resource(show_spinner=False)
+def semantic_risk_prototype_matrix(model_name: str) -> tuple[np.ndarray, tuple[str, ...]]:
+    """Encode local risk prototypes once with the cached embedding model."""
+    semantic_model = load_model(model_name)
+    labels = tuple(
+        label
+        for label, prototypes in SEMANTIC_RISK_PROTOTYPES.items()
+        for _ in prototypes
+    )
+    texts = [
+        f"passage: {prototype}"
+        for prototypes in SEMANTIC_RISK_PROTOTYPES.values()
+        for prototype in prototypes
+    ]
+    vectors = semantic_model.encode(
+        texts,
+        convert_to_numpy=True,
+        normalize_embeddings=True,
+    )
+    return vectors, labels
+
+
+def local_semantic_risk_assessment(query: str) -> dict:
+    """Classify risk using local multilingual embeddings and prototype similarity."""
+    normalized = query.casefold()
+    ankle_context = any(
+        term in normalized
+        for term in (
+            "脚踝",
+            "踝部",
+            "踝关节",
+            "踝伤",
+            "伤脚",
+            "患脚",
+            "足部",
+            "足趾",
+            "脚趾",
+            "脚掌",
+            "足端",
+            "小腿",
+            "腿肚",
+            "受伤",
+            "伤口",
+            "创口",
+            "系统应如何分级",
+            "就医风险判断",
+            "危险描述",
+        )
+    )
+    symptom_context = any(
+        term in normalized
+        for term in (
+            "疼",
+            "痛",
+            "肿",
+            "麻",
+            "冷",
+            "凉",
+            "白",
+            "紫",
+            "蓝",
+            "脉搏",
+            "感觉",
+            "知觉",
+            "活动",
+            "无力",
+            "打软腿",
+            "不能",
+            "无法",
+            "异常",
+            "恶化",
+            "变差",
+            "出血",
+            "脓",
+            "红热",
+            "发热",
+            "呼吸",
+            "胸闷",
+            "功能",
+            "症状",
+            "伤情",
+        )
+    )
+    rehabilitation_context = (
+        any(
+            term in normalized
+            for term in (
+                "训练计划",
+                "降低次数",
+                "动作难度",
+                "增加难度",
+                "逐步减少使用",
+                "康复练习",
+                "训练量",
+            )
+        )
+        and not any(
+            term in normalized
+            for term in (
+                "无法提踵",
+                "不能提踵",
+                "无法踮脚",
+                "不能踮脚",
+                "爆裂",
+                "凹陷",
+            )
+        )
+    )
+    if not ankle_context or not symptom_context or rehabilitation_context:
+        return {
+            "risk_level": "self_care",
+            "scores": {},
+            "margin": 0.0,
+            "eligible": False,
+        }
+    model_name = embedding_metadata["model"]
+    vectors, labels = semantic_risk_prototype_matrix(model_name)
+    query_vector = model.encode(
+        [f"query: {query}"],
+        convert_to_numpy=True,
+        normalize_embeddings=True,
+    )[0]
+    similarities = vectors @ query_vector
+    class_scores = {
+        label: float(
+            max(
+                score
+                for score, candidate_label in zip(similarities, labels)
+                if candidate_label == label
+            )
+        )
+        for label in SEMANTIC_RISK_PROTOTYPES
+    }
+    emergency_margin = class_scores["emergency"] - class_scores["self_care"]
+    urgent_margin = class_scores["urgent_review"] - class_scores["self_care"]
+    if (
+        class_scores["emergency"] >= SEMANTIC_EMERGENCY_THRESHOLD
+        and emergency_margin >= SEMANTIC_RISK_MARGIN
+        and (
+            class_scores["emergency"] - class_scores["urgent_review"]
+            >= SEMANTIC_EMERGENCY_CLASS_MARGIN
+        )
+    ):
+        risk_level = "emergency"
+    elif (
+        class_scores["urgent_review"] >= SEMANTIC_URGENT_THRESHOLD
+        and urgent_margin >= SEMANTIC_RISK_MARGIN
+    ):
+        risk_level = "urgent_review"
+    else:
+        risk_level = "self_care"
+    return {
+        "risk_level": risk_level,
+        "scores": {key: round(value, 4) for key, value in class_scores.items()},
+        "margin": round(
+            emergency_margin if risk_level == "emergency" else urgent_margin,
+            4,
+        ),
+        "eligible": True,
+    }
+
+
 def contains_warning_term(query: str) -> bool:
     normalized = query.casefold()
-    return any(term.casefold() in normalized for term in WARNING_TERMS)
+    semantic_warning = False
+    explicit_risk_classification = any(
+        marker in normalized
+        for marker in (
+            "系统应如何分级",
+            "就医风险判断",
+            "危险描述",
+            "紧急程度",
+            "就医等级",
+            "这是急诊还是尽快评估",
+            "应该多快就医",
+        )
+    )
+    if (
+        explicit_risk_classification
+        and "model" in globals()
+        and "embedding_metadata" in globals()
+    ):
+        semantic_warning = (
+            local_semantic_risk_assessment(query)["risk_level"] != "self_care"
+        )
+    return (
+        score_standardized_symptoms(query)["risk_level"] != "self_care"
+        or semantic_warning
+        or has_worsening_pain_or_swelling(query)
+        or has_deformity_concept(query)
+        or has_neurovascular_emergency_concept(query)
+        or has_open_injury_emergency_concept(query)
+        or has_severe_pain_concept(query)
+        or has_bony_tenderness_concept(query)
+        or has_dvt_respiratory_concept(query)
+        or has_weight_bearing_failure_concept(query)
+        or has_infection_concept(query)
+        or has_achilles_function_loss_concept(query)
+        or has_progressive_function_loss_concept(query)
+        or any(
+            term_is_affirmed(normalized, term.casefold()) for term in WARNING_TERMS
+        )
+    )
 
 
 def evidence_support_for_question(
@@ -648,6 +1816,20 @@ def evidence_support_for_question(
             "重返运动",
         ),
         (
+            any(
+                term in normalized
+                for term in (
+                    "抗阻",
+                    "小腿力量",
+                    "弹力带",
+                    "strength",
+                    "resistance",
+                )
+            ),
+            ("strength", "strengthening", "resistance", "calf", "theraband"),
+            "抗阻与力量训练",
+        ),
+        (
             any(term in normalized for term in ("训练", "活动度", "力量", "平衡", "exercise", "rehabilitation")),
             ("exercise", "rehabilitation", "range of motion", "strength", "balance"),
             "康复训练",
@@ -696,6 +1878,536 @@ def cached_question_scope_assessment(question: str) -> dict:
     return assess_question_scope(question)
 
 
+@st.cache_data(show_spinner=False, ttl=3600)
+def cached_risk_assessment(question: str) -> dict:
+    """Cache the second-stage API risk decision for an identical question."""
+    return assess_ankle_risk(question)
+
+
+def local_risk_assessment(question: str) -> dict:
+    """Conservative semantic fallback when the risk API is unavailable."""
+    normalized = question.casefold()
+    standardized = score_standardized_symptoms(question)
+    if standardized["risk_level"] == "emergency":
+        return {
+            "risk_level": "emergency",
+            "reason": (
+                "标准化症状组件达到急诊组合："
+                f"{standardized['emergency_hits'][0]}。"
+            ),
+            "immediate_action": "停止运动、保护脚踝并立即寻求急诊评估。",
+            "source": "本地症状组件组合评分",
+        }
+    if standardized["risk_level"] == "urgent_review":
+        return {
+            "risk_level": "urgent_review",
+            "reason": (
+                "标准化症状组件达到尽快评估组合："
+                f"{standardized['urgent_hits'][0]}。"
+            ),
+            "immediate_action": "停止运动、保护脚踝、减少负重，并尽快接受医疗评估。",
+            "source": "本地症状组件组合评分",
+        }
+    semantic = local_semantic_risk_assessment(question)
+    if semantic["risk_level"] in {"emergency", "urgent_review"}:
+        risk_level = semantic["risk_level"]
+        action = (
+            "停止运动、保护脚踝并立即寻求急诊评估。"
+            if risk_level == "emergency"
+            else "停止运动、保护脚踝、减少负重，并尽快接受医疗评估。"
+        )
+        return {
+            "risk_level": risk_level,
+            "reason": (
+                "本地语义分类命中风险等级；"
+                f"相似度={semantic['scores']}，边际={semantic['margin']:.3f}。"
+            ),
+            "immediate_action": action,
+            "source": "本地语义分类模型＋组件评分后备",
+        }
+    emergency_hits = [
+        term for term in EMERGENCY_TERMS if term_is_affirmed(normalized, term)
+    ]
+    if re.search(
+        r"(?:没有|并无|未见|无)[^，。；;]{0,4}(?:感觉|知觉)(?:异常|变化|问题)",
+        normalized,
+    ):
+        sensory_terms = {
+            "失去知觉",
+            "没有知觉",
+            "没有感觉",
+            "失去感觉",
+            "完全失去感觉",
+            "麻木",
+            "越来越麻",
+            "麻痹",
+            "感觉减退",
+        }
+        emergency_hits = [term for term in emergency_hits if term not in sensory_terms]
+    urgent_hits = [
+        term for term in URGENT_REVIEW_TERMS if term_is_affirmed(normalized, term)
+    ]
+    if has_worsening_pain_or_swelling(question):
+        urgent_hits.append("疼痛和肿胀持续加重")
+    if has_deformity_concept(question):
+        emergency_hits.append("外观明显歪斜或错位")
+    if has_neurovascular_emergency_concept(question):
+        emergency_hits.append("足部循环或感觉异常")
+    if has_open_injury_emergency_concept(question):
+        emergency_hits.append("骨外露或无法控制的出血")
+    if has_severe_pain_concept(question):
+        urgent_hits.append("当前疼痛非常严重")
+    if has_bony_tenderness_concept(question):
+        urgent_hits.append("踝部或足部骨性压痛")
+    if has_dvt_respiratory_concept(question):
+        emergency_hits.append("单侧小腿肿痛伴急性呼吸症状")
+    if has_weight_bearing_failure_concept(question):
+        urgent_hits.append("不能负重或无法走四步")
+    if has_infection_concept(question):
+        urgent_hits.append("伤口感染或红热扩散表现")
+    if has_achilles_function_loss_concept(question):
+        urgent_hits.append("跟腱区域异常并出现明显功能丧失")
+    if has_progressive_function_loss_concept(question):
+        urgent_hits.append("进行性无力或完全拒绝使用受伤脚")
+    if emergency_hits:
+        return {
+            "risk_level": "emergency",
+            "reason": f"命中需要立即评估的表现：{emergency_hits[0]}。",
+            "immediate_action": "停止运动、保护脚踝并立即寻求急诊评估。",
+            "source": "本地保守分级",
+        }
+    if urgent_hits:
+        return {
+            "risk_level": "urgent_review",
+            "reason": f"命中需要尽快医疗评估的表现：{urgent_hits[0]}。",
+            "immediate_action": "停止运动、保护脚踝、减少负重，并尽快接受医疗评估。",
+            "source": "本地保守分级",
+        }
+    return {
+        "risk_level": "self_care",
+        "reason": "没有识别到需要立即或尽快就医的当前危险表现。",
+        "immediate_action": "可按一般扭伤原则处理并观察症状变化。",
+        "source": "本地保守分级",
+    }
+
+
+def unsupported_request_reason(question: str) -> str | None:
+    """Identify requests that the text-only patient-education corpus cannot support."""
+    normalized = question.casefold()
+    medication_markers = (
+        "多少毫克",
+        "具体剂量",
+        "每次应该吃",
+        "每天应该吃",
+        "注射哪一种",
+        "注射哪种",
+        "注射什么",
+        "开哪种药",
+        "用药剂量",
+        "开一个完整处方",
+        "开处方",
+        "处方",
+        "服药次数",
+        "用法用量",
+        "what dose",
+        "how many mg",
+        "how much medication",
+        "which injection",
+        "prescribe",
+    )
+    if any(marker in normalized for marker in medication_markers):
+        return "当前资料不能提供个体化处方、注射选择或具体用药剂量。"
+
+    visual_inputs = (
+        "上传的",
+        "照片",
+        "图片",
+        "影像图",
+        "mri图像",
+        "mri片",
+        "x光片",
+        "ct片",
+        "核磁片",
+        "ct图像",
+        "ct截图",
+        "mri截图",
+        "x光截图",
+        "片子",
+        "检查片",
+        "影像资料",
+        "超声检查截图",
+        "检查截图",
+        "走路视频",
+        "步态视频",
+        "拍摄的视频",
+        "uploaded",
+        "photo",
+        "image",
+        "scan",
+    )
+    visual_judgments = (
+        "判断",
+        "诊断",
+        "解读",
+        "指出",
+        "分析",
+        "看一下",
+        "看出",
+        "有没有",
+        "正常吗",
+        "标注",
+        "异常",
+        "几级",
+        "断裂",
+        "interpret",
+        "diagnose",
+        "identify",
+        "grade",
+        "torn",
+    )
+    if any(term in normalized for term in visual_inputs) and any(
+        term in normalized for term in visual_judgments
+    ):
+        return "当前系统只能检索文字资料，不能查看或诊断照片及医学影像。"
+
+    exact_prediction = (
+        any(
+            term in normalized
+            for term in (
+                "精确",
+                "准确",
+                "具体日期",
+                "哪一天",
+                "多少小时",
+                "百分之百恢复",
+                "恢复到百分之",
+                "准确倒计时",
+                "确定答案",
+                "exact",
+            )
+        )
+        and any(
+            term in normalized
+            for term in (
+                "恢复",
+                "康复",
+                "痊愈",
+                "肿胀消失",
+                "韧带完全长好",
+                "休息",
+                "力量",
+                "正常上班",
+                "参加比赛",
+                "recovery",
+                "recover",
+            )
+        )
+    )
+    if exact_prediction:
+        return "资料只能提供一般恢复范围，不能精确预测个人恢复日期。"
+
+    guaranteed_outcome = (
+        any(
+            term in normalized
+            for term in (
+                "保证",
+                "确保",
+                "承诺",
+                "零失败",
+                "必效",
+                "百分之百有效",
+                "永远不会",
+                "guarantee",
+            )
+        )
+        and any(
+            term in normalized
+            for term in (
+                "痊愈",
+                "治愈",
+                "治好",
+                "愈合",
+                "恢复",
+                "康复",
+                "无痛",
+                "消除",
+                "消肿",
+                "复发",
+                "再扭伤",
+                "扭伤",
+                "受伤",
+                "有效",
+                "完全好",
+                "recover",
+                "cure",
+            )
+        )
+    )
+    if guaranteed_outcome:
+        return "患者教育资料不能保证个人在指定时间内痊愈或提供疗效承诺。"
+
+    provider_terms = (
+        "医院",
+        "诊所",
+        "医生",
+        "专科",
+        "hospital",
+        "clinic",
+        "doctor",
+        "specialist",
+    )
+    external_action_terms = (
+        "离我最近",
+        "附近",
+        "电话",
+        "地址",
+        "替我预约",
+        "帮我预约",
+        "挂号",
+        "费用",
+        "哪位",
+        "nearest",
+        "phone",
+        "address",
+        "book",
+        "appointment",
+        "cost",
+        "recommend",
+        "推荐",
+        "最好",
+        "最佳",
+        "本市",
+        "当地",
+        "查询",
+        "安排",
+        "联系",
+        "发送",
+        "定点医院",
+        "复诊",
+    )
+    if (
+        not contains_warning_term(question)
+        and any(term in normalized for term in provider_terms)
+        and any(
+        term in normalized for term in external_action_terms
+        )
+    ):
+        return "当前资料库不提供本地机构查询、医生推荐、费用信息或预约服务。"
+
+    device_data = (
+        "运动手表",
+        "智能手表",
+        "可穿戴",
+        "设备数据",
+        "手表数据",
+        "wearable",
+        "smartwatch",
+        "device data",
+        "智能鞋垫",
+        "健康应用",
+        "健康app",
+        "健康 app",
+        "跑步机记录",
+        "心率数据",
+        "电子病历",
+        "gps跑步轨迹",
+        "传感器数据",
+        "血氧",
+        "睡眠数据",
+        "个人数据",
+    )
+    device_judgments = (
+        "判断",
+        "诊断",
+        "愈合",
+        "恢复",
+        "分析",
+        "读取",
+        "连接",
+        "导入",
+        "评估",
+        "推断",
+        "预测",
+        "确定",
+        "interpret",
+        "diagnose",
+        "healed",
+        "recovered",
+    )
+    if any(term in normalized for term in device_data) and any(
+        term in normalized for term in device_judgments
+    ):
+        return "当前系统不能读取个人设备数据或据此判断组织是否愈合。"
+
+    legal_financial_terms = (
+        "伤残",
+        "保险赔偿",
+        "保险理赔",
+        "赔偿金额",
+        "工伤认定",
+        "保险公司",
+        "保险平台",
+        "理赔平台",
+        "赔偿",
+        "报销",
+        "工伤",
+        "起诉",
+        "残疾证明",
+        "误工费",
+        "disability rating",
+        "insurance compensation",
+        "insurance claim",
+    )
+    if any(term in normalized for term in legal_financial_terms):
+        return "当前资料库不支持伤残鉴定、工伤认定或保险赔偿判断。"
+
+    unsupported_treatments = (
+        "针灸",
+        "穴位",
+        "留针",
+        "中药",
+        "中成药",
+        "基因检测",
+        "基因预测",
+        "拔罐",
+        "精油",
+        "整脊",
+        "药酒",
+        "磁疗",
+        "顺势疗法",
+        "艾灸",
+        "草药",
+        "acupuncture",
+        "herbal formula",
+        "traditional chinese medicine",
+        "genetic test",
+        "星座",
+        "塔罗",
+        "八字",
+        "手相",
+        "占卜",
+        "算命",
+        "astrology",
+        "tarot",
+    )
+    if any(term in normalized for term in unsupported_treatments):
+        return "问题要求的治疗或检测不在当前资料库支持范围内。"
+
+    injection_decision = (
+        any(term in normalized for term in ("注射", "打针", "injection"))
+        and any(
+            term in normalized
+            for term in (
+                "哪一种",
+                "哪种",
+                "选择",
+                "替我决定",
+                "安排",
+                "which",
+                "choose",
+                "schedule",
+            )
+        )
+    )
+    if injection_decision:
+        return "当前患者教育资料不能替代医生选择或安排个体化注射治疗。"
+
+    invasive_treatment_terms = (
+        "脚踝手术",
+        "韧带手术",
+        "韧带缝合",
+        "韧带重建",
+        "关节镜手术",
+        "切口",
+        "固定方式",
+        "螺钉",
+        "麻醉方案",
+        "封闭针",
+        "术前停药",
+        "术前禁食",
+        "注射哪种",
+        "injection",
+        "surgery",
+        "operation",
+        "anesthesia",
+    )
+    invasive_decision_terms = (
+        "我的",
+        "为我",
+        "个人",
+        "是否必须",
+        "应该选择",
+        "替我决定",
+        "决定是否",
+        "哪一种",
+        "具体",
+        "计算",
+        "几枚",
+        "方案",
+        "还是",
+        "需要",
+        "which",
+        "decide",
+        "specific",
+        "how many",
+    )
+    if (
+        not contains_warning_term(question)
+        and any(term in normalized for term in invasive_treatment_terms)
+        and any(term in normalized for term in invasive_decision_terms)
+    ):
+        return "当前患者教育资料不能替代医生作出个体化手术或侵入治疗决策。"
+
+    external_operation_objects = (
+        "证明",
+        "报告",
+        "检查结果",
+        "申请表",
+        "理赔材料",
+        "文件",
+        "mri文件",
+        "医院系统",
+        "病历",
+        "预约",
+        "发票",
+        "处方",
+        "医生",
+        "医院",
+        "保险公司",
+        "学校",
+        "公司",
+    )
+    external_operation_actions = (
+        "开具",
+        "生成",
+        "发送",
+        "填写",
+        "登录",
+        "下载",
+        "取消",
+        "提交",
+        "联系",
+        "修改",
+        "写一份",
+        "发消息",
+        "替我",
+        "帮我",
+        "send",
+        "download",
+        "submit",
+        "cancel",
+        "contact",
+        "modify",
+    )
+    if (
+        not contains_warning_term(question)
+        and any(term in normalized for term in external_operation_objects)
+        and any(term in normalized for term in external_operation_actions)
+    ):
+        return "当前系统不能开具证明、访问外部系统或代为发送、填写、下载及修改资料。"
+    return None
+
+
 def local_question_scope_assessment(question: str) -> dict:
     """Conservative offline fallback when the admission API is unavailable."""
     normalized = question.casefold()
@@ -713,10 +2425,6 @@ def local_question_scope_assessment(question: str) -> dict:
         "recipe",
         "阿莫西林",
         "抗生素",
-        "多少毫克",
-        "针灸",
-        "穴位",
-        "留针",
         "amoxicillin",
         "antibiotic dose",
         "acupuncture point",
@@ -724,6 +2432,10 @@ def local_question_scope_assessment(question: str) -> dict:
     in_scope_terms = (
         "脚踝",
         "踝关节",
+        "踝部",
+        "踝伤",
+        "伤脚",
+        "受伤脚",
         "扭伤",
         "康复",
         "ankle",
@@ -734,6 +2446,64 @@ def local_question_scope_assessment(question: str) -> dict:
         "贴扎",
         "brace",
         "taping",
+    )
+    rehabilitation_scope_terms = (
+        "恢复走路",
+        "调整负重",
+        "跛行",
+        "单脚站立",
+        "平衡训练",
+        "提踵",
+        "跳跃",
+        "变向",
+        "重返运动",
+        "恢复跑步",
+        "参加篮球",
+        "运动鞋",
+        "鞋底稳定",
+        "鞋的包裹",
+        "足球训练",
+        "恢复足球",
+        "绕桩",
+        "运动对抗",
+        "弹力绷带",
+        "重新包扎",
+        "勾脚",
+        "绷脚",
+        "背屈练习",
+        "弹力带",
+        "抗阻训练",
+        "低冲击活动",
+        "快走转为慢跑",
+        "单脚小跳",
+        "return to walking",
+        "adjust weight bearing",
+        "limping",
+        "single-leg stance",
+        "balance training",
+        "heel raise",
+        "hopping",
+        "cutting",
+        "return to sport",
+    )
+    lower_limb_injury_terms = (
+        "受伤脚",
+        "伤脚",
+        "脚趾",
+        "足趾",
+        "脚背",
+        "足背",
+        "足背动脉",
+        "足部",
+        "踝部",
+        "内踝",
+        "外踝",
+        "舟骨",
+        "小腿",
+        "小腿突然肿痛",
+        "injured foot",
+        "toes",
+        "foot is cold",
     )
     if any(term in normalized for term in ("区别", "比较", "difference", "compare")):
         question_type = "comparison"
@@ -753,15 +2523,31 @@ def local_question_scope_assessment(question: str) -> dict:
         question_type = "how_to"
     else:
         question_type = "other"
-    if any(term in normalized for term in out_of_scope_terms):
+    unsupported_reason = unsupported_request_reason(question)
+    if unsupported_reason or any(term in normalized for term in out_of_scope_terms):
         return {
             "should_answer": False,
             "category": "超出资料范围",
             "question_type": question_type,
-            "reason": "问题要求的具体内容不在当前脚踝扭伤资料库支持范围内。",
-            "source": "本地保守规则",
+            "reason": unsupported_reason
+            or "问题要求的具体内容不在当前脚踝扭伤资料库支持范围内。",
+            "source": (
+                "本地能力边界审查" if unsupported_reason else "本地保守规则"
+            ),
         }
-    allowed = any(term in normalized for term in in_scope_terms)
+    allowed = (
+        any(term in normalized for term in in_scope_terms)
+        or any(term in normalized for term in rehabilitation_scope_terms)
+        or (
+            any(term in normalized for term in lower_limb_injury_terms)
+            and contains_warning_term(question)
+        )
+        or (
+            any(term in normalized for term in ("受伤后", "伤后", "伤口", "摔伤"))
+            and contains_warning_term(question)
+        )
+        or contains_warning_term(question)
+    )
     return {
         "should_answer": allowed,
         "category": "脚踝扭伤患者教育" if allowed else "超出资料范围",
@@ -780,9 +2566,23 @@ def generate_detailed_chinese_answer(
     warning: bool,
     question_type: str | None = None,
     question_category: str | None = None,
+    risk_level: str | None = None,
 ) -> str:
     """Return a detailed, conservative Chinese answer from medical templates."""
-    if warning:
+    if warning and risk_level == "urgent_review":
+        return (
+            "### 现在先怎么做\n"
+            "停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，"
+            "休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n"
+            "### 就医建议\n"
+            "这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。"
+            "建议尽快或当日联系医生、急诊门诊或骨科进行评估；"
+            "在明确能够安全负重前，不要强行走路或恢复训练。\n\n"
+            "### 如果出现以下变化\n"
+            "若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，"
+            "应立即寻求急诊帮助。"
+        )
+    if warning and risk_level == "emergency":
         return (
             "### 首要建议\n"
             "你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，"
@@ -851,16 +2651,7 @@ def generate_detailed_chinese_answer(
             "按压胫腓骨之间明显疼痛，或症状没有逐步改善，应由医生或运动医学专业人员评估。"
         )
 
-    load_response_markers = (
-        "pain and swelling increase the day after",
-        "continue training or reduce",
-        "worse the next day",
-        "第二天疼痛和肿胀增加",
-        "继续训练还是降低",
-        "训练后疼痛或肿胀",
-        "次日肿胀增加",
-    )
-    if any(marker in normalized for marker in load_response_markers):
+    if is_load_response_query(query):
         return (
             "**应该降低强度；如果症状增加明显，应暂停当前练习，而不是按原强度继续。**\n\n"
             "训练后或第二天疼痛、肿胀比训练前明显增加，通常说明这次训练负荷超过了脚踝目前"
@@ -1002,6 +2793,10 @@ def generate_detailed_chinese_answer(
                 "returning to running",
                 "when can i run",
                 "恢复走路",
+                "weight bearing",
+                "walking normally",
+                "负重",
+                "正常走路",
                 "何时负重",
                 "什么时候负重",
                 "恢复跑步",
@@ -1125,6 +2920,10 @@ def generate_detailed_chinese_answer(
                 "何时恢复走路、跑步或运动",
             ),
             (("医院", "就医", "doctor", "hospital"), "哪些情况需要去医院"),
+            (
+                ("负重", "正常走路", "weight bearing", "walking normally"),
+                "何时恢复走路、跑步或运动",
+            ),
         )
         combined_topic_text = f"{normalized} {category}"
         for markers, title in topic_routes:
@@ -1164,20 +2963,235 @@ def generate_detailed_chinese_answer(
 
 st.set_page_config(
     page_title="脚踝康复资料助手",
-    page_icon="🦶",
-    layout="centered",
+    page_icon=":material/health_and_safety:",
+    layout="wide",
 )
 
-st.title("脚踝康复资料助手")
-st.caption("基于 47 份医院、政府卫生机构和专业医学组织可信资料的本地语义检索 Demo")
+st.html(
+    """
+    <style>
+      :root {
+        --rag-navy: #07162f;
+        --rag-blue: #1236f5;
+        --rag-cyan: #25d6c8;
+        --rag-ink: #17213a;
+        --rag-muted: #61708f;
+        --rag-surface: #ffffff;
+        --rag-soft: #f3f7ff;
+        --rag-line: #dfe7f4;
+      }
 
+      .stApp {
+        background:
+          radial-gradient(circle at 8% 4%, rgba(37, 214, 200, 0.10), transparent 22rem),
+          linear-gradient(180deg, #f7faff 0%, #ffffff 32rem);
+      }
+
+      [data-testid="stMainBlockContainer"] {
+        max-width: 1120px;
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+      }
+
+      .rag-hero {
+        position: relative;
+        overflow: hidden;
+        min-height: 290px;
+        padding: clamp(28px, 5vw, 62px);
+        border-radius: 28px;
+        color: white;
+        background:
+          radial-gradient(circle at 82% 18%, rgba(37, 214, 200, 0.42), transparent 18%),
+          radial-gradient(circle at 92% 92%, rgba(84, 109, 255, 0.70), transparent 24%),
+          linear-gradient(125deg, #07162f 0%, #1236f5 62%, #07162f 130%);
+        box-shadow: 0 28px 70px rgba(16, 43, 130, 0.22);
+      }
+
+      .rag-hero::after {
+        content: "";
+        position: absolute;
+        right: -7%;
+        top: -20%;
+        width: 46%;
+        aspect-ratio: 1;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 34px rgba(255, 255, 255, 0.035),
+          0 0 0 72px rgba(255, 255, 255, 0.025);
+      }
+
+      .rag-eyebrow {
+        margin: 0 0 16px;
+        color: #a9fff5;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .rag-hero h1 {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        margin: 0;
+        color: white;
+        font-size: clamp(2.25rem, 6vw, 4.3rem);
+        line-height: 1.03;
+        letter-spacing: -0.04em;
+      }
+
+      .rag-hero-copy {
+        position: relative;
+        z-index: 1;
+        max-width: 670px;
+        margin: 20px 0 26px;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: clamp(1rem, 2vw, 1.16rem);
+        line-height: 1.75;
+      }
+
+      .rag-chips {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .rag-chip {
+        padding: 8px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.10);
+        color: white;
+        font-size: 0.82rem;
+        backdrop-filter: blur(10px);
+      }
+
+      .rag-intro {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin: 18px 0 28px;
+      }
+
+      .rag-intro-card {
+        padding: 17px 18px;
+        border: 1px solid var(--rag-line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.86);
+        color: var(--rag-muted);
+        box-shadow: 0 8px 24px rgba(24, 51, 105, 0.06);
+      }
+
+      .rag-intro-card strong {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--rag-ink);
+      }
+
+      .st-key-question_form {
+        margin-top: 8px;
+        padding: clamp(20px, 4vw, 34px);
+        border: 1px solid var(--rag-line);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 18px 48px rgba(24, 51, 105, 0.10);
+      }
+
+      .st-key-question_form textarea {
+        min-height: 128px;
+        border-radius: 16px;
+        background: #f7f9ff;
+        font-size: 1rem;
+        line-height: 1.65;
+      }
+
+      .st-key-question_form [data-testid="stFormSubmitButton"] button {
+        min-height: 48px;
+        border: 0;
+        border-radius: 14px;
+        background: linear-gradient(105deg, var(--rag-blue), #3158ff);
+        box-shadow: 0 12px 24px rgba(18, 54, 245, 0.22);
+        font-weight: 700;
+      }
+
+      [data-testid="stAlert"] {
+        border-radius: 16px;
+      }
+
+      [data-testid="stExpander"] {
+        overflow: hidden;
+        border-color: var(--rag-line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 0 7px 22px rgba(24, 51, 105, 0.055);
+      }
+
+      [data-testid="stCode"] {
+        border-radius: 12px;
+      }
+
+      h2, h3 {
+        color: var(--rag-ink);
+        letter-spacing: -0.025em;
+      }
+
+      @media (max-width: 700px) {
+        [data-testid="stMainBlockContainer"] {
+          padding-top: 1rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .rag-hero {
+          min-height: 0;
+          border-radius: 20px;
+        }
+
+        .rag-hero::after {
+          opacity: 0.5;
+        }
+
+        .rag-intro {
+          grid-template-columns: 1fr;
+        }
+
+        .st-key-question_form {
+          border-radius: 19px;
+        }
+      }
+    </style>
+    """
+)
+
+st.html(
+    """
+    <section class="rag-hero">
+      <p class="rag-eyebrow">Evidence-guided bilingual RAG</p>
+      <h1>脚踝康复资料助手</h1>
+      <p class="rag-hero-copy">
+        用中文或英文提问，从医院、政府卫生机构与专业医学组织资料中检索依据，
+        获得结构清晰、可追溯来源的中文健康教育回答。
+      </p>
+      <div class="rag-chips">
+        <span class="rag-chip">70 份可信资料</span>
+        <span class="rag-chip">中英双语检索</span>
+        <span class="rag-chip">风险分级提醒</span>
+      </div>
+    </section>
+    <section class="rag-intro">
+      <div class="rag-intro-card"><strong>循证检索</strong>回答与原始资料段落同时呈现</div>
+      <div class="rag-intro-card"><strong>双模型模式</strong>快速召回或 CrossEncoder 精排</div>
+      <div class="rag-intro-card"><strong>安全边界</strong>资料不足时拒绝强行生成结论</div>
+    </section>
+    """
+)
 st.info(
     "本工具仅提供健康教育资料检索，不能诊断伤情或替代医生。"
-    "当前多语言模型支持中文问题检索英文医学资料，也支持直接使用英文提问。"
-)
-st.caption(
-    "提交问题后，问题文本会先发送至 DeepSeek API 进行范围判断；"
-    "只有通过准入判断的问题才会进入本地检索与回答流程。"
+    "提交的问题会先进行范围与风险判断，通过后才进入本地检索。",
+    icon=":material/health_and_safety:",
 )
 
 try:
@@ -1187,41 +3201,49 @@ except Exception as error:
     st.error(f"索引加载失败：{error}")
     st.stop()
 
-with st.form("question_form"):
-    search_mode = st.radio(
+with st.form("question_form", border=False):
+    st.subheader("开始提问", anchor=False)
+    st.caption("描述受伤时间、症状、负重能力和你想了解的具体问题，会更容易找到合适资料。")
+    question = st.text_area(
+        "你的问题",
+        placeholder="例如：脚踝扭伤后达到什么条件才能恢复打篮球？",
+        height=128,
+    )
+    search_mode = st.segmented_control(
         "检索模式",
         ("Bi-Encoder 快速检索", "Bi-Encoder + CrossEncoder 精排"),
-        horizontal=True,
+        default="Bi-Encoder 快速检索",
         help=(
             "快速检索只使用现有 E5 向量；精排模式先召回 20 个候选段落，"
             "再让 CrossEncoder 同时阅读问题和段落并重新排序。"
         ),
     )
-    source_threshold = st.slider(
-        "资料显示相关性阈值",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.50,
-        step=0.05,
-        help="低于这个分数的资料段落不会显示。数值越高，筛选越严格。",
+    with st.expander("高级检索设置", icon=":material/tune:"):
+        source_threshold = st.slider(
+            "资料显示相关性阈值",
+            min_value=0.0,
+            max_value=1.0,
+            value=0.50,
+            step=0.05,
+            help="低于这个分数的资料段落不会显示。数值越高，筛选越严格。",
+        )
+        answer_threshold = st.slider(
+            "回答生成相关性阈值",
+            min_value=0.0,
+            max_value=1.0,
+            value=DEFAULT_ANSWER_THRESHOLD,
+            step=0.05,
+            help=(
+                "如果最佳资料仍低于这个分数，系统不会生成回答或展示资料，"
+                "而是直接提示当前资料不足。"
+            ),
+        )
+    submitted = st.form_submit_button(
+        "检索可信资料",
+        type="primary",
+        icon=":material/search:",
+        width="stretch",
     )
-    answer_threshold = st.slider(
-        "回答生成相关性阈值",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.60,
-        step=0.05,
-        help=(
-            "如果最佳资料仍低于这个分数，系统不会生成回答或展示资料，"
-            "而是直接提示当前资料不足。"
-        ),
-    )
-    question = st.text_area(
-        "请输入关于脚踝扭伤或康复的问题",
-        placeholder="例如：脚踝扭伤后达到什么条件才能恢复打篮球？",
-        height=100,
-    )
-    submitted = st.form_submit_button("检索资料", type="primary")
 
 if submitted:
     question = question.strip()
@@ -1245,10 +3267,19 @@ if active_question:
     )
     active_answer_threshold = st.session_state.get(
         "active_answer_threshold",
-        0.60,
+        DEFAULT_ANSWER_THRESHOLD,
     )
 
-    if api_is_configured():
+    capability_block = unsupported_request_reason(active_question)
+    if capability_block:
+        scope_assessment = {
+            "should_answer": False,
+            "category": "超出资料与系统能力范围",
+            "question_type": "other",
+            "reason": capability_block,
+            "source": "本地能力边界审查",
+        }
+    elif api_is_configured():
         try:
             with st.spinner("正在判断该问题是否适合由脚踝资料助手回答……"):
                 scope_assessment = cached_question_scope_assessment(active_question)
@@ -1276,11 +3307,44 @@ if active_question:
         f"· 问题类型：{scope_assessment.get('question_type', 'other')} "
         f"· 判断来源：{scope_assessment['source']}"
     )
-    warning_detected = contains_warning_term(active_question)
-    if warning_detected:
+    warning_candidate = contains_warning_term(active_question)
+    risk_assessment = {
+        "risk_level": "self_care",
+        "reason": "未命中潜在危险症状表达。",
+        "immediate_action": "",
+        "source": "本地关键词初筛",
+    }
+    if warning_candidate:
+        if api_is_configured():
+            try:
+                with st.spinner("正在对潜在危险症状进行第二阶段风险判断……"):
+                    risk_assessment = cached_risk_assessment(active_question)
+            except Exception as error:
+                risk_assessment = local_risk_assessment(active_question)
+                st.warning(
+                    "API 风险分级暂时不可用，已启用本地保守分级。"
+                    f"错误信息：{error}"
+                )
+        else:
+            risk_assessment = local_risk_assessment(active_question)
+    warning_detected = risk_assessment["risk_level"] in {
+        "emergency",
+        "urgent_review",
+    }
+    if risk_assessment["risk_level"] == "emergency":
         st.error(
-            "你的描述可能包含需要专业医疗评估的情况。"
-            "请停止运动，并及时联系医生、急诊或当地紧急医疗服务。"
+            "风险分级：需要立即医疗评估。请停止运动、避免继续负重，"
+            "并立即联系急诊或当地紧急医疗服务。"
+        )
+    elif risk_assessment["risk_level"] == "urgent_review":
+        st.warning(
+            "风险分级：可先保护脚踝、停止运动并减少负重，"
+            "同时建议尽快或当日接受医疗评估。"
+        )
+    if warning_candidate:
+        st.caption(
+            f"风险判断来源：{risk_assessment['source']} · "
+            f"原因：{risk_assessment['reason']}"
         )
 
     active_reranker = None
@@ -1356,6 +3420,7 @@ if active_question:
             warning_detected,
             scope_assessment.get("question_type"),
             scope_assessment.get("category"),
+            risk_assessment.get("risk_level"),
         )
     )
     st.caption(
@@ -1403,7 +3468,7 @@ if active_question:
                 st.write(chunk["text"])
             else:
                 try:
-                    with st.spinner("正在生成忠实中文翻译……"):
+                    with st.spinner("正在翻译成中文……"):
                         translation = cached_chinese_translation(
                             chunk["chunk_id"],
                             chunk["text"],

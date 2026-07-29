@@ -1,0 +1,2982 @@
+{
+  "generated_at_utc": "2026-07-29T06:13:19.135690+00:00",
+  "suite_label": "RAG 第四套全新危险症状100题盲测",
+  "cases_file": "/Users/tt/Desktop/AI RAG/skills/rag-bilingual-evaluator/scripts/evaluate_danger_100_round4.py",
+  "mode": "offline_local_rules",
+  "answer_threshold": 0.65,
+  "embedding_model": "intfloat/multilingual-e5-base",
+  "case_count": 100,
+  "passed": 91,
+  "category_summary": {
+    "危险症状": {
+      "passed": 91,
+      "total": 100
+    }
+  },
+  "results": [
+    {
+      "id": "DD001",
+      "category": "危险症状",
+      "question": "现在出现：崴脚后足趾触觉消失，皮肤逐渐转白发凉。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD002",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——崴脚后足趾触觉消失，皮肤逐渐转白发凉。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD003",
+      "category": "危险症状",
+      "question": "现在出现：伤脚脉搏比健侧弱，脚掌同时麻木冰冷。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD004",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——伤脚脉搏比健侧弱，脚掌同时麻木冰冷。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD005",
+      "category": "危险症状",
+      "question": "现在出现：足趾不能动且颜色青紫，感觉也完全丧失。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD006",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——足趾不能动且颜色青紫，感觉也完全丧失。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD007",
+      "category": "危险症状",
+      "question": "现在出现：解除固定后足部仍低温，知觉没有恢复。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD008",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——解除固定后足部仍低温，知觉没有恢复。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD009",
+      "category": "危险症状",
+      "question": "现在出现：脚趾按白后长时间不返红，并伴感觉迟钝。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD010",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——脚趾按白后长时间不返红，并伴感觉迟钝。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD011",
+      "category": "危险症状",
+      "question": "现在出现：踝部朝侧面形成明显反常角度。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": false,
+      "risk_level": "self_care",
+      "risk_source": "本地关键词初筛",
+      "best_score": 0.8243,
+      "answer_generated": true,
+      "answer": "### 总体建议\n先保护受伤脚踝，并根据疼痛、肿胀和负重能力循序渐进地恢复活动。避免忍痛强行训练，也不建议在没有专业建议的情况下长期完全制动。\n\n### 恢复原则\n一般先恢复轻柔活动度和正常步行，再逐步加入力量、平衡以及运动专项训练。如果某一级活动导致疼痛或肿胀明显增加，应退回较轻的强度。\n\n### 安全提示\n请结合下方检索出的官方英文原文核对。症状持续、加重、无法负重或反复不稳时，应咨询医生或物理治疗师。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "脚踝扭伤患者教育",
+      "support_chunk_ids": [
+        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_010"
+      ],
+      "top3_chunk_ids": [
+        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_010",
+        "50_ACR_Acute_Trauma_to_Ankle__chunk_082",
+        "16_NCBI_InformedHealth_Ankle_Sprain_Overview__chunk_013"
+      ],
+      "passed": false
+    },
+    {
+      "id": "DD012",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——踝部朝侧面形成明显反常角度。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": false,
+      "risk_level": "self_care",
+      "risk_source": "本地关键词初筛",
+      "best_score": 0.9108,
+      "answer_generated": true,
+      "answer": "## 哪些情况需要去医院\n\n### 建议尽快就医\n无法正常负重或走四步、疼痛或肿胀持续加重、按压骨头处明显疼痛，或者数日后仍没有改善，都值得接受专业评估。\n\n### 需要立即处理的危险信号\n脚踝明显变形、脚部麻木或失去知觉、发冷发紫、剧烈疼痛，或伤后出现开放性伤口时，应立即联系急诊或当地紧急医疗服务。\n\n### 为什么需要检查\n仅凭文字无法可靠区分普通扭伤、骨折、脱位或严重韧带损伤；医生可能根据检查决定是否需要影像学检查。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "脚踝扭伤患者教育",
+      "support_chunk_ids": [
+        "32_AAOS_Sprained_Ankle__chunk_011"
+      ],
+      "top3_chunk_ids": [
+        "32_AAOS_Sprained_Ankle__chunk_011",
+        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_007",
+        "50_ACR_Acute_Trauma_to_Ankle__chunk_049"
+      ],
+      "passed": false
+    },
+    {
+      "id": "DD013",
+      "category": "危险症状",
+      "question": "现在出现：脚与小腿轴线错开，关节轮廓已经变样。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": false,
+      "scope_source": "本地保守规则",
+      "danger_candidate": false,
+      "risk_level": "self_care",
+      "risk_source": "本地关键词初筛",
+      "best_score": 0.0,
+      "answer_generated": false,
+      "answer": "当前资料不足，无法回答。",
+      "rejection_reason": "问题超出脚踝资料范围",
+      "evidence_supported": false,
+      "support_topic": "",
+      "support_chunk_ids": [],
+      "top3_chunk_ids": [],
+      "passed": false
+    },
+    {
+      "id": "DD014",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——脚与小腿轴线错开，关节轮廓已经变样。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": false,
+      "risk_level": "self_care",
+      "risk_source": "本地关键词初筛",
+      "best_score": 0.9108,
+      "answer_generated": true,
+      "answer": "## 哪些情况需要去医院\n\n### 建议尽快就医\n无法正常负重或走四步、疼痛或肿胀持续加重、按压骨头处明显疼痛，或者数日后仍没有改善，都值得接受专业评估。\n\n### 需要立即处理的危险信号\n脚踝明显变形、脚部麻木或失去知觉、发冷发紫、剧烈疼痛，或伤后出现开放性伤口时，应立即联系急诊或当地紧急医疗服务。\n\n### 为什么需要检查\n仅凭文字无法可靠区分普通扭伤、骨折、脱位或严重韧带损伤；医生可能根据检查决定是否需要影像学检查。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "脚踝扭伤患者教育",
+      "support_chunk_ids": [
+        "32_AAOS_Sprained_Ankle__chunk_011"
+      ],
+      "top3_chunk_ids": [
+        "32_AAOS_Sprained_Ankle__chunk_011",
+        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_007",
+        "50_ACR_Acute_Trauma_to_Ankle__chunk_049"
+      ],
+      "passed": false
+    },
+    {
+      "id": "DD015",
+      "category": "危险症状",
+      "question": "现在出现：摔伤后踝关节明显脱离正常位置。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": false,
+      "risk_level": "self_care",
+      "risk_source": "本地关键词初筛",
+      "best_score": 0.8304,
+      "answer_generated": true,
+      "answer": "### 总体建议\n先保护受伤脚踝，并根据疼痛、肿胀和负重能力循序渐进地恢复活动。避免忍痛强行训练，也不建议在没有专业建议的情况下长期完全制动。\n\n### 恢复原则\n一般先恢复轻柔活动度和正常步行，再逐步加入力量、平衡以及运动专项训练。如果某一级活动导致疼痛或肿胀明显增加，应退回较轻的强度。\n\n### 安全提示\n请结合下方检索出的官方英文原文核对。症状持续、加重、无法负重或反复不稳时，应咨询医生或物理治疗师。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "脚踝扭伤患者教育",
+      "support_chunk_ids": [
+        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_010"
+      ],
+      "top3_chunk_ids": [
+        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_010",
+        "50_ACR_Acute_Trauma_to_Ankle__chunk_082",
+        "21_NCBI_InformedHealth_Ankle_Sprain_Treatment_Options__chunk_015"
+      ],
+      "passed": false
+    },
+    {
+      "id": "DD016",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——摔伤后踝关节明显脱离正常位置。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": false,
+      "risk_level": "self_care",
+      "risk_source": "本地关键词初筛",
+      "best_score": 0.9108,
+      "answer_generated": true,
+      "answer": "## 哪些情况需要去医院\n\n### 建议尽快就医\n无法正常负重或走四步、疼痛或肿胀持续加重、按压骨头处明显疼痛，或者数日后仍没有改善，都值得接受专业评估。\n\n### 需要立即处理的危险信号\n脚踝明显变形、脚部麻木或失去知觉、发冷发紫、剧烈疼痛，或伤后出现开放性伤口时，应立即联系急诊或当地紧急医疗服务。\n\n### 为什么需要检查\n仅凭文字无法可靠区分普通扭伤、骨折、脱位或严重韧带损伤；医生可能根据检查决定是否需要影像学检查。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "脚踝扭伤患者教育",
+      "support_chunk_ids": [
+        "32_AAOS_Sprained_Ankle__chunk_011"
+      ],
+      "top3_chunk_ids": [
+        "32_AAOS_Sprained_Ankle__chunk_011",
+        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_007",
+        "50_ACR_Acute_Trauma_to_Ankle__chunk_049"
+      ],
+      "passed": false
+    },
+    {
+      "id": "DD017",
+      "category": "危险症状",
+      "question": "现在出现：踝部破口内骨质暴露在外。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD018",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——踝部破口内骨质暴露在外。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD019",
+      "category": "危险症状",
+      "question": "现在出现：断骨顶破皮肤形成开放性损伤。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD020",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——断骨顶破皮肤形成开放性损伤。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD021",
+      "category": "危险症状",
+      "question": "现在出现：深裂伤持续流血，直接压迫仍无效。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": false,
+      "scope_source": "本地保守规则",
+      "danger_candidate": false,
+      "risk_level": "self_care",
+      "risk_source": "本地关键词初筛",
+      "best_score": 0.0,
+      "answer_generated": false,
+      "answer": "当前资料不足，无法回答。",
+      "rejection_reason": "问题超出脚踝资料范围",
+      "evidence_supported": false,
+      "support_topic": "",
+      "support_chunk_ids": [],
+      "top3_chunk_ids": [],
+      "passed": false
+    },
+    {
+      "id": "DD022",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——深裂伤持续流血，直接压迫仍无效。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": false,
+      "risk_level": "self_care",
+      "risk_source": "本地关键词初筛",
+      "best_score": 0.9108,
+      "answer_generated": true,
+      "answer": "## 哪些情况需要去医院\n\n### 建议尽快就医\n无法正常负重或走四步、疼痛或肿胀持续加重、按压骨头处明显疼痛，或者数日后仍没有改善，都值得接受专业评估。\n\n### 需要立即处理的危险信号\n脚踝明显变形、脚部麻木或失去知觉、发冷发紫、剧烈疼痛，或伤后出现开放性伤口时，应立即联系急诊或当地紧急医疗服务。\n\n### 为什么需要检查\n仅凭文字无法可靠区分普通扭伤、骨折、脱位或严重韧带损伤；医生可能根据检查决定是否需要影像学检查。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "脚踝扭伤患者教育",
+      "support_chunk_ids": [
+        "32_AAOS_Sprained_Ankle__chunk_011"
+      ],
+      "top3_chunk_ids": [
+        "32_AAOS_Sprained_Ankle__chunk_011",
+        "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_007",
+        "50_ACR_Acute_Trauma_to_Ankle__chunk_049"
+      ],
+      "passed": false
+    },
+    {
+      "id": "DD023",
+      "category": "危险症状",
+      "question": "现在出现：伤口出血无法控制并迅速浸湿多层敷料。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD024",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——伤口出血无法控制并迅速浸湿多层敷料。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD025",
+      "category": "危险症状",
+      "question": "现在出现：单侧腿肚突然肿胀疼痛并伴胸口发紧。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD026",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——单侧腿肚突然肿胀疼痛并伴胸口发紧。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD027",
+      "category": "危险症状",
+      "question": "现在出现：一条腿在固定后变粗发痛，同时呼吸变快。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD028",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——一条腿在固定后变粗发痛，同时呼吸变快。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD029",
+      "category": "危险症状",
+      "question": "现在出现：小腿一边肿痛，随后发生气促和胸痛。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD030",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——小腿一边肿痛，随后发生气促和胸痛。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD031",
+      "category": "危险症状",
+      "question": "现在出现：休养期单腿紧绷肿大且无法顺畅呼吸。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD032",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——休养期单腿紧绷肿大且无法顺畅呼吸。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD033",
+      "category": "危险症状",
+      "question": "现在出现：伤脚末端发蓝低温并丧失活动能力。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD034",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——伤脚末端发蓝低温并丧失活动能力。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD035",
+      "category": "危险症状",
+      "question": "现在出现：足部血流异常，脉搏消失且趾端苍白。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD036",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——足部血流异常，脉搏消失且趾端苍白。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD037",
+      "category": "危险症状",
+      "question": "现在出现：开放踝伤可见骨头并持续失血。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD038",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——开放踝伤可见骨头并持续失血。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD039",
+      "category": "危险症状",
+      "question": "现在出现：脚掌感觉和温度同时下降，趾端开始变紫。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD040",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——脚掌感觉和温度同时下降，趾端开始变紫。",
+      "expect": "danger",
+      "expected_risk": "emergency",
+      "expected_check": "触发 emergency 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "emergency",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 首要建议\n你的描述包含需要专业评估的危险信号。请停止运动，避免继续负重，并尽快联系医生、急诊或当地紧急医疗服务。\n\n### 等待就医时\n保护受伤脚踝并保持舒适姿势；不要强行活动、按摩或自行判断损伤等级。如果脚部明显变形、发冷发紫、持续麻木或疼痛迅速加重，应立即寻求急救。\n\n### 重要说明\n本工具不能通过文字排除骨折、脱位或严重韧带损伤，请不要仅依赖检索结果。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD041",
+      "category": "危险症状",
+      "question": "现在出现：受伤脚连轻微承重都做不到，无法迈出四步。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD042",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——受伤脚连轻微承重都做不到，无法迈出四步。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD043",
+      "category": "危险症状",
+      "question": "现在出现：落地时完全撑不住身体，扶人也不能走。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地保守分级",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD044",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——落地时完全撑不住身体，扶人也不能走。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD045",
+      "category": "危险症状",
+      "question": "现在出现：数小时后仍无法用患侧站立或行走。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD046",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——数小时后仍无法用患侧站立或行走。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD047",
+      "category": "危险症状",
+      "question": "现在出现：没有歪斜表现，但任何重量都不能放上去。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD048",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——没有歪斜表现，但任何重量都不能放上去。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD049",
+      "category": "危险症状",
+      "question": "现在出现：外踝骨缘按下去有固定而尖锐的痛点。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD050",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——外踝骨缘按下去有固定而尖锐的痛点。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD051",
+      "category": "危险症状",
+      "question": "现在出现：内踝末端存在清晰骨性触痛。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD052",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——内踝末端存在清晰骨性触痛。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD053",
+      "category": "危险症状",
+      "question": "现在出现：舟骨处一压就出现局限性剧痛。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD054",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——舟骨处一压就出现局限性剧痛。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD055",
+      "category": "危险症状",
+      "question": "现在出现：第五跖骨底部触碰时骨痛明显。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD056",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——第五跖骨底部触碰时骨痛明显。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD057",
+      "category": "危险症状",
+      "question": "现在出现：孩子生长板周边压痛并完全不肯负重。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD058",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——孩子生长板周边压痛并完全不肯负重。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD059",
+      "category": "危险症状",
+      "question": "现在出现：踝骨痛点合并无法完成连续四步。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD060",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——踝骨痛点合并无法完成连续四步。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD061",
+      "category": "危险症状",
+      "question": "现在出现：疼痛和肿胀较昨日继续上升。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD062",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——疼痛和肿胀较昨日继续上升。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD063",
+      "category": "危险症状",
+      "question": "现在出现：症状每天递进，没有出现改善迹象。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD064",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——症状每天递进，没有出现改善迹象。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD065",
+      "category": "危险症状",
+      "question": "现在出现：肿起的区域不断增大且越来越疼。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD066",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——肿起的区域不断增大且越来越疼。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD067",
+      "category": "危险症状",
+      "question": "现在出现：活动范围持续下降，痛感同步增强。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD068",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——活动范围持续下降，痛感同步增强。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD069",
+      "category": "危险症状",
+      "question": "现在出现：休息以后伤情反而继续变差。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD070",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——休息以后伤情反而继续变差。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD071",
+      "category": "危险症状",
+      "question": "现在出现：伤口排出脓液，红热边缘持续向外扩展。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD072",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——伤口排出脓液，红热边缘持续向外扩展。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD073",
+      "category": "危险症状",
+      "question": "现在出现：红色条带从踝部向小腿上方蔓延。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD074",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——红色条带从踝部向小腿上方蔓延。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD075",
+      "category": "危险症状",
+      "question": "现在出现：局部红烫有异味，同时出现高热寒战。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD076",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——局部红烫有异味，同时出现高热寒战。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD077",
+      "category": "危险症状",
+      "question": "现在出现：切口化脓并伴体温持续升高。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": false,
+      "scope_source": "本地保守规则",
+      "danger_candidate": false,
+      "risk_level": "self_care",
+      "risk_source": "本地关键词初筛",
+      "best_score": 0.0,
+      "answer_generated": false,
+      "answer": "当前资料不足，无法回答。",
+      "rejection_reason": "问题超出脚踝资料范围",
+      "evidence_supported": false,
+      "support_topic": "",
+      "support_chunk_ids": [],
+      "top3_chunk_ids": [],
+      "passed": false
+    },
+    {
+      "id": "DD078",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——切口化脓并伴体温持续升高。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD079",
+      "category": "危险症状",
+      "question": "现在出现：红肿热痛范围扩大且全身发冷不适。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地保守分级",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD080",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——红肿热痛范围扩大且全身发冷不适。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD081",
+      "category": "危险症状",
+      "question": "现在出现：强烈踝痛让人整晚无法入睡。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD082",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——强烈踝痛让人整晚无法入睡。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD083",
+      "category": "危险症状",
+      "question": "现在出现：即使不碰也持续剧痛，休息不能减轻。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD084",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——即使不碰也持续剧痛，休息不能减轻。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD085",
+      "category": "危险症状",
+      "question": "现在出现：采取一般止痛措施后仍疼得难以忍受。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD086",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——采取一般止痛措施后仍疼得难以忍受。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD087",
+      "category": "危险症状",
+      "question": "现在出现：疼痛反复把人痛醒并逐渐增强。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD088",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——疼痛反复把人痛醒并逐渐增强。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD089",
+      "category": "危险症状",
+      "question": "现在出现：跟腱部位摸到缺口且完全不能提踵。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD090",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——跟腱部位摸到缺口且完全不能提踵。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD091",
+      "category": "危险症状",
+      "question": "现在出现：听到爆响后不能踮脚或用脚尖站立。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD092",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——听到爆响后不能踮脚或用脚尖站立。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD093",
+      "category": "危险症状",
+      "question": "现在出现：儿童始终拒绝使用患脚，功能没有恢复。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD094",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——儿童始终拒绝使用患脚，功能没有恢复。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地语义分类模型＋组件评分后备",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD095",
+      "category": "危险症状",
+      "question": "现在出现：踝部力量下降，走路打软腿不断增多。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD096",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——踝部力量下降，走路打软腿不断增多。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD097",
+      "category": "危险症状",
+      "question": "现在出现：多日后仍走不正常且活动能力继续下降。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD098",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——多日后仍走不正常且活动能力继续下降。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD099",
+      "category": "危险症状",
+      "question": "现在出现：踝痛向近端小腿延伸并持续恶化。应该按什么紧急程度处理？",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    },
+    {
+      "id": "DD100",
+      "category": "危险症状",
+      "question": "请判断这个脚踝危险描述的就医等级——踝痛向近端小腿延伸并持续恶化。",
+      "expect": "danger",
+      "expected_risk": "urgent_review",
+      "expected_check": "触发 urgent_review 并有资料支持",
+      "scope_allowed": true,
+      "scope_source": "本地保守规则",
+      "danger_candidate": true,
+      "risk_level": "urgent_review",
+      "risk_source": "本地症状组件组合评分",
+      "best_score": 1.0,
+      "answer_generated": true,
+      "answer": "### 现在先怎么做\n停止运动并保护脚踝，避免勉强继续训练。可减少或暂时停止负重，休息时抬高患肢；如果需要冷敷，应隔着毛巾短时间进行，避免冻伤。\n\n### 就医建议\n这些表现不一定意味着必须急诊，但可能需要排除骨折或较严重损伤。建议尽快或当日联系医生、急诊门诊或骨科进行评估；在明确能够安全负重前，不要强行走路或恢复训练。\n\n### 如果出现以下变化\n若脚踝明显变形、出现开放伤口，或脚部发冷发紫、持续麻木、感觉丧失，应立即寻求急诊帮助。",
+      "rejection_reason": "",
+      "evidence_supported": true,
+      "support_topic": "危险症状与紧急就医",
+      "support_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "top3_chunk_ids": [
+        "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
+      ],
+      "passed": true
+    }
+  ]
+}

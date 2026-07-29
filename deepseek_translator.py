@@ -45,7 +45,14 @@ def assess_question_scope(question: str) -> dict:
                     "早期处理、治疗、康复训练、训练负荷、恢复时间、护具贴扎、"
                     "重返走路跑步运动、疗效、复发预防和危险信号。"
                     "拒绝范围：饮食或吃什么、一般营养、与脚踝扭伤无关的问题、"
-                    "仅包含脚踝关键词但实际意图不属于上述患者教育资料的问题。"
+                    "仅包含脚踝关键词但实际意图不属于上述患者教育资料的问题；"
+                    "还必须拒绝查看或诊断照片及医学影像、提供具体药物或注射剂量、"
+                    "精确预测个人恢复日期、推荐医生或医院、查询费用电话地址、"
+                    "代为挂号预约、承诺指定时间痊愈、读取可穿戴设备数据、"
+                    "伤残鉴定或保险赔偿、作出个体化手术与侵入治疗决策、"
+                    "开具证明、访问外部系统、发送下载或修改资料，"
+                    "使用星座、塔罗、八字、手相或其他占卜方式判断伤情，"
+                    "以及当前资料没有覆盖的治疗或检测。"
                     "如果问题同时包含允许范围和无关问题，只有当核心意图能够由允许范围"
                     "直接回答时才允许。危险信号和就医问题必须允许。"
                     "同时识别问题表达方式：yes_no（是否类）、how_to（怎么做类）、"
@@ -92,6 +99,58 @@ def assess_question_scope(question: str) -> dict:
         "category": str(result.get("category", "未分类")).strip(),
         "question_type": question_type,
         "reason": str(result.get("reason", "未提供原因")).strip(),
+        "source": "DeepSeek API",
+    }
+
+
+def assess_ankle_risk(question: str) -> dict:
+    """Classify a possible ankle-injury warning signal without diagnosing it."""
+    response = _client().chat.completions.create(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "你是脚踝损伤患者教育系统的风险分级器，不进行诊断。"
+                    "只有在文本已经命中潜在危险症状同义词后才会调用你。"
+                    "将风险分为：emergency（明显变形、开放伤口、足部发冷发紫、"
+                    "感觉丧失、足部脉搏消失或苍白、骨头外露、持续大量出血、"
+                    "无法活动脚趾，或小腿急性肿痛伴呼吸困难等可能威胁肢体"
+                    "或需要立即急诊的表现）；"
+                    "urgent_review（不能负重或走四步、严重或持续加重的疼痛肿胀等，"
+                    "骨点或舟骨压痛、儿童生长板附近压痛且拒绝行走、发烧伴局部红热、"
+                    "伤口流脓或红线扩散等，"
+                    "可先保护、停止运动和减少负重，但应尽快或当日医疗评估）；"
+                    "self_care（语境并未描述当前危险症状，可提供一般处理及观察建议）。"
+                    "必须结合完整语义，区分否定、假设、询问定义和患者正在出现症状。"
+                    "不得因为单个关键词自动判为 emergency，也不得把明确的 emergency "
+                    "表现降级。只输出JSON对象，不要输出Markdown。"
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    '输出格式：{"risk_level":"emergency、urgent_review或self_care",'
+                    '"reason":"简短中文原因","immediate_action":"一条安全的立即措施"}。\n\n'
+                    f"问题：{question}"
+                ),
+            },
+        ],
+        response_format={"type": "json_object"},
+        stream=False,
+        extra_body={"thinking": {"type": "disabled"}},
+    )
+    content = response.choices[0].message.content
+    if not content or not content.strip():
+        raise RuntimeError("DeepSeek 返回了空的风险判断")
+    result = json.loads(content)
+    risk_level = str(result.get("risk_level", "")).strip()
+    if risk_level not in {"emergency", "urgent_review", "self_care"}:
+        raise RuntimeError("DeepSeek 风险判断包含无效的 risk_level")
+    return {
+        "risk_level": risk_level,
+        "reason": str(result.get("reason", "未提供原因")).strip(),
+        "immediate_action": str(result.get("immediate_action", "")).strip(),
         "source": "DeepSeek API",
     }
 

@@ -1,6 +1,6 @@
 # Ankle Sprain Patient Education PDFs
 
-Collected from official healthcare-provider websites; last updated 2026-07-28.
+Collected from official healthcare-provider websites; last updated 2026-07-29.
 
 | File | Issuing institution | Document date | Next review | Official source |
 |---|---|---:|---:|---|
@@ -120,3 +120,31 @@ Collected from official healthcare-provider websites; last updated 2026-07-28.
   imaging indications, and imaging for persistent ankle pain.
 - The original English medical text was preserved. No source was machine
   translated before chunking, indexing, or embedding.
+
+## Added sources 56-70
+
+| File | Title | Issuing institution | Publication/update date | Original official URL |
+|---|---|---|---:|---|
+| `56_Cleveland_Clinic_Ankle_Anatomy.pdf` | Ankle: Anatomy & How It Works | Cleveland Clinic | 15 April 2023 | https://my.clevelandclinic.org/health/body/24909-ankle-joint |
+| `57_RNOH_Common_Peroneal_Nerve_Guide.pdf` | A Patient's Guide to Common Peroneal Nerve Exploration | Royal National Orthopaedic Hospital NHS Trust | 2025 | https://www.rnoh.nhs.uk/patients-and-visitors/patient-information-guides/common-peroneal-nerve-exploration-patients-guide |
+| `58_Cleveland_Clinic_Peroneal_Nerve_Injury.pdf` | Peroneal Nerve Injury: Symptoms, Causes & Treatment | Cleveland Clinic | 31 March 2026 | https://my.clevelandclinic.org/health/diseases/24263-peroneal-nerve-injury |
+| `59_MedlinePlus_Ankle_Injuries_and_Disorders.pdf` | Ankle Injuries and Disorders | MedlinePlus, U.S. National Library of Medicine | 30 September 2024 | https://medlineplus.gov/ankleinjuriesanddisorders.html |
+| `60_MedlinePlus_Ankle_Pain.pdf` | Ankle Pain | MedlinePlus, U.S. National Library of Medicine | Not stated | https://medlineplus.gov/ency/article/003167.htm |
+| `61_Plymouth_NHS_Ankle_Fractures.pdf` | Ankle Fractures | University Hospitals Plymouth NHS Trust | July 2025 | https://www.plymouthhospitals.nhs.uk/display-pil/pil-ankle-fractures-3956 |
+| `62_Plymouth_NHS_Achilles_Rupture_Rehabilitation.pdf` | Achilles Tendon Rupture Rehabilitation | University Hospitals Plymouth NHS Trust | August 2025 | https://www.plymouthhospitals.nhs.uk/display-pil/pil-achilles-tendon-rupture-rehabilitation-8516 |
+| `63_East_Sussex_NHS_Ankle_Avulsion_Fracture.pdf` | Ankle Avulsion Fracture | East Sussex Healthcare NHS Trust | Not stated | https://www.esht.nhs.uk/leaflet/ankle-avulsion-fracture/ |
+| `64_MedlinePlus_Ankle_Fracture_Aftercare.pdf` | Ankle Fracture - Aftercare | MedlinePlus, U.S. National Library of Medicine | 17 June 2024 | https://medlineplus.gov/ency/patientinstructions/000548.htm |
+| `65_North_Tees_NHS_Ankle_Fracture.pdf` | Ankle Fracture | North Tees and Hartlepool NHS Foundation Trust | 2026 | https://www.nth.nhs.uk/resources/ankle-fracture/ |
+| `66_Worcestershire_NHS_Ankle_Fracture_Rehabilitation.pdf` | Ankle Fracture | Worcestershire Acute Hospitals NHS Trust | 23 June 2026 | https://www.worcsacute.nhs.uk/leaflets/ankle-fracture/ |
+| `67_Imperial_NHS_Achilles_Tendon_Partial_Tear.pdf` | Achilles Tendon - Partial Tear | Imperial College Healthcare NHS Trust | 2026 | https://www.imperial.nhs.uk/-/media/website/patient-information-leaflets/orthopaedics/virtual-fracture-clinic/achilles-tendon--partial-tear.pdf?rev=ad40df832c2e4a32bbaf964d7ef96f93 |
+| `68_Doncaster_NHS_Ankle_Fracture_Exercises.pdf` | Advice and Exercises for Ankle Fractures | Doncaster and Bassetlaw Teaching Hospitals NHS Foundation Trust | Not stated | https://www.dbth.nhs.uk/advice-and-exercises-for-ankle-fractures/ |
+| `69_Royal_Cornwall_NHS_Achilles_Tendon_Injury.pdf` | Achilles Tendon Injury | Royal Cornwall Hospitals NHS Trust | 2 October 2024 | https://fractureclinic.royalcornwallhospitals.nhs.uk/ankle-injuries/achilles-tendon-injury/ |
+| `70_AOFAS_FootCareMD_Sprained_Ankle_Care.pdf` | Sprained Ankle Self Care and Treatment | American Orthopaedic Foot & Ankle Society (FootCareMD) | Not stated | https://www.footcaremd.org/resources/how-to-help/how-to-care-for-a-sprained-ankle |
+
+- Files 56-66 and 68-70 are English-text PDF snapshots of official patient
+  education pages. File 67 is the original official NHS PDF.
+- The group adds named ankle bones, cartilage, ligaments, muscles, tendons,
+  nerves and blood vessels; common peroneal nerve injury and foot drop;
+  fracture recovery; and Achilles tendon rehabilitation.
+- Navigation was removed from webpage snapshots. The source medical text was
+  not translated, paraphrased, or supplemented before indexing.

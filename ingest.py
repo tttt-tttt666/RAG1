@@ -358,6 +358,96 @@ SOURCES = {
         "document_date": "not stated",
         "review_date": "not stated",
     },
+    "56_Cleveland_Clinic_Ankle_Anatomy.pdf": {
+        "institution": "Cleveland Clinic",
+        "source_url": "https://my.clevelandclinic.org/health/body/24909-ankle-joint",
+        "document_date": "2023-04-15",
+        "review_date": "not applicable",
+    },
+    "57_RNOH_Common_Peroneal_Nerve_Guide.pdf": {
+        "institution": "Royal National Orthopaedic Hospital NHS Trust",
+        "source_url": "https://www.rnoh.nhs.uk/patients-and-visitors/patient-information-guides/common-peroneal-nerve-exploration-patients-guide",
+        "document_date": "2025",
+        "review_date": "not stated",
+    },
+    "58_Cleveland_Clinic_Peroneal_Nerve_Injury.pdf": {
+        "institution": "Cleveland Clinic",
+        "source_url": "https://my.clevelandclinic.org/health/diseases/24263-peroneal-nerve-injury",
+        "document_date": "2026-03-31",
+        "review_date": "not applicable",
+    },
+    "59_MedlinePlus_Ankle_Injuries_and_Disorders.pdf": {
+        "institution": "MedlinePlus, U.S. National Library of Medicine",
+        "source_url": "https://medlineplus.gov/ankleinjuriesanddisorders.html",
+        "document_date": "2024-09-30",
+        "review_date": "not applicable",
+    },
+    "60_MedlinePlus_Ankle_Pain.pdf": {
+        "institution": "MedlinePlus, U.S. National Library of Medicine",
+        "source_url": "https://medlineplus.gov/ency/article/003167.htm",
+        "document_date": "not stated",
+        "review_date": "not applicable",
+    },
+    "61_Plymouth_NHS_Ankle_Fractures.pdf": {
+        "institution": "University Hospitals Plymouth NHS Trust",
+        "source_url": "https://www.plymouthhospitals.nhs.uk/display-pil/pil-ankle-fractures-3956",
+        "document_date": "2025-07",
+        "review_date": "2027-07",
+    },
+    "62_Plymouth_NHS_Achilles_Rupture_Rehabilitation.pdf": {
+        "institution": "University Hospitals Plymouth NHS Trust",
+        "source_url": "https://www.plymouthhospitals.nhs.uk/display-pil/pil-achilles-tendon-rupture-rehabilitation-8516",
+        "document_date": "2025-08",
+        "review_date": "2027-08",
+    },
+    "63_East_Sussex_NHS_Ankle_Avulsion_Fracture.pdf": {
+        "institution": "East Sussex Healthcare NHS Trust",
+        "source_url": "https://www.esht.nhs.uk/leaflet/ankle-avulsion-fracture/",
+        "document_date": "not stated",
+        "review_date": "2027-12",
+    },
+    "64_MedlinePlus_Ankle_Fracture_Aftercare.pdf": {
+        "institution": "MedlinePlus, U.S. National Library of Medicine",
+        "source_url": "https://medlineplus.gov/ency/patientinstructions/000548.htm",
+        "document_date": "2024-06-17",
+        "review_date": "not applicable",
+    },
+    "65_North_Tees_NHS_Ankle_Fracture.pdf": {
+        "institution": "North Tees and Hartlepool NHS Foundation Trust",
+        "source_url": "https://www.nth.nhs.uk/resources/ankle-fracture/",
+        "document_date": "2026",
+        "review_date": "not stated",
+    },
+    "66_Worcestershire_NHS_Ankle_Fracture_Rehabilitation.pdf": {
+        "institution": "Worcestershire Acute Hospitals NHS Trust",
+        "source_url": "https://www.worcsacute.nhs.uk/leaflets/ankle-fracture/",
+        "document_date": "2026-06-23",
+        "review_date": "not stated",
+    },
+    "67_Imperial_NHS_Achilles_Tendon_Partial_Tear.pdf": {
+        "institution": "Imperial College Healthcare NHS Trust",
+        "source_url": "https://www.imperial.nhs.uk/-/media/website/patient-information-leaflets/orthopaedics/virtual-fracture-clinic/achilles-tendon--partial-tear.pdf?rev=ad40df832c2e4a32bbaf964d7ef96f93",
+        "document_date": "2026",
+        "review_date": "not stated",
+    },
+    "68_Doncaster_NHS_Ankle_Fracture_Exercises.pdf": {
+        "institution": "Doncaster and Bassetlaw Teaching Hospitals NHS Foundation Trust",
+        "source_url": "https://www.dbth.nhs.uk/advice-and-exercises-for-ankle-fractures/",
+        "document_date": "not stated",
+        "review_date": "not stated",
+    },
+    "69_Royal_Cornwall_NHS_Achilles_Tendon_Injury.pdf": {
+        "institution": "Royal Cornwall Hospitals NHS Trust",
+        "source_url": "https://fractureclinic.royalcornwallhospitals.nhs.uk/ankle-injuries/achilles-tendon-injury/",
+        "document_date": "2024-10-02",
+        "review_date": "not applicable",
+    },
+    "70_AOFAS_FootCareMD_Sprained_Ankle_Care.pdf": {
+        "institution": "American Orthopaedic Foot & Ankle Society (FootCareMD)",
+        "source_url": "https://www.footcaremd.org/resources/how-to-help/how-to-care-for-a-sprained-ankle",
+        "document_date": "not stated",
+        "review_date": "not stated",
+    },
 }
 
 

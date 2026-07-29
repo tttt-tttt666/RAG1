@@ -152,6 +152,49 @@ DANGER_EVIDENCE_TERMS = (
 def prioritized_evidence_terms(query: str) -> tuple[str, ...]:
     """Return strict evidence terms for topics prone to keyword-only matches."""
     normalized = query.casefold()
+    if any(
+        term in normalized
+        for term in (
+            "腓总神经",
+            "腓骨神经",
+            "足下垂",
+            "脚背麻木",
+            "common peroneal nerve",
+            "common fibular nerve",
+            "foot drop",
+            "dorsum of the foot",
+        )
+    ):
+        return (
+            "common peroneal nerve",
+            "common fibular nerve",
+            "foot drop",
+            "dorsum of the foot",
+            "numbness",
+            "tingling",
+        )
+    if any(
+        term in normalized
+        for term in (
+            "踝关节周围",
+            "踝关节解剖",
+            "骨骼、韧带",
+            "骨骼和韧带",
+            "肌肉、神经",
+            "肌肉和神经",
+            "blood vessels",
+            "ankle anatomy",
+            "bones, ligaments",
+            "muscles, nerves",
+        )
+    ):
+        return (
+            "bones in the ankle",
+            "ligaments in the ankle",
+            "muscles in the ankle",
+            "nerves in the ankle",
+            "blood vessels in the ankle",
+        )
     if (
         any(term in normalized for term in ("六周", "6周", "6 weeks", "persistent", "持续"))
         and any(term in normalized for term in ("x-ray", "x ray", "mri", "影像", "拍片", "x光"))
@@ -432,6 +475,42 @@ def retrieve(
 def canonicalize_retrieval_query(query: str) -> str:
     """Map bilingual domain intents to the same English retrieval query."""
     normalized = query.casefold()
+    if any(
+        term in normalized
+        for term in (
+            "腓总神经",
+            "腓骨神经",
+            "足下垂",
+            "脚背麻木",
+            "common peroneal nerve",
+            "common fibular nerve",
+            "foot drop",
+            "dorsum of the foot",
+        )
+    ):
+        return (
+            "common peroneal nerve injury anatomy and function: foot drop, "
+            "weak ankle dorsiflexion, numbness or tingling on the dorsum of the foot"
+        )
+    if any(
+        term in normalized
+        for term in (
+            "踝关节周围",
+            "踝关节解剖",
+            "骨骼、韧带",
+            "骨骼和韧带",
+            "肌肉、神经",
+            "肌肉和神经",
+            "blood vessels",
+            "ankle anatomy",
+            "bones, ligaments",
+            "muscles, nerves",
+        )
+    ):
+        return (
+            "ankle anatomy: names of bones, cartilage, ligaments, muscles, "
+            "nerves and blood vessels around the ankle joint"
+        )
     if (
         any(term in normalized for term in ("六周", "6周", "6 weeks", "persistent", "持续"))
         and any(term in normalized for term in ("x-ray", "x ray", "mri", "影像", "拍片", "x光"))
@@ -1524,7 +1603,7 @@ st.html(
         获得结构清晰、可追溯来源的中文健康教育回答。
       </p>
       <div class="rag-chips">
-        <span class="rag-chip">55 份可信资料</span>
+        <span class="rag-chip">70 份可信资料</span>
         <span class="rag-chip">中英双语检索</span>
         <span class="rag-chip">风险分级提醒</span>
       </div>

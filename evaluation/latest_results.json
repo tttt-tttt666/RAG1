@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-07-28T08:40:25.464458+00:00",
+  "generated_at_utc": "2026-07-29T01:52:41.509850+00:00",
   "question_pairs": 10,
   "query_count": 20,
   "embedding_model": "intfloat/multilingual-e5-base",
@@ -218,6 +218,17 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
+              "chunk_id": "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_007",
+              "institution": "American Orthopaedic Foot & Ankle Society (FootCareMD)",
+              "similarity": 0.8989,
+              "matched_terms": [
+                "range of motion",
+                "strength",
+                "balance",
+                "proprioception"
+              ]
+            },
+            {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
               "institution": "The Royal Children's Hospital Melbourne",
               "similarity": 0.8889,
@@ -231,17 +242,6 @@
               "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
               "similarity": 0.8865,
               "matched_terms": [
-                "strength",
-                "balance",
-                "proprioception"
-              ]
-            },
-            {
-              "chunk_id": "13_AAP_Ankle_Sprain_Treatment__chunk_002",
-              "institution": "American Academy of Pediatrics",
-              "similarity": 0.8836,
-              "matched_terms": [
-                "range of motion",
                 "strength",
                 "balance",
                 "proprioception"
@@ -264,6 +264,17 @@
           "source_score_at_3": 100.0,
           "sources": [
             {
+              "chunk_id": "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_007",
+              "institution": "American Orthopaedic Foot & Ankle Society (FootCareMD)",
+              "similarity": 0.8989,
+              "matched_terms": [
+                "range of motion",
+                "strength",
+                "balance",
+                "proprioception"
+              ]
+            },
+            {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
               "institution": "The Royal Children's Hospital Melbourne",
               "similarity": 0.8889,
@@ -277,17 +288,6 @@
               "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
               "similarity": 0.8865,
               "matched_terms": [
-                "strength",
-                "balance",
-                "proprioception"
-              ]
-            },
-            {
-              "chunk_id": "13_AAP_Ankle_Sprain_Treatment__chunk_002",
-              "institution": "American Academy of Pediatrics",
-              "similarity": 0.8836,
-              "matched_terms": [
-                "range of motion",
                 "strength",
                 "balance",
                 "proprioception"
@@ -732,9 +732,9 @@
               ]
             },
             {
-              "chunk_id": "41_APTA_ChoosePT_Ankle_Sprain_Guide__chunk_016",
-              "institution": "American Physical Therapy Association (ChoosePT)",
-              "similarity": 0.8884,
+              "chunk_id": "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_007",
+              "institution": "American Orthopaedic Foot & Ankle Society (FootCareMD)",
+              "similarity": 0.8887,
               "matched_terms": [
                 "balance",
                 "strength"
@@ -775,9 +775,9 @@
               ]
             },
             {
-              "chunk_id": "41_APTA_ChoosePT_Ankle_Sprain_Guide__chunk_016",
-              "institution": "American Physical Therapy Association (ChoosePT)",
-              "similarity": 0.8884,
+              "chunk_id": "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_007",
+              "institution": "American Orthopaedic Foot & Ankle Society (FootCareMD)",
+              "similarity": 0.8887,
               "matched_terms": [
                 "balance",
                 "strength"
@@ -917,22 +917,22 @@
               ]
             },
             {
+              "chunk_id": "69_Royal_Cornwall_NHS_Achilles_Tendon_Injury__chunk_002",
+              "institution": "Royal Cornwall Hospitals NHS Trust",
+              "similarity": 0.905,
+              "matched_terms": [
+                "ice",
+                "swelling",
+                "cold"
+              ]
+            },
+            {
               "chunk_id": "11_Oxford_NHS_Ankle_Sprain_Advice__chunk_003",
               "institution": "Oxford University Hospitals NHS Foundation Trust",
               "similarity": 0.8975,
               "matched_terms": [
                 "ice",
                 "swelling"
-              ]
-            },
-            {
-              "chunk_id": "14_UHSussex_NHS_Ankle_Sprain_No_Followup__chunk_003",
-              "institution": "University Hospitals Sussex NHS Foundation Trust",
-              "similarity": 0.8945,
-              "matched_terms": [
-                "ice",
-                "swelling",
-                "cold"
               ]
             }
           ]
@@ -961,22 +961,22 @@
               ]
             },
             {
+              "chunk_id": "69_Royal_Cornwall_NHS_Achilles_Tendon_Injury__chunk_002",
+              "institution": "Royal Cornwall Hospitals NHS Trust",
+              "similarity": 0.905,
+              "matched_terms": [
+                "ice",
+                "swelling",
+                "cold"
+              ]
+            },
+            {
               "chunk_id": "11_Oxford_NHS_Ankle_Sprain_Advice__chunk_003",
               "institution": "Oxford University Hospitals NHS Foundation Trust",
               "similarity": 0.8975,
               "matched_terms": [
                 "ice",
                 "swelling"
-              ]
-            },
-            {
-              "chunk_id": "14_UHSussex_NHS_Ankle_Sprain_No_Followup__chunk_003",
-              "institution": "University Hospitals Sussex NHS Foundation Trust",
-              "similarity": 0.8945,
-              "matched_terms": [
-                "ice",
-                "swelling",
-                "cold"
               ]
             }
           ]

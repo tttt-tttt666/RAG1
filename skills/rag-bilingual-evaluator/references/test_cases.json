@@ -15,7 +15,30 @@
     "en": "What symptoms after an ankle sprain mean that I should go to hospital or have an X-ray?",
     "expected_heading": "哪些情况需要去医院",
     "answer_terms": ["无法正常负重", "变形", "麻木"],
-    "evidence_terms": ["x-ray", "unable to bear weight", "four steps", "deformity", "bone tenderness"]
+    "evidence_terms": ["x-ray", "x ray", "radiograph", "radiography", "imaging", "ottawa ankle", "unable to bear weight", "unable to walk", "four steps", "deformity", "bone tenderness", "point tenderness", "malleoli", "fracture"],
+    "evidence_min_score": 2,
+    "evidence_concepts": [
+      {
+        "name": "影像检查术语",
+        "weight": 1,
+        "terms": ["x-ray", "x ray", "radiograph", "radiography", "initial imaging", "diagnostic imaging", "plain film", "mri", "ct ankle", "ultrasound"]
+      },
+      {
+        "name": "Ottawa规则或临床判据",
+        "weight": 1,
+        "terms": ["ottawa ankle", "four steps", "able to walk", "unable to walk", "unable to bear weight", "bone tenderness", "point tenderness", "malleoli", "malleolar", "talus", "calcaneus"]
+      },
+      {
+        "name": "紧急危险信号",
+        "weight": 2,
+        "terms": ["deformity", "numbness", "loss of sensation", "cold foot", "blue foot", "open wound", "severe pain", "worsening pain", "worsening swelling"]
+      },
+      {
+        "name": "疑似骨折或进一步评估",
+        "weight": 1,
+        "terms": ["suspected fracture", "possible fracture", "fracture", "medical assessment", "further assessment", "emergency department"]
+      }
+    ]
   },
   {
     "id": "rehab-sequence",

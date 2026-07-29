@@ -1,14 +1,14 @@
 {
-  "generated_at_utc": "2026-07-29T01:52:41.509850+00:00",
+  "generated_at_utc": "2026-07-29T02:03:06.129651+00:00",
   "question_pairs": 10,
   "query_count": 20,
   "embedding_model": "intfloat/multilingual-e5-base",
   "metrics": {
     "answer_adaptation": 100.0,
-    "source_relevance_at_3": 96.7,
+    "source_relevance_at_3": 100.0,
     "bilingual_top3_consistency": 100.0,
     "exact_order_pair_rate": 100.0,
-    "overall_score": 98.8
+    "overall_score": 100.0
   },
   "grade": "优秀",
   "weights": {
@@ -45,7 +45,10 @@
               "similarity": 0.9012,
               "matched_terms": [
                 "ice"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_054",
@@ -53,7 +56,10 @@
               "similarity": 0.8908,
               "matched_terms": [
                 "protect"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_011",
@@ -62,7 +68,10 @@
               "matched_terms": [
                 "ice",
                 "elevation"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         },
@@ -86,7 +95,10 @@
               "similarity": 0.9012,
               "matched_terms": [
                 "ice"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "06_PMC9301067_Acute_Ankle_Sprain_Umbrella_Review__chunk_054",
@@ -94,7 +106,10 @@
               "similarity": 0.8908,
               "matched_terms": [
                 "protect"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_011",
@@ -103,7 +118,10 @@
               "matched_terms": [
                 "ice",
                 "elevation"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         }
@@ -113,7 +131,7 @@
       "id": "medical-assessment",
       "topic": "就医或影像检查",
       "answer_adaptation": 100.0,
-      "source_relevance_at_3": 66.7,
+      "source_relevance_at_3": 100.0,
       "bilingual_top3_consistency": 100.0,
       "exact_order_match": true,
       "languages": {
@@ -129,29 +147,113 @@
               "## 哪些情况需要去医院"
             ]
           },
-          "source_score_at_3": 66.7,
+          "source_score_at_3": 100.0,
           "sources": [
             {
               "chunk_id": "50_ACR_Acute_Trauma_to_Ankle__chunk_003",
               "institution": "American College of Radiology (ACR)",
               "similarity": 0.9625,
-              "matched_terms": []
+              "matched_terms": [
+                "radiograph",
+                "radiography",
+                "imaging",
+                "ottawa ankle",
+                "point tenderness",
+                "malleoli"
+              ],
+              "matched_concepts": [
+                {
+                  "name": "影像检查术语",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "radiograph",
+                    "radiography",
+                    "initial imaging",
+                    "mri",
+                    "ct ankle"
+                  ]
+                },
+                {
+                  "name": "Ottawa规则或临床判据",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "ottawa ankle",
+                    "able to walk",
+                    "point tenderness",
+                    "malleoli",
+                    "talus",
+                    "calcaneus"
+                  ]
+                }
+              ],
+              "concept_score": 2.0,
+              "relevance_decision": true
             },
             {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_017",
               "institution": "The Royal Children's Hospital Melbourne",
               "similarity": 0.9606,
               "matched_terms": [
-                "x-ray"
-              ]
+                "x-ray",
+                "radiograph",
+                "ottawa ankle",
+                "fracture"
+              ],
+              "matched_concepts": [
+                {
+                  "name": "影像检查术语",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "x-ray",
+                    "radiograph"
+                  ]
+                },
+                {
+                  "name": "Ottawa规则或临床判据",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "ottawa ankle"
+                  ]
+                },
+                {
+                  "name": "疑似骨折或进一步评估",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "fracture"
+                  ]
+                }
+              ],
+              "concept_score": 3.0,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_011",
               "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
               "similarity": 0.9458,
               "matched_terms": [
-                "x-ray"
-              ]
+                "x-ray",
+                "imaging",
+                "fracture"
+              ],
+              "matched_concepts": [
+                {
+                  "name": "影像检查术语",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "x-ray",
+                    "mri"
+                  ]
+                },
+                {
+                  "name": "疑似骨折或进一步评估",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "fracture"
+                  ]
+                }
+              ],
+              "concept_score": 2.0,
+              "relevance_decision": true
             }
           ]
         },
@@ -167,29 +269,113 @@
               "## 哪些情况需要去医院"
             ]
           },
-          "source_score_at_3": 66.7,
+          "source_score_at_3": 100.0,
           "sources": [
             {
               "chunk_id": "50_ACR_Acute_Trauma_to_Ankle__chunk_003",
               "institution": "American College of Radiology (ACR)",
               "similarity": 0.9625,
-              "matched_terms": []
+              "matched_terms": [
+                "radiograph",
+                "radiography",
+                "imaging",
+                "ottawa ankle",
+                "point tenderness",
+                "malleoli"
+              ],
+              "matched_concepts": [
+                {
+                  "name": "影像检查术语",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "radiograph",
+                    "radiography",
+                    "initial imaging",
+                    "mri",
+                    "ct ankle"
+                  ]
+                },
+                {
+                  "name": "Ottawa规则或临床判据",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "ottawa ankle",
+                    "able to walk",
+                    "point tenderness",
+                    "malleoli",
+                    "talus",
+                    "calcaneus"
+                  ]
+                }
+              ],
+              "concept_score": 2.0,
+              "relevance_decision": true
             },
             {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_017",
               "institution": "The Royal Children's Hospital Melbourne",
               "similarity": 0.9606,
               "matched_terms": [
-                "x-ray"
-              ]
+                "x-ray",
+                "radiograph",
+                "ottawa ankle",
+                "fracture"
+              ],
+              "matched_concepts": [
+                {
+                  "name": "影像检查术语",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "x-ray",
+                    "radiograph"
+                  ]
+                },
+                {
+                  "name": "Ottawa规则或临床判据",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "ottawa ankle"
+                  ]
+                },
+                {
+                  "name": "疑似骨折或进一步评估",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "fracture"
+                  ]
+                }
+              ],
+              "concept_score": 3.0,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_011",
               "institution": "American Academy of Orthopaedic Surgeons (AAOS)",
               "similarity": 0.9458,
               "matched_terms": [
-                "x-ray"
-              ]
+                "x-ray",
+                "imaging",
+                "fracture"
+              ],
+              "matched_concepts": [
+                {
+                  "name": "影像检查术语",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "x-ray",
+                    "mri"
+                  ]
+                },
+                {
+                  "name": "疑似骨折或进一步评估",
+                  "weight": 1.0,
+                  "matched_terms": [
+                    "fracture"
+                  ]
+                }
+              ],
+              "concept_score": 2.0,
+              "relevance_decision": true
             }
           ]
         }
@@ -226,7 +412,10 @@
                 "strength",
                 "balance",
                 "proprioception"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
@@ -235,7 +424,10 @@
               "matched_terms": [
                 "balance",
                 "proprioception"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_017",
@@ -245,7 +437,10 @@
                 "strength",
                 "balance",
                 "proprioception"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         },
@@ -272,7 +467,10 @@
                 "strength",
                 "balance",
                 "proprioception"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_012",
@@ -281,7 +479,10 @@
               "matched_terms": [
                 "balance",
                 "proprioception"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_017",
@@ -291,7 +492,10 @@
                 "strength",
                 "balance",
                 "proprioception"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         }
@@ -328,7 +532,10 @@
                 "strength",
                 "balance",
                 "hop"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_022",
@@ -338,7 +545,10 @@
                 "strength",
                 "balance",
                 "agility"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "13_AAP_Ankle_Sprain_Treatment__chunk_003",
@@ -346,7 +556,10 @@
               "similarity": 0.9402,
               "matched_terms": [
                 "agility"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         },
@@ -373,7 +586,10 @@
                 "strength",
                 "balance",
                 "hop"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_022",
@@ -383,7 +599,10 @@
                 "strength",
                 "balance",
                 "agility"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "13_AAP_Ankle_Sprain_Treatment__chunk_003",
@@ -391,7 +610,10 @@
               "similarity": 0.9402,
               "matched_terms": [
                 "agility"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         }
@@ -430,7 +652,10 @@
                 "mild",
                 "moderate",
                 "severe"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_003",
@@ -440,7 +665,10 @@
                 "grade i",
                 "grade ii",
                 "grade iii"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "43_Cleveland_Clinic_Sprained_Ankle__chunk_003",
@@ -450,7 +678,10 @@
                 "mild",
                 "moderate",
                 "severe"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         },
@@ -479,7 +710,10 @@
                 "mild",
                 "moderate",
                 "severe"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "40_RCH_Ankle_Sprains_Emergency_Guideline__chunk_003",
@@ -489,7 +723,10 @@
                 "grade i",
                 "grade ii",
                 "grade iii"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "43_Cleveland_Clinic_Sprained_Ankle__chunk_003",
@@ -499,7 +736,10 @@
                 "mild",
                 "moderate",
                 "severe"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         }
@@ -533,7 +773,10 @@
               "similarity": 0.8897,
               "matched_terms": [
                 "walking"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "44_UCSF_Health_Ankle_Sprain__chunk_005",
@@ -542,7 +785,10 @@
               "matched_terms": [
                 "walking",
                 "pain"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "52_St_Georges_NHS_Ankle_Sprains__chunk_003",
@@ -551,7 +797,10 @@
               "matched_terms": [
                 "walking",
                 "pain"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         },
@@ -575,7 +824,10 @@
               "similarity": 0.8897,
               "matched_terms": [
                 "walking"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "44_UCSF_Health_Ankle_Sprain__chunk_005",
@@ -584,7 +836,10 @@
               "matched_terms": [
                 "walking",
                 "pain"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "52_St_Georges_NHS_Ankle_Sprains__chunk_003",
@@ -593,7 +848,10 @@
               "matched_terms": [
                 "walking",
                 "pain"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         }
@@ -628,7 +886,10 @@
               "matched_terms": [
                 "weeks",
                 "recovery"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
@@ -636,7 +897,10 @@
               "similarity": 0.9239,
               "matched_terms": [
                 "weeks"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "36_Leeds_NHS_Soft_Tissue_Ankle_Injuries__chunk_004",
@@ -644,7 +908,10 @@
               "similarity": 0.9198,
               "matched_terms": [
                 "weeks"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         },
@@ -669,7 +936,10 @@
               "matched_terms": [
                 "weeks",
                 "recovery"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_008",
@@ -677,7 +947,10 @@
               "similarity": 0.9239,
               "matched_terms": [
                 "weeks"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "36_Leeds_NHS_Soft_Tissue_Ankle_Injuries__chunk_004",
@@ -685,7 +958,10 @@
               "similarity": 0.9198,
               "matched_terms": [
                 "weeks"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         }
@@ -720,7 +996,10 @@
               "matched_terms": [
                 "recurrent",
                 "balance"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_021",
@@ -729,7 +1008,10 @@
               "matched_terms": [
                 "balance",
                 "strength"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_007",
@@ -738,7 +1020,10 @@
               "matched_terms": [
                 "balance",
                 "strength"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         },
@@ -763,7 +1048,10 @@
               "matched_terms": [
                 "recurrent",
                 "balance"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_021",
@@ -772,7 +1060,10 @@
               "matched_terms": [
                 "balance",
                 "strength"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_007",
@@ -781,7 +1072,10 @@
               "matched_terms": [
                 "balance",
                 "strength"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         }
@@ -816,7 +1110,10 @@
               "matched_terms": [
                 "brace",
                 "return to sport"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_017",
@@ -826,7 +1123,10 @@
                 "bracing",
                 "taping",
                 "return to sport"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "24_Better_Health_Victoria_Ankle_Sprains__chunk_007",
@@ -835,7 +1135,10 @@
               "matched_terms": [
                 "brace",
                 "taping"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         },
@@ -860,7 +1163,10 @@
               "matched_terms": [
                 "brace",
                 "return to sport"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "32_AAOS_Sprained_Ankle__chunk_017",
@@ -870,7 +1176,10 @@
                 "bracing",
                 "taping",
                 "return to sport"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "24_Better_Health_Victoria_Ankle_Sprains__chunk_007",
@@ -879,7 +1188,10 @@
               "matched_terms": [
                 "brace",
                 "taping"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         }
@@ -914,7 +1226,10 @@
               "matched_terms": [
                 "ice",
                 "swelling"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "69_Royal_Cornwall_NHS_Achilles_Tendon_Injury__chunk_002",
@@ -924,7 +1239,10 @@
                 "ice",
                 "swelling",
                 "cold"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "11_Oxford_NHS_Ankle_Sprain_Advice__chunk_003",
@@ -933,7 +1251,10 @@
               "matched_terms": [
                 "ice",
                 "swelling"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         },
@@ -958,7 +1279,10 @@
               "matched_terms": [
                 "ice",
                 "swelling"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "69_Royal_Cornwall_NHS_Achilles_Tendon_Injury__chunk_002",
@@ -968,7 +1292,10 @@
                 "ice",
                 "swelling",
                 "cold"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             },
             {
               "chunk_id": "11_Oxford_NHS_Ankle_Sprain_Advice__chunk_003",
@@ -977,7 +1304,10 @@
               "matched_terms": [
                 "ice",
                 "swelling"
-              ]
+              ],
+              "matched_concepts": [],
+              "concept_score": null,
+              "relevance_decision": true
             }
           ]
         }

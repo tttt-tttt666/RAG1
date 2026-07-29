@@ -33,18 +33,45 @@ def answer_score(answer: str, case: dict) -> tuple[float, dict]:
 
 def source_score(rows: list[tuple[float, dict]], case: dict) -> tuple[float, list[dict]]:
     terms = [term.casefold() for term in case["evidence_terms"]]
+    concept_rules = case.get("evidence_concepts", [])
+    minimum_concept_score = float(case.get("evidence_min_score", 1))
     details = []
     hits = 0
     for score, chunk in rows:
         text = chunk["text"].casefold()
         matched = [term for term in terms if term in text]
-        hits += bool(matched)
+        matched_concepts = []
+        concept_score = 0.0
+        for concept in concept_rules:
+            concept_terms = [
+                term.casefold() for term in concept.get("terms", [])
+            ]
+            concept_matches = [term for term in concept_terms if term in text]
+            if concept_matches:
+                weight = float(concept.get("weight", 1))
+                concept_score += weight
+                matched_concepts.append(
+                    {
+                        "name": concept["name"],
+                        "weight": weight,
+                        "matched_terms": concept_matches,
+                    }
+                )
+        is_relevant = (
+            concept_score >= minimum_concept_score
+            if concept_rules
+            else bool(matched)
+        )
+        hits += is_relevant
         details.append(
             {
                 "chunk_id": chunk["chunk_id"],
                 "institution": chunk["institution"],
                 "similarity": round(score, 4),
                 "matched_terms": matched,
+                "matched_concepts": matched_concepts,
+                "concept_score": concept_score if concept_rules else None,
+                "relevance_decision": bool(is_relevant),
             }
         )
     return hits / max(len(rows), 1), details
@@ -94,7 +121,7 @@ def render_report(result: dict) -> str:
             "## 说明",
             "",
             "- 回答适配度检查预期意图、是否夹带无关意图以及关键概念覆盖。",
-            "- 资料适配度是规则化 Precision@3：Top-3 中含主题证据词的段落比例。",
+            "- 资料适配度是规则化 Precision@3：一般主题使用证据词；就医/影像检查使用分组同义词和加权证据概念。",
             "- 中英文一致性比较 chunk ID；100 表示三条资料集合完全相同。",
             "- 本报告是自动回归测试，不等同于医生对医学正确性与安全性的审核。",
             "",

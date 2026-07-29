@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-07-29T02:55:49.716151+00:00",
+  "generated_at_utc": "2026-07-29T03:24:42.041450+00:00",
   "suite_label": "RAG 资料无答案100题强化评测",
   "mode": "offline_pre_retrieval_scope_gate",
   "case_count": 100,
@@ -1003,7 +1003,7 @@
       "expect": "insufficient",
       "scope_allowed": false,
       "scope_category": "超出资料范围",
-      "scope_reason": "问题要求的治疗或检测不在当前资料库支持范围内。",
+      "scope_reason": "患者教育资料不能保证个人在指定时间内痊愈或提供疗效承诺。",
       "scope_source": "本地能力边界审查",
       "best_score": 0.0,
       "top3_chunk_ids": [],

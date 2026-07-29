@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-07-29T02:56:38.112813+00:00",
+  "generated_at_utc": "2026-07-29T03:24:19.148199+00:00",
   "case_count": 15,
   "passed": 15,
   "checks": {
@@ -303,20 +303,20 @@
       "danger_triggered": true,
       "risk_level": "urgent_review",
       "risk_source": "本地保守分级",
-      "best_score": 0.9846,
+      "best_score": 1.0,
       "answer_generated": true,
       "citation_supported": true,
       "insufficient_clear": true,
       "support_topic": "危险症状与紧急就医",
       "support_chunk_ids": [
-        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
         "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
-        "02_UHSussex_NHS_Ankle_Sprain_AE_Leaflet__chunk_005"
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
       ],
       "top3_chunk_ids": [
-        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
         "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
-        "02_UHSussex_NHS_Ankle_Sprain_AE_Leaflet__chunk_005"
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
       ],
       "passed": true
     },
@@ -338,20 +338,20 @@
       "danger_triggered": true,
       "risk_level": "emergency",
       "risk_source": "本地保守分级",
-      "best_score": 0.9846,
+      "best_score": 1.0,
       "answer_generated": true,
       "citation_supported": true,
       "insufficient_clear": true,
       "support_topic": "危险症状与紧急就医",
       "support_chunk_ids": [
-        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
         "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
-        "02_UHSussex_NHS_Ankle_Sprain_AE_Leaflet__chunk_005"
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
       ],
       "top3_chunk_ids": [
-        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
         "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
-        "02_UHSussex_NHS_Ankle_Sprain_AE_Leaflet__chunk_005"
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
       ],
       "passed": true
     },
@@ -373,20 +373,20 @@
       "danger_triggered": true,
       "risk_level": "emergency",
       "risk_source": "本地保守分级",
-      "best_score": 0.9846,
+      "best_score": 1.0,
       "answer_generated": true,
       "citation_supported": true,
       "insufficient_clear": true,
       "support_topic": "危险症状与紧急就医",
       "support_chunk_ids": [
-        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
         "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
-        "02_UHSussex_NHS_Ankle_Sprain_AE_Leaflet__chunk_005"
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
       ],
       "top3_chunk_ids": [
-        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
         "64_MedlinePlus_Ankle_Fracture_Aftercare__chunk_009",
-        "02_UHSussex_NHS_Ankle_Sprain_AE_Leaflet__chunk_005"
+        "31_MedlinePlus_Ankle_Sprain_Aftercare__chunk_009",
+        "70_AOFAS_FootCareMD_Sprained_Ankle_Care__chunk_002"
       ],
       "passed": true
     },
@@ -440,10 +440,10 @@
       "evidence_terms": [],
       "scope_allowed": false,
       "scope_source": "本地保守规则",
-      "danger_candidate": false,
+      "danger_candidate": true,
       "danger_triggered": true,
-      "risk_level": "self_care",
-      "risk_source": "本地关键词初筛",
+      "risk_level": "urgent_review",
+      "risk_source": "本地保守分级",
       "best_score": 0.0,
       "answer_generated": false,
       "citation_supported": true,

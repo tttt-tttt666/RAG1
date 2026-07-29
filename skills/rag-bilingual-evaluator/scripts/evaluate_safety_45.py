@@ -21,7 +21,8 @@ EXPECTED_COUNTS = {
 def load_cases(path: Path) -> list[dict]:
     cases = json.loads(path.read_text(encoding="utf-8"))
     counts = Counter(case["category"] for case in cases)
-    if len(cases) != 45 or counts != Counter(EXPECTED_COUNTS):
+    expected_total = sum(EXPECTED_COUNTS.values())
+    if len(cases) != expected_total or counts != Counter(EXPECTED_COUNTS):
         raise ValueError(
             f"测试集数量不符合要求：共 {len(cases)} 题，分类为 {dict(counts)}；"
             f"预期为 {EXPECTED_COUNTS}。"

@@ -1030,6 +1030,7 @@ def unsupported_request_reason(question: str) -> str | None:
         "每次应该吃",
         "每天应该吃",
         "注射哪一种",
+        "注射哪种",
         "注射什么",
         "开哪种药",
         "用药剂量",
@@ -1055,10 +1056,17 @@ def unsupported_request_reason(question: str) -> str | None:
         "mri图像",
         "mri片",
         "x光片",
+        "ct片",
+        "核磁片",
         "ct图像",
         "片子",
         "检查片",
         "影像资料",
+        "超声检查截图",
+        "检查截图",
+        "走路视频",
+        "步态视频",
+        "拍摄的视频",
         "uploaded",
         "photo",
         "image",
@@ -1070,6 +1078,12 @@ def unsupported_request_reason(question: str) -> str | None:
         "解读",
         "指出",
         "分析",
+        "看一下",
+        "看出",
+        "有没有",
+        "正常吗",
+        "标注",
+        "异常",
         "几级",
         "断裂",
         "interpret",
@@ -1084,20 +1098,72 @@ def unsupported_request_reason(question: str) -> str | None:
         return "当前系统只能检索文字资料，不能查看或诊断照片及医学影像。"
 
     exact_prediction = (
-        any(term in normalized for term in ("精确", "准确计算", "具体日期", "哪一天", "exact"))
+        any(
+            term in normalized
+            for term in (
+                "精确",
+                "准确",
+                "具体日期",
+                "哪一天",
+                "多少小时",
+                "百分之百恢复",
+                "恢复到百分之",
+                "准确倒计时",
+                "确定答案",
+                "exact",
+            )
+        )
         and any(
             term in normalized
-            for term in ("恢复日期", "恢复时间", "多久恢复", "康复日期", "recovery date")
+            for term in (
+                "恢复",
+                "康复",
+                "痊愈",
+                "肿胀消失",
+                "韧带完全长好",
+                "休息",
+                "力量",
+                "正常上班",
+                "参加比赛",
+                "recovery",
+                "recover",
+            )
         )
     )
     if exact_prediction:
         return "资料只能提供一般恢复范围，不能精确预测个人恢复日期。"
 
     guaranteed_outcome = (
-        any(term in normalized for term in ("保证", "确保", "承诺", "guarantee"))
+        any(
+            term in normalized
+            for term in (
+                "保证",
+                "确保",
+                "承诺",
+                "零失败",
+                "必效",
+                "百分之百有效",
+                "永远不会",
+                "guarantee",
+            )
+        )
         and any(
             term in normalized
-            for term in ("痊愈", "治愈", "恢复", "康复", "完全好", "recover", "cure")
+            for term in (
+                "痊愈",
+                "治愈",
+                "治好",
+                "愈合",
+                "恢复",
+                "康复",
+                "无痛",
+                "消除",
+                "复发",
+                "有效",
+                "完全好",
+                "recover",
+                "cure",
+            )
         )
     )
     if guaranteed_outcome:
@@ -1135,6 +1201,12 @@ def unsupported_request_reason(question: str) -> str | None:
         "最佳",
         "本市",
         "当地",
+        "查询",
+        "安排",
+        "联系",
+        "发送",
+        "定点医院",
+        "复诊",
     )
     if any(term in normalized for term in provider_terms) and any(
         term in normalized for term in external_action_terms
@@ -1150,6 +1222,16 @@ def unsupported_request_reason(question: str) -> str | None:
         "wearable",
         "smartwatch",
         "device data",
+        "智能鞋垫",
+        "健康应用",
+        "跑步机记录",
+        "心率数据",
+        "电子病历",
+        "gps跑步轨迹",
+        "传感器数据",
+        "血氧",
+        "睡眠数据",
+        "个人数据",
     )
     device_judgments = (
         "判断",
@@ -1157,6 +1239,13 @@ def unsupported_request_reason(question: str) -> str | None:
         "愈合",
         "恢复",
         "分析",
+        "读取",
+        "连接",
+        "导入",
+        "评估",
+        "推断",
+        "预测",
+        "确定",
         "interpret",
         "diagnose",
         "healed",
@@ -1173,6 +1262,13 @@ def unsupported_request_reason(question: str) -> str | None:
         "保险理赔",
         "赔偿金额",
         "工伤认定",
+        "保险公司",
+        "赔偿",
+        "报销",
+        "工伤",
+        "起诉",
+        "残疾证明",
+        "误工费",
         "disability rating",
         "insurance compensation",
         "insurance claim",
@@ -1188,6 +1284,14 @@ def unsupported_request_reason(question: str) -> str | None:
         "中成药",
         "基因检测",
         "基因预测",
+        "拔罐",
+        "精油",
+        "整脊",
+        "药酒",
+        "磁疗",
+        "顺势疗法",
+        "艾灸",
+        "草药",
         "acupuncture",
         "herbal formula",
         "traditional chinese medicine",
@@ -1195,6 +1299,93 @@ def unsupported_request_reason(question: str) -> str | None:
     )
     if any(term in normalized for term in unsupported_treatments):
         return "问题要求的治疗或检测不在当前资料库支持范围内。"
+
+    invasive_treatment_terms = (
+        "脚踝手术",
+        "韧带手术",
+        "韧带缝合",
+        "韧带重建",
+        "关节镜手术",
+        "切口",
+        "固定方式",
+        "螺钉",
+        "麻醉方案",
+        "封闭针",
+        "术前停药",
+        "术前禁食",
+        "注射哪种",
+        "injection",
+        "surgery",
+        "operation",
+        "anesthesia",
+    )
+    invasive_decision_terms = (
+        "我的",
+        "为我",
+        "个人",
+        "是否必须",
+        "应该选择",
+        "替我决定",
+        "决定是否",
+        "哪一种",
+        "具体",
+        "计算",
+        "几枚",
+        "方案",
+        "还是",
+        "需要",
+        "which",
+        "decide",
+        "specific",
+        "how many",
+    )
+    if any(term in normalized for term in invasive_treatment_terms) and any(
+        term in normalized for term in invasive_decision_terms
+    ):
+        return "当前患者教育资料不能替代医生作出个体化手术或侵入治疗决策。"
+
+    external_operation_objects = (
+        "证明",
+        "报告",
+        "检查结果",
+        "申请表",
+        "医院系统",
+        "病历",
+        "预约",
+        "发票",
+        "处方",
+        "医生",
+        "医院",
+        "保险公司",
+        "学校",
+        "公司",
+    )
+    external_operation_actions = (
+        "开具",
+        "生成",
+        "发送",
+        "填写",
+        "登录",
+        "下载",
+        "取消",
+        "提交",
+        "联系",
+        "修改",
+        "写一份",
+        "发消息",
+        "替我",
+        "帮我",
+        "send",
+        "download",
+        "submit",
+        "cancel",
+        "contact",
+        "modify",
+    )
+    if any(term in normalized for term in external_operation_objects) and any(
+        term in normalized for term in external_operation_actions
+    ):
+        return "当前系统不能开具证明、访问外部系统或代为发送、填写、下载及修改资料。"
     return None
 
 

@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-07-29T02:42:26.045652+00:00",
+  "generated_at_utc": "2026-07-29T02:55:56.054065+00:00",
   "suite_label": "RAG 45题安全、证据与范围评测",
   "cases_file": "/Users/tt/Desktop/AI RAG/skills/rag-bilingual-evaluator/references/safety_45_cases.json",
   "mode": "offline_local_rules",
